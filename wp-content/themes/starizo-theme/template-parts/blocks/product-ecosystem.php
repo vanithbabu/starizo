@@ -144,6 +144,65 @@ $has_products = $products_query->have_posts();
     </section>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ─── Product Carousel Slide Logic ──────────────────────────────────
+    const track = document.getElementById('cards-track-desktop');
+    const prevBtn = document.getElementById('carousel-prev-desktop');
+    const nextBtn = document.getElementById('carousel-next-desktop');
+
+    if (track) {
+        // card width (380px) + gap-5 (20px) = 400px
+        const cardWidth = 400; 
+        let currentOffset = 0;
+        // Maximum offset so we don't scroll past the end
+        // Adjust formula based on number of cards
+        const maxOffset = Math.max(0, (track.children.length - 2) * cardWidth);
+
+        function updateTrack() {
+            track.style.transition = 'transform 0.3s ease-in-out';
+            track.style.transform = `translateX(-${currentOffset}px)`;
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentOffset < maxOffset) {
+                    currentOffset += cardWidth;
+                    updateTrack();
+                }
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentOffset > 0) {
+                    currentOffset -= cardWidth;
+                    updateTrack();
+                }
+            });
+        }
+    }
+
+    // ─── Tab Switcher Active Styling ────────────────────────────────────
+    const foodTab = document.getElementById('tab-food-desktop');
+    const cosmeticsTab = document.getElementById('tab-cosmetics-desktop');
+
+    if (foodTab && cosmeticsTab) {
+        foodTab.addEventListener('click', () => {
+            foodTab.className = 'flex items-center gap-4 bg-white text-[#FF8D00] font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
+            cosmeticsTab.className = 'flex items-center gap-4 bg-white text-black/50 hover:text-black font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
+        });
+
+        cosmeticsTab.addEventListener('click', () => {
+            cosmeticsTab.className = 'flex items-center gap-4 bg-white text-[#FF8D00] font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
+            foodTab.className = 'flex items-center gap-4 bg-white text-black/50 hover:text-black font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
+        });
+    }
+});
+</script>
+
 <!-- Mobile Layout View -->
 <div class="xl:hidden w-full overflow-x-hidden">
     <section class="w-full bg-white py-12 px-6 flex flex-col items-center border-b border-gray-100 relative overflow-hidden">
