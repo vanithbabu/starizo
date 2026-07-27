@@ -105,8 +105,9 @@ if( function_exists('acf_add_options_page') ) {
     ));
 }
 
-// Include ACF Options Fields
+// Include ACF options fields registration
 require_once get_template_directory() . '/inc/acf-options-fields.php';
+require_once get_template_directory() . '/inc/acf-product-fields.php';
 
 /**
  * Calculate estimated reading time of post content.
