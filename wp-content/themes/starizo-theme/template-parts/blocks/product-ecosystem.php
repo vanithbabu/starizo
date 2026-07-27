@@ -42,6 +42,21 @@ $has_products = $products_query->have_posts();
               </span>
             </div>
 
+            <!-- Selector Tabs -->
+            <div class="flex items-center gap-4 justify-center mb-6">
+              <!-- Active: Food & Beverage -->
+              <button id="tab-food-desktop" class="flex items-center gap-4 bg-white text-[#FF8D00] font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/food-icon.svg' ); ?>" alt="Food & Beverage" class="w-10 h-10 shrink-0">
+                Food &amp; Beverage
+              </button>
+
+              <!-- Inactive: Cosmetics & Personal Care -->
+              <button id="tab-cosmetics-desktop" class="flex items-center gap-4 bg-white text-black/50 hover:text-black font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/cosmitics-personal-icon.svg' ); ?>" alt="Cosmetics & Personal Care" class="w-10 h-10 shrink-0">
+                Cosmetics &amp; Personal Care
+              </button>
+            </div>
+
             <p class="text-center font-montserrat font-medium text-[16px] text-black/70 leading-[26px] max-w-[650px] mx-auto">
               <?php echo wp_kses_post( $description ); ?>
             </p>
@@ -113,6 +128,25 @@ $has_products = $products_query->have_posts();
           <span class="font-montserrat font-bold text-[14px] text-starizo-brown uppercase tracking-wider">
               <?php echo esc_html( $heading ); ?>
           </span>
+        </div>
+
+        <!-- Pill Tabs Selector Stack (Food & Beverage active) -->
+        <div class="flex flex-col gap-3 w-full mb-6">
+          <!-- Active Food & Beverage Pill -->
+          <button class="w-full h-[52px] bg-white rounded-full flex items-center justify-start px-4 gap-3 text-[#FF8D00] font-montserrat font-bold text-[15px] select-none shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+            <span class="w-9 h-9 rounded-full flex items-center justify-center shrink-0">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/food-icon.svg' ); ?>" alt="" class="w-10 h-10">
+            </span>
+            <span>Food &amp; Beverage</span>
+          </button>
+
+          <!-- Inactive Cosmetics & Personal Care Pill -->
+          <button class="w-full h-[52px] bg-white rounded-full shadow-sm flex items-center justify-start px-4 gap-3 text-[#5D3700] font-montserrat font-semibold text-[15px] select-none border border-gray-100">
+            <span class="w-9 h-9 rounded-full border-2 border-gray-200 flex items-center justify-center shrink-0">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/cosmitics-personal-icon.svg' ); ?>" alt="" class="w-10 h-10">
+            </span>
+            <span>Cosmetics &amp; Personal Care</span>
+          </button>
         </div>
 
         <p class="font-montserrat text-[14px] text-black leading-[22px] mb-8 text-center max-w-[320px]">
