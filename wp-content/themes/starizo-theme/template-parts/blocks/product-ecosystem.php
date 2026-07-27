@@ -104,11 +104,39 @@ $has_products = $products_query->have_posts();
             </div>
           </div>
           
-          <div class="flex justify-center relative z-10">
-            <a href="<?php echo esc_url( $button_link ); ?>" class="h-[48px] bg-white border-2 border-[#FF8D00] hover:bg-[#FF8D00] hover:text-white text-[#FF8D00] font-montserrat font-bold text-[16px] px-8 rounded-full flex items-center gap-2 transition duration-200 shadow-sm">
+          <div class="relative z-10 flex items-center mt-6">
+            
+            <!-- Left spacer to balance the arrows and keep button truly centered -->
+            <div class="flex-1"></div>
+
+            <!-- Explore Products button — pill shaped -->
+            <a href="<?php echo esc_url( $button_link ); ?>"
+              class="shrink-0 flex items-center justify-center gap-[10px] border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white font-montserrat font-bold text-[15px] transition duration-200 select-none bg-white shadow-sm"
+              style="width:222px; height:45px; padding:12px 17px; border-radius:42px;">
               <?php echo esc_html( $button_text ); ?>
-              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
             </a>
+
+            <!-- Right: Carousel circle arrows -->
+            <div class="flex-1 flex items-center justify-end gap-3 select-none">
+              <button id="carousel-prev-desktop" aria-label="Previous Products"
+                class="flex items-center justify-center border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white transition duration-200 focus:outline-none"
+                style="width:45px; height:45px; border-radius:50%;">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button id="carousel-next-desktop" aria-label="Next Products"
+                class="flex items-center justify-center border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white transition duration-200 focus:outline-none"
+                style="width:45px; height:45px; border-radius:50%;">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+
           </div>
 
         </div>
