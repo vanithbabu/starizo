@@ -67,7 +67,7 @@ function starizo_register_post_types() {
 			'not_found_in_trash' => 'No jobs found in Trash',
 		),
 		'public' => true,
-		'has_archive' => true,
+		'has_archive' => false,
 		'rewrite' => array('slug' => 'careers'),
 		'supports' => array('title', 'editor', 'thumbnail'),
 		'menu_icon' => 'dashicons-businessman',
@@ -89,3 +89,69 @@ function starizo_setup() {
 	) );
 }
 add_action( 'after_setup_theme', 'starizo_setup' );
+
+/**
+ * Calculate estimated reading time of post content.
+ */
+function starizo_reading_time($content = '') {
+    $word_count = str_word_count( strip_tags( $content ) );
+    $reading_time = ceil($word_count / 200); // Assuming 200 words per minute
+    return $reading_time . ' min read';
+}
+
+/**
+ * Generate Table of Contents from H2 tags in content.
+ */
+function starizo_get_toc($content) {
+    preg_match_all('/<h2.*?>(.*?)<\/h2>/s', $content, $matches);
+    
+    if ( empty($matches[1]) ) {
+        return '';
+    }
+    
+    $toc = '<div class="border-l border-gray-300 ml-[5px] pl-5 flex flex-col gap-[22px] relative py-1">';
+    
+    foreach ($matches[1] as $index => $heading) {
+        $heading_text = strip_tags($heading);
+        $slug = sanitize_title($heading_text);
+        
+        // Use the first item as active for styling purposes (orange dot)
+        if ( $index === 0 ) {
+            $toc .= '<div class="relative">
+                <span class="absolute left-[-26px] top-[4px] w-[11px] h-[11px] bg-[#FF8D00] rounded-full shadow-sm"></span>
+                <a href="#' . esc_attr($slug) . '" class="font-montserrat font-bold text-[13px] leading-[18px] text-black hover:text-[#FF8D00] transition-colors block">
+                  ' . esc_html($heading_text) . '
+                </a>
+              </div>';
+        } else {
+            $toc .= '<div class="relative">
+                <span class="absolute left-[-26px] top-[4px] w-[11px] h-[11px] bg-white border-2 border-[#FF8D00] rounded-full"></span>
+                <a href="#' . esc_attr($slug) . '" class="font-montserrat font-medium text-[13px] leading-[18px] text-[#333333] hover:text-[#FF8D00] transition-colors block">
+                  ' . esc_html($heading_text) . '
+                </a>
+              </div>';
+        }
+    }
+    
+    $toc .= '</div>';
+    return $toc;
+}
+
+/**
+ * Add IDs to H2 tags in content so the ToC works.
+ */
+function starizo_add_ids_to_headings($content) {
+    if ( is_single() && is_main_query() ) {
+        $content = preg_replace_callback('/<h2(.*?)>(.*?)<\/h2>/s', function($matches) {
+            $slug = sanitize_title(strip_tags($matches[2]));
+            // Check if id already exists
+            if ( strpos($matches[1], 'id=') !== false ) {
+                return $matches[0];
+            }
+            return '<h2 id="' . esc_attr($slug) . '" class="font-montserrat font-bold text-[22px] leading-[39px] tracking-normal bg-gradient-to-r from-[#00A256] to-[#5DC671] bg-clip-text text-transparent block mt-8 mb-2"' . $matches[1] . '>' . $matches[2] . '</h2>';
+        }, $content);
+    }
+    return $content;
+}
+add_filter('the_content', 'starizo_add_ids_to_headings');
+
