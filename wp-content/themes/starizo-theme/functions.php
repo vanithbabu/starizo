@@ -85,10 +85,28 @@ function starizo_setup() {
 	add_theme_support( 'post-thumbnails' );
 	register_nav_menus( array(
 		'primary' => esc_html__( 'Primary Menu', 'starizo' ),
-		'footer'  => esc_html__( 'Footer Menu', 'starizo' ),
+		'footer_products'  => esc_html__( 'Footer Products Menu', 'starizo' ),
+		'footer_about'  => esc_html__( 'Footer About Menu', 'starizo' ),
+		'footer_partner'  => esc_html__( 'Footer Partner Menu', 'starizo' ),
 	) );
 }
 add_action( 'after_setup_theme', 'starizo_setup' );
+
+/**
+ * Add ACF Options Page
+ */
+if( function_exists('acf_add_options_page') ) {
+    acf_add_options_page(array(
+        'page_title'    => 'Theme Global Settings',
+        'menu_title'    => 'Theme Settings',
+        'menu_slug'     => 'theme-general-settings',
+        'capability'    => 'edit_posts',
+        'redirect'      => false
+    ));
+}
+
+// Include ACF Options Fields
+require_once get_template_directory() . '/inc/acf-options-fields.php';
 
 /**
  * Calculate estimated reading time of post content.
