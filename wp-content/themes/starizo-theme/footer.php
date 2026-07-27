@@ -47,7 +47,10 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                       'fallback_cb' => false,
                   ) );
               } else {
-                  echo '<ul class="space-y-2"><li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors">Food &amp; Beverage</a></li></ul>';
+                  echo '<ul class="space-y-2">
+                          <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Food &amp; Beverage</a></li>
+                          <li><a href="#" class="text-[12px] text-black leading-[16px] hover:text-starizo-orange transition-colors block">Cosmetics &amp; Personal Care</a></li>
+                        </ul>';
               }
               ?>
             </div>
@@ -64,7 +67,11 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                       'fallback_cb' => false,
                   ) );
               } else {
-                  echo '<ul class="space-y-2"><li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors">Our Story</a></li></ul>';
+                  echo '<ul class="space-y-2">
+                          <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Our Story</a></li>
+                          <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Research Lab</a></li>
+                          <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Technology &amp; Quality</a></li>
+                        </ul>';
               }
               ?>
             </div>
@@ -81,7 +88,12 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                       'fallback_cb' => false,
                   ) );
               } else {
-                  echo '<ul class="space-y-2"><li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors">Plant</a></li></ul>';
+                  echo '<ul class="space-y-2">
+                          <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Plant</a></li>
+                          <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Careers</a></li>
+                          <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Insights</a></li>
+                          <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Contact</a></li>
+                        </ul>';
               }
               ?>
             </div>
@@ -141,7 +153,8 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                 ) );
             } else {
                 echo '<ul class="flex flex-col gap-2 mb-6 font-montserrat font-normal text-[12px] leading-[20px] tracking-[0em] text-black/80">
-                        <li><a href="#" class="hover:text-starizo-orange transition-colors">Food &amp; Beverage</a></li>
+                        <li><a href="#" class="hover:text-starizo-orange transition-colors block">Food &amp; Beverage</a></li>
+                        <li><a href="#" class="hover:text-starizo-orange transition-colors block leading-[16px]">Cosmetics &amp;<br>Personal Care</a></li>
                       </ul>';
             }
             ?>
@@ -156,7 +169,11 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                       'fallback_cb' => false,
                   ) );
               } else {
-                  echo '<a href="#" class="hover:text-starizo-orange transition-colors">Partner with Us</a>';
+                  echo '<a href="#" class="hover:text-starizo-orange transition-colors block">Partner with Us</a>
+                        <a href="#" class="hover:text-starizo-orange transition-colors block">Plant</a>
+                        <a href="#" class="hover:text-starizo-orange transition-colors block">Careers</a>
+                        <a href="#" class="hover:text-starizo-orange transition-colors block">Insights</a>
+                        <a href="#" class="hover:text-starizo-orange transition-colors block">Contact</a>';
               }
               ?>
             </div>
@@ -187,7 +204,9 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                 ) );
             } else {
                 echo '<ul class="flex flex-col gap-2 font-montserrat font-normal text-[12px] leading-[20px] tracking-[0em] text-black/80">
-                        <li><a href="#" class="hover:text-starizo-orange transition-colors">Our Story</a></li>
+                        <li><a href="#" class="hover:text-starizo-orange transition-colors block">Our Story</a></li>
+                        <li><a href="#" class="hover:text-starizo-orange transition-colors block">Research Lab</a></li>
+                        <li><a href="#" class="hover:text-starizo-orange transition-colors block">Technology &amp; Quality</a></li>
                       </ul>';
             }
             ?>
