@@ -2,6 +2,11 @@
 /**
  * The template for displaying the footer
  */
+$footer_logo = get_field('footer_logo', 'option') ?: get_template_directory_uri() . '/public/assets/logo.svg';
+$footer_email = get_field('footer_email', 'option') ?: 'sales@starizo.com';
+$footer_copyright = get_field('footer_copyright_text', 'option') ?: '© 2026 Starizo | All Rights Reserved.';
+$legal_policy_link = get_field('footer_legal_policy_link', 'option') ?: '#';
+$privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
 ?>
 
 <!-- Desktop Layout Container for Footer -->
@@ -27,37 +32,58 @@
 
             <!-- Brand Logo Column -->
             <div class="lg:col-span-2">
-              <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/logo.svg'); ?>" alt="Starizo" class="h-[44px] w-auto">
+              <img src="<?php echo esc_url($footer_logo); ?>" alt="<?php bloginfo('name'); ?>" class="h-[44px] w-auto">
             </div>
 
             <!-- Products Column -->
             <div class="lg:col-span-2">
               <h5 class="text-[12px] font-bold text-black leading-[20px] mb-4">Products</h5>
-              <ul class="space-y-2">
-                <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors">Food &amp; Beverage</a></li>
-                <li><a href="#" class="text-[12px] text-black leading-[16px] hover:text-starizo-orange transition-colors">Cosmetics &amp; Personal Care</a></li>
-              </ul>
+              <?php
+              if ( has_nav_menu('footer_products') ) {
+                  wp_nav_menu( array(
+                      'theme_location' => 'footer_products',
+                      'container' => false,
+                      'menu_class' => 'space-y-2',
+                      'fallback_cb' => false,
+                  ) );
+              } else {
+                  echo '<ul class="space-y-2"><li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors">Food &amp; Beverage</a></li></ul>';
+              }
+              ?>
             </div>
 
             <!-- About Column -->
             <div class="lg:col-span-2">
               <h5 class="text-[12px] font-bold text-black leading-[20px] mb-4">About</h5>
-              <ul class="space-y-2">
-                <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors">Our Story</a></li>
-                <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors">Research Lab</a></li>
-                <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors">Technology &amp; Quality</a></li>
-              </ul>
+              <?php
+              if ( has_nav_menu('footer_about') ) {
+                  wp_nav_menu( array(
+                      'theme_location' => 'footer_about',
+                      'container' => false,
+                      'menu_class' => 'space-y-2',
+                      'fallback_cb' => false,
+                  ) );
+              } else {
+                  echo '<ul class="space-y-2"><li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors">Our Story</a></li></ul>';
+              }
+              ?>
             </div>
 
             <!-- Partner with Us Column -->
             <div class="lg:col-span-2">
               <h5 class="text-[12px] font-bold text-black leading-[20px] mb-4">Partner with Us</h5>
-              <ul class="space-y-2">
-                <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors">Plant</a></li>
-                <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors">Careers</a></li>
-                <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors">Insights</a></li>
-                <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors">Contact</a></li>
-              </ul>
+              <?php
+              if ( has_nav_menu('footer_partner') ) {
+                  wp_nav_menu( array(
+                      'theme_location' => 'footer_partner',
+                      'container' => false,
+                      'menu_class' => 'space-y-2',
+                      'fallback_cb' => false,
+                  ) );
+              } else {
+                  echo '<ul class="space-y-2"><li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors">Plant</a></li></ul>';
+              }
+              ?>
             </div>
 
             <!-- Contact Details Column -->
@@ -65,7 +91,7 @@
               <h5 class="text-[12px] font-bold text-black leading-[20px] mb-4">Contact Details</h5>
               <div class="flex items-center gap-2">
                 <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/mail-icon.svg'); ?>" alt="Email" class="w-[29px] h-[29px] shrink-0">
-                <span class="text-[12px] font-bold text-black leading-[20px]">Email: sales@starizo.com</span>
+                <span class="text-[12px] font-bold text-black leading-[20px]">Email: <a href="mailto:<?php echo esc_attr($footer_email); ?>" class="hover:underline"><?php echo esc_html($footer_email); ?></a></span>
               </div>
             </div>
 

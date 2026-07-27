@@ -173,3 +173,19 @@ function starizo_add_ids_to_headings($content) {
 }
 add_filter('the_content', 'starizo_add_ids_to_headings');
 
+/**
+ * Add Tailwind classes to footer menu links
+ */
+function starizo_add_footer_menu_classes($atts, $item, $args) {
+    if ( $args->theme_location === 'footer_products' || $args->theme_location === 'footer_about' || $args->theme_location === 'footer_partner' ) {
+        $atts['class'] = 'text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block';
+        
+        // Partner with Us has bolder text
+        if ( $args->theme_location === 'footer_partner' ) {
+             $atts['class'] = 'text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block';
+        }
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'starizo_add_footer_menu_classes', 10, 3);
+
