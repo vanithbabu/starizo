@@ -1,5 +1,6 @@
 <?php
 require_once 'wp-load.php';
+require_once 'upload_helper.php';
 
 $page_title = 'Research Lab';
 $page = get_page_by_title($page_title, OBJECT, 'page');
@@ -18,8 +19,8 @@ $blocks[] = array(
         'url' => '/contact',
         'target' => ''
     ),
-    'background_leaf_image' => '', 
-    'foreground_image' => '', 
+    'background_leaf_image' => upload_image_to_wp('product-leaf.png'), 
+    'foreground_image' => upload_image_to_wp('hero-research.png'), 
     'bottom_highlights' => array(
         array('text' => 'Advanced Testing'),
         array('text' => 'Global Standards'),
@@ -69,7 +70,7 @@ $blocks[] = array(
     'title' => 'Analytical Capabilities',
     'subtitle' => 'Precision testing for dependable performance.',
     'layout_direction' => 'image_left',
-    'image' => '',
+    'image' => upload_image_to_wp('anatical.png'),
     'bullet_points' => array(
         array('text' => 'Instrumental analysis (LC-MS, HPLC, FT-NIR, ICP-OES & more)'),
         array('text' => 'Nutritional profiling and verification'),
@@ -88,7 +89,7 @@ $blocks[] = array(
     'title' => 'R&D & Research Lab',
     'subtitle' => 'Turning ideas into market-ready solutions.',
     'layout_direction' => 'image_right',
-    'image' => '',
+    'image' => upload_image_to_wp('research-lab.png'),
     'bullet_points' => array(
         array('text' => 'Product optimization and reformulation'),
         array('text' => 'Application-specific functionality testing'),
@@ -107,7 +108,7 @@ $blocks[] = array(
     'title' => 'Certifications & Compliance',
     'subtitle' => 'Trusted processes. Global standards.',
     'layout_direction' => 'image_left',
-    'image' => '',
+    'image' => upload_image_to_wp('about-let.png'),
     'bullet_points' => array(
         array('text' => 'ISO 9001:2015 — Quality Management System'),
         array('text' => 'NABL 17025 Accreditation (in progress)'),

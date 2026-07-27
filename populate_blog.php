@@ -68,7 +68,7 @@ $dummy_posts = [
             <p>The brands that will succeed in the coming years are the ones that treat clean label not as a marketing exercise, but as a commitment to transparency throughout the supply chain.</p>
         ',
         'category' => 'Clean Label',
-        'image_url' => get_template_directory_uri() . '/public/assets/blog-detail-paddie.png'
+        'image_url' => 'blog-detail-paddie.png'
     ],
     [
         'title' => 'How Rice Starch Changes Texture Performance',
@@ -80,7 +80,7 @@ $dummy_posts = [
             <p>In plant-based milks and yogurts, rice starch acts as a powerful texturizer.</p>
         ',
         'category' => 'Ingredient Science',
-        'image_url' => get_template_directory_uri() . '/public/assets/blog-industries.png'
+        'image_url' => 'blog-industries.png'
     ],
     [
         'title' => 'Sustainable Supply Chains in 2026',
@@ -92,7 +92,7 @@ $dummy_posts = [
             <p>Optimizing logistics and processing can significantly lower environmental impact.</p>
         ',
         'category' => 'Sustainability',
-        'image_url' => get_template_directory_uri() . '/public/assets/blog-paddie.png'
+        'image_url' => 'blog-paddie.png'
     ],
     [
         'title' => 'Innovations in Plant-Based Proteins',
@@ -104,14 +104,11 @@ $dummy_posts = [
             <p>New processing techniques are making rice protein more functional in beverages.</p>
         ',
         'category' => 'Innovation',
-        'image_url' => get_template_directory_uri() . '/public/assets/blog-industries.png'
+        'image_url' => 'blog-industries.png'
     ]
 ];
 
-// Include necessary files for media sideloading
-require_once(ABSPATH . 'wp-admin/includes/media.php');
-require_once(ABSPATH . 'wp-admin/includes/file.php');
-require_once(ABSPATH . 'wp-admin/includes/image.php');
+require_once 'upload_helper.php';
 
 foreach ($dummy_posts as $post_data) {
     $existing = get_page_by_title($post_data['title'], OBJECT, 'post');
@@ -125,12 +122,23 @@ foreach ($dummy_posts as $post_data) {
         ]);
         
         // Attach image
-        // To be safe and quick, we will just set a custom field or use the image URL directly in our theme if no thumbnail exists, but we can try sideloading:
         if (!is_wp_error($post_id)) {
+            if (!empty($post_data['image_url'])) {
+                $attach_id = upload_image_to_wp($post_data['image_url']);
+                if ($attach_id) {
+                    set_post_thumbnail($post_id, $attach_id);
+                }
+            }
             echo "Created post: " . $post_data['title'] . "\n";
         }
     } else {
         echo "Post already exists: " . $post_data['title'] . "\n";
+        if (!empty($post_data['image_url']) && !has_post_thumbnail($existing->ID)) {
+            $attach_id = upload_image_to_wp($post_data['image_url']);
+            if ($attach_id) {
+                set_post_thumbnail($existing->ID, $attach_id);
+            }
+        }
     }
 }
 

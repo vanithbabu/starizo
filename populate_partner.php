@@ -1,5 +1,6 @@
 <?php
 require_once 'wp-load.php';
+require_once 'upload_helper.php';
 
 // Find the Partner with Us page by title
 $partner_page = get_page_by_title( 'Partner with Us' );
@@ -21,7 +22,7 @@ $page_blocks = array(
         'description' => 'At STARIZO, partnerships begin long before production and continue far beyond delivery. We combine rice-derived ingredient expertise, application understanding, and manufacturing excellence to support businesses creating the next generation of food, nutrition, and industrial products.',
         'button_text' => 'Become a Partner',
         'button_link' => '/contact',
-        'image' => '',
+        'image' => upload_image_to_wp('partner-with-us-hero.png'),
         'highlights' => array(
             array('label' => 'Clean Ingredients'),
             array('label' => 'Reliabe Supply'),
@@ -33,42 +34,42 @@ $page_blocks = array(
         'acf_fc_layout' => 'who_we_partner_with',
         'subheading' => 'WHO WE PARTNER WITH',
         'heading' => 'Built For Teams That Create, Scale & Innovate',
-        'image' => '',
+        'image' => upload_image_to_wp('partner-paddie.png'),
         'partners' => array(
             array(
                 'title' => 'Food Manufacturers',
                 'description' => 'Scale clean-label production with reliable ingredient systems.',
-                'icon' => '',
+                'icon' => upload_image_to_wp('food-manufacture-icon.svg'),
                 'highlight' => true
             ),
             array(
                 'title' => 'R&D & Formulation Teams',
                 'description' => 'Develop application-ready solutions with technical collaboration.',
-                'icon' => '',
+                'icon' => upload_image_to_wp('r-d-manufactures-icon.svg'),
                 'highlight' => false
             ),
             array(
                 'title' => 'Nutraceutical Brands',
                 'description' => 'Source functional rice-derived ingredients with traceability.',
-                'icon' => '',
+                'icon' => upload_image_to_wp('nutrisial-icon.svg'),
                 'highlight' => false
             ),
             array(
                 'title' => 'Global Ingredient Buyers',
                 'description' => 'Secure scalable supply with quality assurance.',
-                'icon' => '',
+                'icon' => upload_image_to_wp('global-icon.svg'),
                 'highlight' => false
             ),
             array(
                 'title' => 'Contract Manufacturers',
                 'description' => 'Improve consistency and reduce sourcing complexity.',
-                'icon' => '',
+                'icon' => upload_image_to_wp('contract-icon.svg'),
                 'highlight' => false
             ),
             array(
                 'title' => 'Emerging Brands',
                 'description' => 'Build differentiated products with expert guidance.',
-                'icon' => '',
+                'icon' => upload_image_to_wp('emerging-icon.svg'),
                 'highlight' => false
             ),
         )
@@ -81,31 +82,31 @@ $page_blocks = array(
             array(
                 'title' => 'Rice-Derived Expertise',
                 'description' => 'Deep understanding across starches, sweeteners, proteins and derivatives.',
-                'image' => '',
+                'image' => upload_image_to_wp('partner-application.png'),
                 'highlight' => true
             ),
             array(
                 'title' => 'Clean Manufacturing',
                 'description' => '',
-                'image' => '',
+                'image' => upload_image_to_wp('partne-clean.png'),
                 'highlight' => false
             ),
             array(
                 'title' => 'Traceable Supply Chain',
                 'description' => '',
-                'image' => '',
+                'image' => upload_image_to_wp('partner-life.png'),
                 'highlight' => false
             ),
             array(
                 'title' => 'Global Scalability',
                 'description' => '',
-                'image' => '',
+                'image' => upload_image_to_wp('partner-globe.png'),
                 'highlight' => false
             ),
             array(
                 'title' => 'Application Support',
                 'description' => '',
-                'image' => '',
+                'image' => upload_image_to_wp('partner-application.png'),
                 'highlight' => false
             ),
         )
@@ -117,11 +118,11 @@ $page_blocks = array(
         'button_text' => 'Explore Applications',
         'button_link' => '/product-rice-starch',
         'industries' => array(
-            array('title' => 'Food Manufacturers', 'image' => ''),
-            array('title' => 'Nutrition Brands', 'image' => ''),
-            array('title' => 'Pharmaceutical', 'image' => ''),
-            array('title' => 'Personal Care', 'image' => ''),
-            array('title' => 'Industrial Applications', 'image' => ''),
+            array('title' => 'Food Manufacturers', 'image' => upload_image_to_wp('industry-food.png')),
+            array('title' => 'Nutrition Brands', 'image' => upload_image_to_wp('industry-nutrition.png')),
+            array('title' => 'Pharmaceutical', 'image' => upload_image_to_wp('industry-pharma.png')),
+            array('title' => 'Personal Care', 'image' => upload_image_to_wp('industry-personal-care.png')),
+            array('title' => 'Industrial Applications', 'image' => upload_image_to_wp('industry-industrial.png')),
         )
     ),
     array(
@@ -130,8 +131,8 @@ $page_blocks = array(
         'description' => 'Bring your challenge. We’ll bring ingredient expertise, manufacturing capability, and a long-term approach.',
         'button_text' => 'Contact Us',
         'button_link' => '/contact',
-        'image' => '',
-        'floating_image' => ''
+        'image' => upload_image_to_wp('starizo-mobile-green.png'),
+        'floating_image' => upload_image_to_wp('starzo-partner-green.png')
     ),
     array(
         'acf_fc_layout' => 'faq_section',

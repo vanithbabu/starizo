@@ -1,5 +1,6 @@
 <?php
 require_once 'wp-load.php';
+require_once 'upload_helper.php';
 
 // Find the About page by title
 $about_page = get_page_by_title( 'About Us' );
@@ -24,7 +25,7 @@ $page_blocks = array(
         'button_1_link' => '#products',
         'button_2_text' => 'Contact Us',
         'button_2_link' => '/contact',
-        'image' => ''
+        'image' => upload_image_to_wp('about-let.png')
     ),
     array(
         'acf_fc_layout' => 'our_story',
@@ -37,7 +38,7 @@ $page_blocks = array(
         'subheading' => 'INSIDE STARIZO',
         'heading' => 'Manufacturing Built For Scale',
         'description' => 'Infrastructure designed to support quality, traceability, and long-term growth.',
-        'blueprint_image' => '',
+        'blueprint_image' => upload_image_to_wp('facility-abaout.png'),
         'highlights' => array(
             array('label' => 'Location'),
             array('label' => 'Production Capacity'),
@@ -47,20 +48,20 @@ $page_blocks = array(
         ),
         'title' => 'Facility Commissioning',
         'date' => 'Q2 2026',
-        'image' => ''
+        'image' => upload_image_to_wp('Facility Communation.png')
     ),
     array(
         'acf_fc_layout' => 'certifications',
         'subheading' => 'CERTIFICATIONS',
         'certificates' => array(
-            array('title' => 'FSSC 22000', 'image' => ''),
-            array('title' => 'ISO 9001:2015', 'image' => ''),
-            array('title' => 'Non-GMO Project-verified', 'image' => ''),
-            array('title' => 'Halal Indonesia', 'image' => ''),
-            array('title' => 'Kosher', 'image' => ''),
-            array('title' => 'BRCGS (British Retail Consortium Global Standards)', 'image' => ''),
-            array('title' => 'FDA (Food and Drug Administration USA)', 'image' => ''),
-            array('title' => 'GMP (Good Manufacturing Processes)', 'image' => '')
+            array('title' => 'FSSC 22000', 'image' => upload_image_to_wp('FSSC.png')),
+            array('title' => 'ISO 9001:2015', 'image' => upload_image_to_wp('ISO.png')),
+            array('title' => 'Non-GMO Project-verified', 'image' => upload_image_to_wp('NonGMO.png')),
+            array('title' => 'Halal Indonesia', 'image' => upload_image_to_wp('Halal.png')),
+            array('title' => 'Kosher', 'image' => upload_image_to_wp('K-2.png')),
+            array('title' => 'BRCGS (British Retail Consortium Global Standards)', 'image' => upload_image_to_wp('BRGS.png')),
+            array('title' => 'FDA (Food and Drug Administration USA)', 'image' => upload_image_to_wp('FDA.png')),
+            array('title' => 'GMP (Good Manufacturing Processes)', 'image' => upload_image_to_wp('GMP.png'))
         )
     ),
     array(
@@ -69,8 +70,8 @@ $page_blocks = array(
         'description' => 'Whether you\'re developing a new formulation or scaling production, our team is ready to support your next stage of growth.',
         'button_text' => 'Contact Us',
         'button_link' => '/contact',
-        'image' => '',
-        'floating_image' => ''
+        'image' => upload_image_to_wp('starizo-mobile-green.png'),
+        'floating_image' => upload_image_to_wp('starzo-partner-green.png')
     )
 );
 
