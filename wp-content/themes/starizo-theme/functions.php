@@ -174,9 +174,15 @@ function starizo_add_ids_to_headings($content) {
 add_filter('the_content', 'starizo_add_ids_to_headings');
 
 /**
- * Add Tailwind classes to footer menu links
+ * Add Tailwind classes to menu links (Header and Footer)
  */
-function starizo_add_footer_menu_classes($atts, $item, $args) {
+function starizo_add_nav_menu_classes($atts, $item, $args) {
+    // Primary Header Menu
+    if ( $args->theme_location === 'primary' ) {
+        $atts['class'] = 'text-[18px] font-medium hover:text-starizo-orange transition';
+    }
+    
+    // Footer Menus
     if ( $args->theme_location === 'footer_products' || $args->theme_location === 'footer_about' || $args->theme_location === 'footer_partner' ) {
         $atts['class'] = 'text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block';
         
@@ -187,5 +193,5 @@ function starizo_add_footer_menu_classes($atts, $item, $args) {
     }
     return $atts;
 }
-add_filter('nav_menu_link_attributes', 'starizo_add_footer_menu_classes', 10, 3);
+add_filter('nav_menu_link_attributes', 'starizo_add_nav_menu_classes', 10, 3);
 
