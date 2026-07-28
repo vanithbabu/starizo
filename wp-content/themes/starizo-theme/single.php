@@ -108,12 +108,12 @@ get_header();
 
     </div>
 
-    <!-- RELATED INSIGHTS SECTION -->
+    <!-- RELATED READING SECTION -->
     <div class="w-full max-w-[1120px] mx-auto mt-24 px-6 lg:px-0">
       <div class="flex items-center gap-3 mb-10">
         <span class="w-[3px] h-[24px] bg-[#FF8D00] rounded-full inline-block"></span>
-        <h2 class="font-montserrat font-normal text-[22px] leading-[54px] tracking-[0.11em] uppercase text-[#B86200]">
-          RELATED INSIGHTS
+        <h2 class="font-montserrat font-bold text-[22px] leading-[32px] tracking-[0.11em] uppercase text-[#B86200]">
+          RELATED READING
         </h2>
       </div>
 
@@ -163,9 +163,9 @@ get_header();
                     <span class="font-['Work_Sans'] font-normal text-[14px] leading-[22px] text-[#828282] block">
                       <?php echo get_the_date(); ?> | <?php echo esc_html($rel_reading_time); ?>
                     </span>
-                    <a href="<?php the_permalink(); ?>" class="font-montserrat font-semibold text-[18px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1.5 transition duration-150 w-fit select-none mt-2">
+                    <a href="<?php the_permalink(); ?>" class="group font-montserrat font-semibold text-[18px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1.5 transition duration-150 w-fit select-none mt-2">
                       <span>Read More</span>
-                      <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                      <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </a>
                   </div>
                 </div>
@@ -174,6 +174,43 @@ get_header();
             wp_reset_postdata();
         }
         ?>
+      </div>
+    </div>
+
+    <!-- NEWSLETTER SUBSCRIPTION SECTION -->
+    <div class="w-full max-w-[1120px] mx-auto mt-24 px-6 lg:px-0">
+      <div class="relative w-full bg-gradient-to-r from-[#00A256] to-[#5DC671] rounded-tr-[48px] rounded-bl-[48px] p-8 lg:p-14 overflow-hidden shadow-xl text-white flex flex-col lg:flex-row items-center justify-between gap-8">
+        
+        <!-- Background Rice Field Accent -->
+        <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/hero-rice-field-bg.png'); ?>" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none mix-blend-overlay">
+
+        <!-- Left Content -->
+        <div class="relative z-10 max-w-[540px]">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-[4px] h-[20px] bg-[#FF8D00] rounded-full inline-block"></span>
+            <span class="font-montserrat font-bold text-[14px] uppercase tracking-[0.11em] text-[#FBEAC4]">NEWSLETTER</span>
+          </div>
+          <h3 class="font-montserrat font-black text-[28px] sm:text-[34px] leading-[38px] sm:leading-[44px] text-white">
+            Stay Ahead with Starizo Insights
+          </h3>
+          <p class="font-montserrat font-medium text-[16px] leading-[26px] text-white/90 mt-3">
+            Subscribe to our technical newsletter for the latest research, market trends, and clean-label ingredient innovations.
+          </p>
+        </div>
+
+        <!-- Right Form -->
+        <div class="relative z-10 w-full lg:w-auto">
+          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Starizo Insights!');" class="flex flex-col sm:flex-row gap-3 w-full max-w-[500px]">
+            <input type="email" required placeholder="Enter your email address" class="w-full sm:w-[320px] h-[50px] px-6 rounded-full border border-white/30 bg-white/10 text-white placeholder-white/70 focus:outline-none focus:bg-white focus:text-black focus:placeholder-gray-400 text-[15px] font-montserrat transition duration-200">
+            <button type="submit" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-bold text-[15px] px-8 h-[50px] rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shrink-0 cursor-pointer">
+              Subscribe
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </form>
+        </div>
+
       </div>
     </div>
 
