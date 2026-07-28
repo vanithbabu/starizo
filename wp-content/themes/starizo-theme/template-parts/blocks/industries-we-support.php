@@ -82,9 +82,9 @@ if ( empty( $industries ) ) {
 
     <!-- Centered Bottom Action Button -->
     <div class="w-full flex items-center justify-center mt-12">
-      <a href="<?php echo esc_url( $button_link ); ?>" class="bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[16px] px-8 py-3.5 rounded-full shadow-md transition duration-200 flex items-center justify-center gap-2 select-none">
+      <a href="<?php echo esc_url( $button_link ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[16px] px-8 py-3.5 rounded-full shadow-md hover:shadow-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 select-none">
         <span><?php echo esc_html( $button_text ); ?></span>
-        <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
       </a>

@@ -111,9 +111,9 @@ if ( $image ) {
       </p>
 
       <?php if ( $button_link && $button_text ) : ?>
-      <a href="<?php echo esc_url( $button_link ); ?>" class="h-[44px] bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[14px] px-6 rounded-full flex items-center justify-center gap-2 select-none mb-8 shadow-sm">
-        <?php echo esc_html( $button_text ); ?>
-        <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
+      <a href="<?php echo esc_url( $button_link ); ?>" class="group h-[44px] bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[14px] px-6 rounded-full flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none mb-8 shadow-md hover:shadow-xl">
+        <span><?php echo esc_html( $button_text ); ?></span>
+        <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
       </a>

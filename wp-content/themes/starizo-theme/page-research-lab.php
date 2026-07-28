@@ -47,19 +47,9 @@ get_header(); ?>
 
             <!-- Single Button: Speak To Team -->
             <div class="flex flex-row items-center justify-start shrink-0">
-              <a href="./contact.html"
-                class="flex flex-row items-center justify-center shrink-0 whitespace-nowrap shadow-md hover:opacity-90 transition select-none group"
-                style="height: 48px; border-radius: 24px; padding: 12px 28px; background-color: #FF8D00; gap: 10px;">
-                <span class="font-montserrat font-semibold text-white whitespace-nowrap"
-                  style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 18px; line-height: 21px; letter-spacing: 0%; color: #FFFFFF;">
-                  Speak To Team
-                </span>
-                <svg class="w-4 h-4 fill-white transform group-hover:translate-x-0.5 transition-transform duration-200 shrink-0"
-                  viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M5.15736 2.93105L9.76836 7.61605C9.86948 7.71827 9.92621 7.85626 9.92621 8.00005C9.92621 8.14384 9.86948 8.28183 9.76836 8.38405L5.15835 13.0691C5.05728 13.1719 5.00064 13.3103 5.00064 13.4546C5.00064 13.5988 5.05728 13.7372 5.15835 13.8401C5.20773 13.8907 5.26675 13.931 5.33192 13.9584C5.3971 13.9859 5.46712 14.0001 5.53786 14.0001C5.60859 14.0001 5.67861 13.9859 5.74379 13.9584C5.80896 13.931 5.86798 13.931 5.91735 13.8401L10.5274 9.15605C10.8303 8.84753 11 8.43243 11 8.00005C11 7.56768 10.8303 7.15257 10.5274 6.84405L5.91736 2.16005C5.86796 2.10925 5.80889 2.06887 5.74362 2.04129C5.67835 2.01372 5.60821 1.99951 5.53736 1.99951C5.4665 1.99951 5.39636 2.01372 5.3311 2.04129C5.26583 2.06887 5.20675 2.10925 5.15736 2.16005C5.05628 2.26291 4.99964 2.40135 4.99964 2.54555C4.99964 2.68976 5.05628 2.8282 5.15736 2.93105Z"
-                    fill="#FFFFFF" />
-                </svg>
+              <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white px-7 h-[48px] rounded-full flex items-center justify-center gap-2 font-montserrat font-bold text-[18px] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md hover:shadow-xl select-none">
+                <span>Speak To Team</span>
+                <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
             </div>
 
@@ -868,12 +858,9 @@ get_header(); ?>
           </p>
 
           <div class="pt-2">
-            <a href="./contact.html"
-              class="h-[46px] bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[15px] px-7 rounded-full inline-flex items-center gap-2 transition duration-200 select-none shadow-md">
-              Contact Us
-              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
+            <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[15px] px-7 h-[46px] rounded-full inline-flex items-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shadow-md hover:shadow-xl">
+              <span>Contact Us</span>
+              <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
           </div>
 
@@ -924,12 +911,9 @@ get_header(); ?>
 
         <!-- CTA Button -->
         <div class="flex flex-row items-center justify-start w-full">
-          <a href="./contact.html"
-            class="bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[14px] h-[44px] px-7 rounded-full flex items-center justify-center gap-2 transition duration-200 shadow-sm shrink-0">
+          <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[14px] h-[44px] px-7 rounded-full flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md hover:shadow-xl select-none shrink-0">
             <span>Speak To Team</span>
-            <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
+            <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </a>
         </div>
 
@@ -1592,12 +1576,9 @@ get_header(); ?>
           </p>
 
           <div class="pt-1">
-            <a href="./contact.html"
-              class="h-[44px] border border-black rounded-full px-6 inline-flex items-center gap-2 font-montserrat font-bold text-[14px] text-black hover:bg-black hover:text-white transition duration-200 w-fit select-none">
-              Speak To Team
-              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
+            <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[14px] h-[44px] px-6 rounded-full inline-flex items-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shadow-md hover:shadow-xl">
+              <span>Speak To Team</span>
+              <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
           </div>
         </div>

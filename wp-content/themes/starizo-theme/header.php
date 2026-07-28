@@ -1,7 +1,15 @@
 <?php
 $header_logo = get_field('header_logo', 'option') ?: get_template_directory_uri() . '/public/assets/logo.svg';
-$cta_text = get_field('header_cta_text', 'option') ?: 'Contact Us';
-$cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
+$cta_text   = get_field('header_cta_text', 'option') ?: 'Contact Us';
+$cta_link   = get_field('header_cta_link', 'option') ?: site_url('/contact');
+
+// Determine active page highlights
+$is_products = is_page( array( 'food-beverage', 'cosmetics-personal-care' ) ) || is_tax( 'product_cat' ) || is_singular( 'product' );
+$is_about    = is_page( 'about' );
+$is_partner  = is_page( 'partner-with-us' );
+$is_research = is_page( 'research-lab' );
+$is_careers  = is_page( 'careers' );
+$is_insights = is_page( 'insights' ) || is_home() || is_singular( 'post' ) || is_category();
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -27,7 +35,7 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
           <img src="<?php echo esc_url( $header_logo ); ?>" class="h-9" alt="<?php bloginfo( 'name' ); ?>">
         </a>
 
-        <!-- Menu -->
+        <!-- Menu Navigation with Dynamic Page Highlighting -->
         <nav class="flex items-center gap-10">
           <?php if ( has_nav_menu( 'primary' ) ) : ?>
               <?php
@@ -39,22 +47,38 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
               ) );
               ?>
           <?php else : ?>
-            <!-- Fallback hardcoded links if menu isn't set -->
-            <button class="flex items-center gap-1 text-[18px] font-medium text-starizo-brown group relative">
-              Products
-              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M7 10l5 5 5-5H7z" />
-              </svg>
-            </button>
-            <a href="<?php echo esc_url( site_url('/about') ); ?>" class="text-[18px] font-medium hover:text-starizo-orange transition">About</a>
-            <a href="<?php echo esc_url( site_url('/partner-with-us') ); ?>" class="text-[18px] font-medium">Partner with Us</a>
-            <a href="<?php echo esc_url( site_url('/research-lab') ); ?>" class="text-[18px] font-medium">Research Lab</a>
-            <a href="<?php echo esc_url( site_url('/careers') ); ?>" class="text-[18px] font-medium">Careers</a>
-            <a href="<?php echo esc_url( site_url('/insights') ); ?>" class="text-[18px] font-medium">Insights</a>
+            <!-- Products Dropdown -->
+            <div class="relative group py-2">
+              <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" class="text-[18px] <?php echo $is_products ? 'font-bold text-[#FF8D00]' : 'font-medium text-black hover:text-[#FF8D00]'; ?> transition flex items-center gap-1">
+                <span>Products</span>
+                <svg class="w-4 h-4 fill-current transition-transform group-hover:rotate-180" viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5H7z" />
+                </svg>
+              </a>
+              <div class="absolute left-0 top-full hidden group-hover:flex flex-col bg-white border border-gray-100 rounded-[16px] shadow-xl py-3 px-4 w-[240px] z-50 transition-all">
+                <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" class="font-montserrat font-bold text-[14px] py-2 text-black hover:text-[#FF8D00] border-b border-gray-100 transition-colors">Food & Beverage</a>
+                <a href="<?php echo esc_url( site_url('/cosmetics-personal-care') ); ?>" class="font-montserrat font-bold text-[14px] py-2 text-black hover:text-[#FF8D00] transition-colors">Cosmetics & Personal Care</a>
+              </div>
+            </div>
+
+            <!-- About -->
+            <a href="<?php echo esc_url( site_url('/about') ); ?>" class="text-[18px] <?php echo $is_about ? 'font-bold text-[#FF8D00]' : 'font-medium text-black hover:text-[#FF8D00]'; ?> transition">About</a>
+            
+            <!-- Partner with Us -->
+            <a href="<?php echo esc_url( site_url('/partner-with-us') ); ?>" class="text-[18px] <?php echo $is_partner ? 'font-bold text-[#FF8D00]' : 'font-medium text-black hover:text-[#FF8D00]'; ?> transition">Partner with Us</a>
+            
+            <!-- Research Lab -->
+            <a href="<?php echo esc_url( site_url('/research-lab') ); ?>" class="text-[18px] <?php echo $is_research ? 'font-bold text-[#FF8D00]' : 'font-medium text-black hover:text-[#FF8D00]'; ?> transition">Research Lab</a>
+            
+            <!-- Careers -->
+            <a href="<?php echo esc_url( site_url('/careers') ); ?>" class="text-[18px] <?php echo $is_careers ? 'font-bold text-[#FF8D00]' : 'font-medium text-black hover:text-[#FF8D00]'; ?> transition">Careers</a>
+            
+            <!-- Insights -->
+            <a href="<?php echo esc_url( site_url('/insights') ); ?>" class="text-[18px] <?php echo $is_insights ? 'font-bold text-[#FF8D00]' : 'font-medium text-black hover:text-[#FF8D00]'; ?> transition">Insights</a>
           <?php endif; ?>
         </nav>
 
-        <!-- Contact -->
+        <!-- Contact CTA -->
         <a href="<?php echo esc_url( $cta_link ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white px-7 h-[46px] rounded-full flex items-center gap-2 font-bold hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shrink-0 shadow-md hover:shadow-xl select-none">
           <?php echo esc_html( $cta_text ); ?>
           <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -116,14 +140,14 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
                 <button id="mobile-accordion-toggle" class="w-full flex items-center justify-between py-1 text-left focus:outline-none cursor-pointer group">
                     <div class="flex items-center gap-3.5">
                         <!-- Sprout Icon -->
-                        <div class="w-7 h-7 flex items-center justify-center text-[#00A256] shrink-0">
+                        <div class="w-7 h-7 flex items-center justify-center <?php echo $is_products ? 'text-[#FF8D00]' : 'text-[#00A256]'; ?> shrink-0">
                             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 22v-9"/>
                                 <path d="M12 13a7 7 0 0 0 7-7c0 0-3 0-7 3.5"/>
                                 <path d="M12 13a7 7 0 0 1-7-7c0 0 3 0 7 3.5"/>
                             </svg>
                         </div>
-                        <span class="font-montserrat font-bold text-[16px] text-black group-hover:text-[#00A256] transition-colors">Products</span>
+                        <span class="font-montserrat font-bold text-[16px] <?php echo $is_products ? 'text-[#FF8D00]' : 'text-black group-hover:text-[#00A256]'; ?> transition-colors">Products</span>
                     </div>
                     <svg id="mobile-accordion-arrow" class="w-4 h-4 text-[#FF8D00] transform transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -132,7 +156,7 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
 
                 <!-- Submenu items -->
                 <div id="mobile-accordion-menu" class="hidden flex flex-col gap-2 pt-3 pb-1 pl-2">
-                    <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" class="flex items-center gap-3 py-2 text-black hover:text-[#FF8D00] font-montserrat font-bold text-[15px] transition-colors">
+                    <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" class="flex items-center gap-3 py-2 <?php echo is_page('food-beverage') ? 'text-[#FF8D00] font-bold' : 'text-black hover:text-[#FF8D00] font-bold'; ?> font-montserrat text-[15px] transition-colors">
                         <div class="w-7 h-7 rounded-full border border-[#00A256]/30 bg-[#00A256]/10 flex items-center justify-center text-[#00A256] shrink-0">
                             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
@@ -144,7 +168,7 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
                         </div>
                         Food & Beverage
                     </a>
-                    <a href="<?php echo esc_url( site_url('/cosmetics-personal-care') ); ?>" class="flex items-center gap-3 py-2 text-black hover:text-[#FF8D00] font-montserrat font-bold text-[15px] transition-colors">
+                    <a href="<?php echo esc_url( site_url('/cosmetics-personal-care') ); ?>" class="flex items-center gap-3 py-2 <?php echo is_page('cosmetics-personal-care') ? 'text-[#FF8D00] font-bold' : 'text-black hover:text-[#FF8D00] font-bold'; ?> font-montserrat text-[15px] transition-colors">
                         <div class="w-7 h-7 rounded-full border border-[#00A256]/30 bg-[#00A256]/10 flex items-center justify-center text-[#00A256] shrink-0">
                             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
@@ -158,21 +182,21 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
             <!-- Item 2: About -->
             <div class="py-3.5">
                 <a href="<?php echo esc_url( site_url('/about') ); ?>" class="flex items-center gap-3.5 py-1 group">
-                    <div class="w-7 h-7 flex items-center justify-center text-[#00A256] shrink-0">
+                    <div class="w-7 h-7 flex items-center justify-center <?php echo $is_about ? 'text-[#FF8D00]' : 'text-[#00A256]'; ?> shrink-0">
                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"/>
                             <line x1="12" y1="16" x2="12" y2="12"/>
                             <line x1="12" y1="8" x2="12.01" y2="8"/>
                         </svg>
                     </div>
-                    <span class="font-montserrat font-bold text-[16px] text-black group-hover:text-[#00A256] transition-colors">About</span>
+                    <span class="font-montserrat font-bold text-[16px] <?php echo $is_about ? 'text-[#FF8D00]' : 'text-black group-hover:text-[#00A256]'; ?> transition-colors">About</span>
                 </a>
             </div>
 
             <!-- Item 3: Partner with Us -->
             <div class="py-3.5">
                 <a href="<?php echo esc_url( site_url('/partner-with-us') ); ?>" class="flex items-center gap-3.5 py-1 group">
-                    <div class="w-7 h-7 flex items-center justify-center text-[#00A256] shrink-0">
+                    <div class="w-7 h-7 flex items-center justify-center <?php echo $is_partner ? 'text-[#FF8D00]' : 'text-[#00A256]'; ?> shrink-0">
                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
                             <circle cx="9" cy="7" r="4"/>
@@ -180,14 +204,14 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
                             <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                         </svg>
                     </div>
-                    <span class="font-montserrat font-bold text-[16px] text-black group-hover:text-[#00A256] transition-colors">Partner with Us</span>
+                    <span class="font-montserrat font-bold text-[16px] <?php echo $is_partner ? 'text-[#FF8D00]' : 'text-black group-hover:text-[#00A256]'; ?> transition-colors">Partner with Us</span>
                 </a>
             </div>
 
             <!-- Item 4: Research Lab -->
             <div class="py-3.5">
                 <a href="<?php echo esc_url( site_url('/research-lab') ); ?>" class="flex items-center gap-3.5 py-1 group">
-                    <div class="w-7 h-7 flex items-center justify-center text-[#00A256] shrink-0">
+                    <div class="w-7 h-7 flex items-center justify-center <?php echo $is_research ? 'text-[#FF8D00]' : 'text-[#00A256]'; ?> shrink-0">
                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="4" width="18" height="16" rx="2"/>
                             <path d="M7 8h10"/>
@@ -195,21 +219,21 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
                             <path d="M7 16h6"/>
                         </svg>
                     </div>
-                    <span class="font-montserrat font-bold text-[16px] text-black group-hover:text-[#00A256] transition-colors">Research Lab</span>
+                    <span class="font-montserrat font-bold text-[16px] <?php echo $is_research ? 'text-[#FF8D00]' : 'text-black group-hover:text-[#00A256]'; ?> transition-colors">Research Lab</span>
                 </a>
             </div>
 
             <!-- Item 5: Insights -->
             <div class="py-3.5">
                 <a href="<?php echo esc_url( site_url('/insights') ); ?>" class="flex items-center gap-3.5 py-1 group">
-                    <div class="w-7 h-7 flex items-center justify-center text-[#00A256] shrink-0">
+                    <div class="w-7 h-7 flex items-center justify-center <?php echo $is_insights ? 'text-[#FF8D00]' : 'text-[#00A256]'; ?> shrink-0">
                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.5 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/>
                             <path d="M9 18h6"/>
                             <path d="M10 22h4"/>
                         </svg>
                     </div>
-                    <span class="font-montserrat font-bold text-[16px] text-black group-hover:text-[#00A256] transition-colors">Insights</span>
+                    <span class="font-montserrat font-bold text-[16px] <?php echo $is_insights ? 'text-[#FF8D00]' : 'text-black group-hover:text-[#00A256]'; ?> transition-colors">Insights</span>
                 </a>
             </div>
 

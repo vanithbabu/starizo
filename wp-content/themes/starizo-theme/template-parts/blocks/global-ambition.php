@@ -73,8 +73,8 @@ $banner_button_link = get_sub_field( 'banner_button_link' ) ?: '#';
               <?php echo wp_kses_post( $banner_description ); ?>
             </p>
             <?php if ( $banner_button_link && $banner_button_text ) : ?>
-            <a href="<?php echo esc_url( $banner_button_link ); ?>" class="group bg-[#FF8D00] hover:bg-[#e07c00] hover:scale-[1.04] active:scale-[0.98] text-white font-montserrat font-bold text-[15px] px-8 h-[46px] rounded-full flex items-center gap-2 transition-all duration-300 select-none shadow-md hover:shadow-lg">
-              <?php echo esc_html( $banner_button_text ); ?>
+            <a href="<?php echo esc_url( $banner_button_link ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[15px] px-8 h-[46px] rounded-full flex items-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shadow-md hover:shadow-xl">
+              <span><?php echo esc_html( $banner_button_text ); ?></span>
               <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
@@ -156,9 +156,9 @@ $banner_button_link = get_sub_field( 'banner_button_link' ) ?: '#';
             </p>
 
             <?php if ( $banner_button_link && $banner_button_text ) : ?>
-            <a href="<?php echo esc_url( $banner_button_link ); ?>" class="h-[44px] bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[14px] px-6 rounded-full flex items-center justify-center gap-2 select-none shadow-md mb-8">
-              <?php echo esc_html( $banner_button_text ); ?>
-              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
+            <a href="<?php echo esc_url( $banner_button_link ); ?>" class="group h-[44px] bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[14px] px-6 rounded-full flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shadow-md hover:shadow-xl mb-8">
+              <span><?php echo esc_html( $banner_button_text ); ?></span>
+              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </a>

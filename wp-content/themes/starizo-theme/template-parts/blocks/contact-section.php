@@ -220,9 +220,9 @@ $form_shortcode = get_sub_field('form_shortcode');
               <!-- Submit Button -->
               <div class="w-full flex justify-end mt-4">
                 <button type="submit" id="contact-submit-btn"
-                  class="w-[190px] h-[51px] bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-semibold text-[18px] rounded-[5px] flex items-center justify-center gap-2 shadow-md transition-all duration-200 select-none">
+                  class="group w-[190px] h-[51px] bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[18px] rounded-[5px] flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md hover:shadow-xl select-none">
                   <span id="contact-btn-text">Submit</span>
-                  <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </button>
@@ -382,10 +382,10 @@ $form_shortcode = get_sub_field('form_shortcode');
 
             <div class="w-full flex justify-center mt-2">
               <button type="submit" id="mobile-contact-submit-btn"
-                class="bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-semibold text-[14px] leading-[21px] rounded-[5px] flex items-center justify-center gap-[10px] shadow-sm select-none transition-colors"
+                class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[14px] leading-[21px] rounded-[5px] flex items-center justify-center gap-[10px] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md hover:shadow-xl select-none"
                 style="width: 120px; height: 36px; padding: 4px 12px;">
                 <span id="mobile-btn-text">Submit</span>
-                <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+                <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
               </button>

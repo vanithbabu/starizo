@@ -667,10 +667,9 @@
         <!-- Buttons Container (Figma Spec 1:1: Horizontal Row, width 319px, height 36px, gap 21px) -->
         <div class="flex flex-row items-center justify-start gap-[21px] w-full" style="max-width: 319px; min-height: 36px;">
           <!-- Primary Action Button: Contact Us -->
-          <a href="#"
-            class="bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[13px] h-[36px] px-5 rounded-full flex items-center justify-center gap-1.5 transition duration-200 shadow-sm shrink-0">
+          <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[13px] h-[36px] px-5 rounded-full flex items-center justify-center gap-1.5 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md hover:shadow-xl shrink-0 select-none">
             <span>Contact Us</span>
-            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </a>
@@ -1100,14 +1099,9 @@
           </p>
         </div>
 
-        <a href="#"
-          class="w-full border-2 border-[#FF8D00] hover:bg-[#FF8D00] text-[#FF8D00] hover:text-white font-bold text-[16px] py-3.5 rounded-[22px] flex items-center justify-center gap-2 group transition-all duration-200 mt-8 select-none">
-          Speak To Team
-          <svg class="w-4 h-4 fill-current transform group-hover:translate-x-0.5 transition-transform duration-200"
-            viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M5.15736 2.93105L9.76836 7.61605C9.86948 7.71827 9.92621 7.85626 9.92621 8.00005C9.92621 8.14384 9.86948 8.28183 9.76836 8.38405L5.15835 13.0691C5.05728 13.1719 5.00064 13.3103 5.00064 13.4546C5.00064 13.5988 5.05728 13.7372 5.15835 13.8401C5.20773 13.8907 5.26675 13.931 5.33192 13.9584C5.3971 13.9859 5.46712 14.0001 5.53786 14.0001C5.60859 14.0001 5.67861 13.9859 5.74379 13.9584C5.80896 13.931 5.86798 13.931 5.91735 13.8401L10.5274 9.15605C10.8303 8.84753 11 8.43243 11 8.00005C11 7.56768 10.8303 7.15257 10.5274 6.84405L5.91736 2.16005C5.86796 2.10925 5.80889 2.06887 5.74362 2.04129C5.67635 2.01372 5.60821 1.99951 5.53736 1.99951C5.4665 1.99951 5.39636 2.01372 5.3311 2.04129C5.26583 2.06887 5.20675 2.10925 5.15736 2.16005C5.05628 2.26291 4.99964 2.40135 4.99964 2.54555C4.99964 2.68976 5.05628 2.8282 5.15736 2.93105Z" />
-          </svg>
+        <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-bold text-[16px] py-3.5 rounded-[22px] flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 mt-8 shadow-md hover:shadow-xl select-none">
+          <span>Speak To Team</span>
+          <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </a>
       </div>
 

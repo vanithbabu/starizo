@@ -104,25 +104,29 @@ get_header(); ?>
 
       <!-- Desktop Grid -->
       <div class="hidden sm:grid w-full grid-cols-2 md:grid-cols-5 gap-x-[6px] gap-y-[12px] justify-items-center">
+        <!-- ALL TOPICS Pill -->
+        <button type="button" data-topic="all" class="topic-filter-btn w-full max-w-[218px] h-[46px] rounded-[42px] px-2 py-3 bg-gradient-to-r from-[#FF8D00] to-[#FFB457] text-white border-0 shadow-md font-montserrat font-bold text-[13px] leading-[22px] tracking-[0.05em] uppercase flex items-center justify-center text-center cursor-pointer transition-all select-none">
+            ALL TOPICS
+        </button>
         <?php
         $categories = get_categories(array('hide_empty' => 0));
-        foreach($categories as $index => $cat) : 
-            $active_class = ($index === 0) ? 'bg-gradient-to-r from-[#FF8D00] to-[#FFB457] text-white border-0 shadow-md' : 'bg-white border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white transition-all';
+        foreach($categories as $cat) : 
         ?>
-        <a href="<?php echo esc_url(get_category_link($cat->term_id)); ?>" class="w-full max-w-[218px] h-[46px] rounded-[42px] px-2 py-3 <?php echo esc_attr($active_class); ?> font-montserrat font-bold text-[13px] leading-[22px] tracking-[0.05em] uppercase flex items-center justify-center text-center">
+        <button type="button" data-topic="<?php echo esc_attr($cat->slug); ?>" class="topic-filter-btn w-full max-w-[218px] h-[46px] rounded-[42px] px-2 py-3 bg-white border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white transition-all font-montserrat font-bold text-[13px] leading-[22px] tracking-[0.05em] uppercase flex items-center justify-center text-center cursor-pointer select-none">
             <?php echo esc_html($cat->name); ?>
-        </a>
+        </button>
         <?php endforeach; ?>
       </div>
       
-      <!-- Mobile Grid (simplified) -->
+      <!-- Mobile Grid -->
       <div class="sm:hidden w-full flex flex-wrap gap-2 justify-center">
-        <?php foreach($categories as $index => $cat) : 
-            $active_class = ($index === 0) ? 'bg-gradient-to-r from-[#FF8D00] to-[#FFB457] text-white border-0 shadow-sm' : 'bg-white border border-[#FF8D00] text-[#FF8D00]';
-        ?>
-        <a href="<?php echo esc_url(get_category_link($cat->term_id)); ?>" class="h-[32px] rounded-[42px] px-4 <?php echo esc_attr($active_class); ?> font-montserrat font-bold text-[11px] uppercase flex items-center justify-center">
+        <button type="button" data-topic="all" class="topic-filter-btn h-[32px] rounded-[42px] px-4 bg-gradient-to-r from-[#FF8D00] to-[#FFB457] text-white border-0 shadow-sm font-montserrat font-bold text-[11px] uppercase flex items-center justify-center cursor-pointer select-none">
+            ALL TOPICS
+        </button>
+        <?php foreach($categories as $cat) : ?>
+        <button type="button" data-topic="<?php echo esc_attr($cat->slug); ?>" class="topic-filter-btn h-[32px] rounded-[42px] px-4 bg-white border border-[#FF8D00] text-[#FF8D00] font-montserrat font-bold text-[11px] uppercase flex items-center justify-center cursor-pointer select-none">
             <?php echo esc_html($cat->name); ?>
-        </a>
+        </button>
         <?php endforeach; ?>
       </div>
     </div>
@@ -141,23 +145,22 @@ get_header(); ?>
       </div>
 
       <!-- Posts Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[24px]">
+      <div id="insights-posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[24px]">
         <?php
-        // Main Loop (skipping the featured post if we wanted, but let's just use standard main loop for pagination)
         if ( have_posts() ) :
             while ( have_posts() ) : the_post();
-                // Skip featured post if on first page
                 if ( isset($featured_id) && get_the_ID() == $featured_id && !is_paged() ) continue;
                 
                 $reading_time = starizo_reading_time( get_the_content() );
                 $category = get_the_category(); 
                 $cat_name = !empty($category) ? $category[0]->name : 'Insight';
+                $cat_slug = !empty($category) ? $category[0]->slug : 'all';
                 $thumb = get_the_post_thumbnail_url(get_the_ID(), 'large');
                 if (!$thumb) {
                     $thumb = get_template_directory_uri() . '/public/assets/blog-industries.png';
                 }
         ?>
-        <div class="w-full max-w-[362px] min-h-[580px] bg-white border border-[#E8E8EA] shadow-[0px_4px_18.5px_0px_rgba(0,0,0,0.06)] rounded-tr-[40.63px] rounded-bl-[40.63px] p-[14.77px] flex flex-col justify-between mx-auto transition-transform hover:-translate-y-1">
+        <div data-category="<?php echo esc_attr($cat_slug); ?>" class="insight-post-card w-full max-w-[362px] min-h-[580px] bg-white border border-[#E8E8EA] shadow-[0px_4px_18.5px_0px_rgba(0,0,0,0.06)] rounded-tr-[40.63px] rounded-bl-[40.63px] p-[14.77px] flex flex-col justify-between mx-auto transition-all duration-300 hover:-translate-y-1">
           <!-- Top Image -->
           <div class="w-full h-[221.6px] overflow-hidden rounded-tr-[40.63px] rounded-bl-[40.63px] bg-gray-200">
             <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>" class="w-full h-full object-cover">
@@ -183,34 +186,87 @@ get_header(); ?>
             <span class="font-['Work_Sans'] font-normal text-[14px] leading-[22px] text-[#828282] block">
               <?php echo get_the_date(); ?> | <?php echo esc_html($reading_time); ?>
             </span>
-            <a href="<?php the_permalink(); ?>" class="font-montserrat font-semibold text-[18px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1.5 transition duration-150 w-fit select-none mt-2">
+            <a href="<?php the_permalink(); ?>" class="group font-montserrat font-semibold text-[18px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1.5 transition duration-150 w-fit select-none mt-2">
               <span>Read More</span>
-              <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
           </div>
         </div>
         <?php
             endwhile;
-        else :
-            echo '<p>No insights found.</p>';
         endif;
         ?>
       </div>
 
+      <!-- No Posts Match Message (Hidden by default) -->
+      <div id="no-insights-msg" class="hidden text-center py-12">
+        <p class="font-montserrat font-semibold text-[18px] text-[#828282]">No articles found under this topic.</p>
+      </div>
+
       <!-- Pagination -->
-      <div class="mt-12 flex justify-center w-full pagination-wrapper">
-          <?php 
-          the_posts_pagination( array(
-              'mid_size'  => 2,
-              'prev_text' => __( 'Previous', 'starizo' ),
-              'next_text' => __( 'Next', 'starizo' ),
-          ) ); 
-          ?>
+      <div class="mt-8 flex justify-center">
+        <?php
+        the_posts_pagination( array(
+            'mid_size'  => 2,
+            'prev_text' => __( '&laquo; Prev', 'starizo' ),
+            'next_text' => __( 'Next &raquo;', 'starizo' ),
+            'class'     => 'font-montserrat font-bold flex gap-2 text-[#FF8D00]',
+        ) );
+        ?>
       </div>
 
     </div>
   </section>
 
-</div>
+  <!-- Interactive Topic Filtering Script -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const topicBtns = document.querySelectorAll('.topic-filter-btn');
+      const postCards = document.querySelectorAll('.insight-post-card');
+      const noMsg = document.getElementById('no-insights-msg');
+
+      const activeClasses = ['bg-gradient-to-r', 'from-[#FF8D00]', 'to-[#FFB457]', 'text-white', 'border-0', 'shadow-md'];
+      const inactiveClasses = ['bg-white', 'border', 'border-[#FF8D00]', 'text-[#FF8D00]', 'hover:bg-[#FF8D00]', 'hover:text-white'];
+
+      topicBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+              const selectedTopic = btn.getAttribute('data-topic');
+
+              // Update all buttons visual state
+              topicBtns.forEach(b => {
+                  if (b.getAttribute('data-topic') === selectedTopic) {
+                      b.classList.remove(...inactiveClasses);
+                      b.classList.add(...activeClasses);
+                  } else {
+                      b.classList.remove(...activeClasses);
+                      b.classList.add(...inactiveClasses);
+                  }
+              });
+
+              // Filter post cards
+              let visibleCount = 0;
+              postCards.forEach(card => {
+                  const cardCat = card.getAttribute('data-category');
+                  if (selectedTopic === 'all' || cardCat === selectedTopic) {
+                      card.style.display = 'flex';
+                      visibleCount++;
+                  } else {
+                      card.style.display = 'none';
+                  }
+              });
+
+              if (noMsg) {
+                  if (visibleCount === 0) {
+                      noMsg.classList.remove('hidden');
+                  } else {
+                      noMsg.classList.add('hidden');
+                  }
+              }
+          });
+      });
+  });
+  </script>
+
+</main>
 
 <?php get_footer(); ?>
