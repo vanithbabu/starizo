@@ -61,9 +61,6 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </a>
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </a>
 
       </div>
     </header>

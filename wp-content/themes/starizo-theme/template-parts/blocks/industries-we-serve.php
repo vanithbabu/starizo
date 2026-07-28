@@ -75,10 +75,10 @@ $industries = [
               <h4 class="font-montserrat font-bold text-[15px] text-white tracking-tight"><?php echo esc_html( $industry['title'] ); ?></h4>
             </div>
 
-            <!-- Slide-Up Hover Overlay (Bottom to Top Animation) -->
-            <div class="absolute inset-0 bg-[#00A256] p-5 flex flex-col justify-between z-20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out text-white pointer-events-none group-hover:pointer-events-auto" style="border-radius: 44px 8px 44px 8px;">
+            <!-- Slide-Up Hover Overlay (Orange Gradient Leaf Card - 1:1 Figma Match) -->
+            <div class="absolute inset-0 bg-gradient-to-b from-[#FF8D00] to-[#FFB457] p-6 flex flex-col justify-between z-20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out text-white pointer-events-none group-hover:pointer-events-auto" style="border-radius: 44px 8px 44px 8px;">
               <!-- Background Leaf Line Watermark Pattern -->
-              <svg class="absolute bottom-2 right-2 w-36 h-36 opacity-25 pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+              <svg class="absolute bottom-3 right-3 w-32 h-32 opacity-30 pointer-events-none text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M50 10 C20 40 20 80 50 90 C80 80 80 40 50 10 Z" />
                 <path d="M50 10 L50 90" />
                 <path d="M50 40 Q30 30 20 40" />
@@ -87,22 +87,13 @@ $industries = [
                 <path d="M50 60 Q70 50 80 60" />
               </svg>
 
-              <div>
-                <h4 class="font-montserrat font-bold text-[19px] text-white leading-tight mb-3">
+              <div class="relative z-10">
+                <h4 class="font-montserrat font-bold text-[20px] text-white leading-tight mb-3">
                   <?php echo esc_html( $industry['title'] ); ?>
                 </h4>
-                <p class="font-montserrat font-medium text-[13px] text-white/95 leading-relaxed">
-                  <?php echo esc_html( $industry['description'] ?? 'Create consistency, texture, and ingredient performance.' ); ?>
+                <p class="font-montserrat font-medium text-[14px] text-white/95 leading-[22px]">
+                  <?php echo esc_html( $industry['description'] ?? 'Reliable sourcing and manufacturing processes.' ); ?>
                 </p>
-              </div>
-
-              <div class="pt-4 border-t border-white/20 mt-auto">
-                <span class="inline-flex items-center gap-2 font-montserrat font-bold text-[12px] text-white uppercase tracking-wider">
-                  Learn More
-                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </span>
               </div>
             </div>
 

@@ -146,41 +146,23 @@ $has_products = $products_query->have_posts();
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // ─── Product Carousel Slide Logic ──────────────────────────────────
+    // ─── Product Carousel Native Smooth Scroll ──────────────────────────
     const track = document.getElementById('cards-track-desktop');
     const prevBtn = document.getElementById('carousel-prev-desktop');
     const nextBtn = document.getElementById('carousel-next-desktop');
 
     if (track) {
-        // card width (380px) + gap-5 (20px) = 400px
-        const cardWidth = 400; 
-        let currentOffset = 0;
-        // Maximum offset so we don't scroll past the end
-        // Adjust formula based on number of cards
-        const maxOffset = Math.max(0, (track.children.length - 2) * cardWidth);
-
-        function updateTrack() {
-            track.style.transition = 'transform 0.3s ease-in-out';
-            track.style.transform = `translateX(-${currentOffset}px)`;
-        }
-
         if (nextBtn) {
             nextBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                if (currentOffset < maxOffset) {
-                    currentOffset += cardWidth;
-                    updateTrack();
-                }
+                track.scrollBy({ left: 400, behavior: 'smooth' });
             });
         }
 
         if (prevBtn) {
             prevBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                if (currentOffset > 0) {
-                    currentOffset -= cardWidth;
-                    updateTrack();
-                }
+                track.scrollBy({ left: -400, behavior: 'smooth' });
             });
         }
     }
