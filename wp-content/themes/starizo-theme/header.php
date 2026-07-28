@@ -96,7 +96,7 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
     <div id="mobile-sidebar-backdrop" class="fixed inset-0 bg-black/40 z-[999] opacity-0 pointer-events-none transition-opacity duration-300"></div>
 
     <!-- Mobile Slide-In Sidebar Panel (1:1 Figma Component 23 Design) -->
-    <div id="mobile-sidebar-panel" class="fixed top-0 left-0 w-[280px] sm:w-[320px] h-full bg-white z-[1000] transform -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl p-6 flex flex-col justify-start rounded-r-[24px] overflow-y-auto">
+    <div id="mobile-sidebar-panel" class="fixed top-0 left-0 w-[85vw] max-w-[360px] sm:w-[380px] h-full bg-white z-[1000] transform -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl p-6 sm:p-8 flex flex-col justify-start rounded-r-[24px] overflow-y-auto">
         
         <!-- Top Row: Close Button [X] -->
         <div class="w-full flex justify-end mb-6">
