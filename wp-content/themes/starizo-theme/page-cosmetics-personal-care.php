@@ -9,20 +9,20 @@
 get_header();
 ?>
 
-<main class="w-full relative overflow-hidden bg-[#FDFBF3] pt-[170px] pb-16">
+<main class="w-full relative overflow-hidden bg-[#FDFBF3]">
 
   <!-- Desktop / Laptop View (lg: 1024px+ screens) -->
   <div class="hidden lg:block w-full">
 
     <!-- 1. HERO SECTION -->
-    <section class="w-full relative overflow-hidden min-h-[580px] bg-[#FDFBF3] pb-16">
+    <section class="w-full relative overflow-hidden min-h-[640px] bg-[#FDFBF3] pb-16">
       <!-- Background Image -->
       <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
         <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/consmitics-hero.png' ); ?>" alt="Cosmetics & Personal Care" class="w-full h-full object-cover object-right">
       </div>
 
       <!-- Hero Left Content Container -->
-      <div class="relative z-10 max-w-[1280px] mx-auto w-full flex items-center justify-start h-full px-6 sm:px-10 md:px-14 lg:px-16 pt-6">
+      <div class="relative z-10 max-w-[1280px] mx-auto w-full flex items-center justify-start h-full px-6 sm:px-10 md:px-14 lg:px-16 pt-[130px]">
         <div class="w-[480px] max-w-full flex flex-col items-start gap-6 text-left my-auto">
           
           <!-- Category Tag -->
