@@ -11,8 +11,8 @@ get_header();
 
 <main class="w-full relative overflow-hidden bg-[#FDFBF3] pt-[170px] pb-16">
 
-  <!-- Desktop View (xl: 1280px+ screens) -->
-  <div class="hidden xl:block w-full">
+  <!-- Desktop / Laptop View (lg: 1024px+ screens) -->
+  <div class="hidden lg:block w-full">
 
     <!-- 1. HERO SECTION -->
     <section class="w-full relative overflow-hidden min-h-[580px] bg-[#FDFBF3] pb-16">

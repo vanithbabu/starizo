@@ -11,14 +11,14 @@ get_header();
 
 <main class="w-full relative overflow-hidden bg-[#FDFBF3] pt-[170px] pb-16">
 
-  <!-- Desktop View (xl: 1280px+ screens) -->
-  <div class="hidden xl:block w-full">
+  <!-- Desktop / Laptop View (lg: 1024px+ screens) -->
+  <div class="hidden lg:block w-full">
 
     <!-- 1. HERO SECTION -->
     <section class="w-full relative overflow-hidden min-h-[580px] bg-[#FDFBF3] pb-16">
       <!-- Background Image -->
       <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/food&Bevarges-hero.png' ); ?>" alt="Food & Beverage Ingredients" class="w-full h-full object-cover object-right-top">
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/food-beverages-hero.png' ); ?>" alt="Food & Beverage Ingredients" class="w-full h-full object-cover object-right-top">
       </div>
 
       <!-- Hero Content Container -->
