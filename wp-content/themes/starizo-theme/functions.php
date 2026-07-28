@@ -392,3 +392,32 @@ function starizo_add_nav_menu_classes($atts, $item, $args) {
 }
 add_filter('nav_menu_link_attributes', 'starizo_add_nav_menu_classes', 10, 3);
 
+/**
+ * AJAX Newsletter Subscription Handler
+ */
+function starizo_handle_newsletter_subscription() {
+    check_ajax_referer( 'starizo_newsletter_nonce', 'security' );
+
+    $email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+
+    if ( ! is_email( $email ) ) {
+        wp_send_json_error( array( 'message' => 'Please enter a valid email address.' ) );
+    }
+
+    $subscribers = get_option( 'starizo_subscribers', array() );
+    if ( ! is_array( $subscribers ) ) {
+        $subscribers = array();
+    }
+
+    if ( in_array( $email, $subscribers, true ) ) {
+        wp_send_json_success( array( 'message' => 'You are already subscribed!' ) );
+    }
+
+    $subscribers[] = $email;
+    update_option( 'starizo_subscribers', $subscribers );
+
+    wp_send_json_success( array( 'message' => 'Thank you for subscribing to Starizo Insights!' ) );
+}
+add_action( 'wp_ajax_starizo_newsletter', 'starizo_handle_newsletter_subscription' );
+add_action( 'wp_ajax_nopriv_starizo_newsletter', 'starizo_handle_newsletter_subscription' );
+

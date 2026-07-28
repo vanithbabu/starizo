@@ -92,9 +92,9 @@ get_header();
               Let’s build better products together.
             </p>
           </div>
-          <a href="/contact" class="mt-4 w-full h-[44px] bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[15px] rounded-full flex items-center justify-center gap-2 shadow-md transition-all select-none">
+          <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="group mt-4 w-full h-[44px] bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[15px] rounded-full flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md hover:shadow-xl select-none">
             <span>Contact Us</span>
-            <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </a>
         </div>
       </aside>
@@ -108,16 +108,19 @@ get_header();
 
     </div>
 
-    <!-- RELATED READING SECTION -->
-    <div class="w-full max-w-[1120px] mx-auto mt-24 px-6 lg:px-0">
-      <div class="flex items-center gap-3 mb-10">
-        <span class="w-[3px] h-[24px] bg-[#FF8D00] rounded-full inline-block"></span>
-        <h2 class="font-montserrat font-bold text-[22px] leading-[32px] tracking-[0.11em] uppercase text-[#B86200]">
+    <!-- ==================== RELATED READING SECTION (DYNAMIC 1:1 WITH blog-detail.html) ==================== -->
+    <div class="w-full max-w-[1120px] mx-auto mt-16 pb-12 flex flex-col gap-8 px-4 lg:px-0">
+      
+      <!-- Heading with Vertical Orange Accent Bar -->
+      <div class="flex items-center gap-3">
+        <span class="w-[4px] h-[24px] bg-[#FF8D00] rounded-full inline-block"></span>
+        <h2 class="font-montserrat font-normal text-[18px] leading-[28px] tracking-[0.11em] uppercase text-[#B86200]">
           RELATED READING
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[24px]">
+      <!-- 3-Card Grid (Dynamic WP_Query 1:1 with blog-detail.html) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
         <?php
         $cat_ids = array();
         if ( !empty($category) ) {
@@ -133,86 +136,182 @@ get_header();
         );
         $related_query = new WP_Query($related_args);
         
-        if( $related_query->have_posts() ) {
-            while( $related_query->have_posts() ) {
+        if ( ! $related_query->have_posts() ) {
+            // Fallback to latest 3 posts if no category match
+            $related_query = new WP_Query( array(
+                'post_type'      => 'post',
+                'posts_per_page' => 3,
+                'post__not_in'   => array( get_the_ID() ),
+            ) );
+        }
+
+        if( $related_query->have_posts() ) :
+            while( $related_query->have_posts() ) :
                 $related_query->the_post();
                 $rel_reading_time = starizo_reading_time( get_the_content() );
                 $rel_thumb = get_the_post_thumbnail_url(get_the_ID(), 'large');
                 if (!$rel_thumb) {
                     $rel_thumb = get_template_directory_uri() . '/public/assets/blog-industries.png';
                 }
-                ?>
-                <div class="w-full max-w-[362px] min-h-[580px] bg-white border border-[#E8E8EA] shadow-[0px_4px_18.5px_0px_rgba(0,0,0,0.06)] rounded-tr-[40.63px] rounded-bl-[40.63px] p-[14.77px] flex flex-col justify-between mx-auto transition-transform hover:-translate-y-1">
-                  <div class="w-full h-[221.6px] overflow-hidden rounded-tr-[40.63px] rounded-bl-[40.63px] bg-gray-200">
-                    <img src="<?php echo esc_url($rel_thumb); ?>" alt="<?php the_title_attribute(); ?>" class="w-full h-full object-cover">
-                  </div>
-                  <div class="p-2.5 flex flex-col gap-[6px] flex-1 mt-3">
-                    <span class="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.11em] uppercase text-[#00A256] block">
-                      <?php echo esc_html($cat_name); ?>
-                    </span>
-                    <div class="flex flex-col gap-[9px]">
-                      <h3 class="font-montserrat font-bold text-[22px] leading-[29px] text-black hover:text-[#FF8D00] transition">
-                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                      </h3>
-                      <p class="font-montserrat font-medium text-[16px] leading-[26px] text-[#333333] line-clamp-3">
-                        <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="px-2.5 pb-2.5 pt-2 flex flex-col gap-2 border-t border-gray-100">
-                    <span class="font-['Work_Sans'] font-normal text-[14px] leading-[22px] text-[#828282] block">
-                      <?php echo get_the_date(); ?> | <?php echo esc_html($rel_reading_time); ?>
-                    </span>
-                    <a href="<?php the_permalink(); ?>" class="group font-montserrat font-semibold text-[18px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1.5 transition duration-150 w-fit select-none mt-2">
-                      <span>Read More</span>
-                      <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </a>
-                  </div>
-                </div>
-                <?php
-            }
+                $rel_cat = get_the_category();
+                $rel_cat_name = !empty($rel_cat) ? $rel_cat[0]->name : 'Clean Label';
+        ?>
+        <div class="w-full max-w-[362px] min-h-[560px] bg-white border border-[#E8E8EA] shadow-[0px_4px_18.5px_0px_rgba(0,0,0,0.06)] rounded-tr-[40.63px] rounded-bl-[40.63px] p-[14.77px] flex flex-col justify-between mx-auto transition-transform hover:-translate-y-1">
+          <div class="w-full h-[221.6px] overflow-hidden rounded-tr-[40.63px] rounded-bl-[40.63px]">
+            <img src="<?php echo esc_url($rel_thumb); ?>" alt="<?php the_title_attribute(); ?>" class="w-full h-full object-cover">
+          </div>
+
+          <div class="p-2.5 flex flex-col gap-[6px] flex-1 mt-3">
+            <span class="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.11em] uppercase bg-gradient-to-r from-[#00A256] to-[#5DC671] bg-clip-text text-transparent block">
+              <?php echo esc_html($rel_cat_name); ?>
+            </span>
+
+            <div class="flex flex-col gap-[9px]">
+              <h3 class="font-montserrat font-bold text-[22px] leading-[29px] text-black hover:text-[#FF8D00] transition">
+                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+              </h3>
+              <p class="font-montserrat font-medium text-[18px] leading-[30px] text-[#333333] line-clamp-3">
+                <?php echo wp_trim_words( get_the_excerpt(), 20, '...' ); ?>
+              </p>
+            </div>
+          </div>
+
+          <div class="px-2.5 pb-2.5 pt-2 flex flex-col gap-2 border-t border-gray-100">
+            <span class="font-['Work_Sans'] font-normal text-[16px] leading-[22.16px] text-[#828282] block">
+              <?php echo get_the_date('F j, Y'); ?> | <?php echo esc_html($rel_reading_time); ?>
+            </span>
+            <a href="<?php the_permalink(); ?>" class="group font-montserrat font-semibold text-[18px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1.5 transition duration-150 w-fit select-none">
+              <span>Read More</span>
+              <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+        <?php
+            endwhile;
             wp_reset_postdata();
-        }
+        endif;
         ?>
       </div>
     </div>
 
-    <!-- NEWSLETTER SUBSCRIPTION SECTION -->
-    <div class="w-full max-w-[1120px] mx-auto mt-24 px-6 lg:px-0">
-      <div class="relative w-full bg-gradient-to-r from-[#00A256] to-[#5DC671] rounded-tr-[48px] rounded-bl-[48px] p-8 lg:p-14 overflow-hidden shadow-xl text-white flex flex-col lg:flex-row items-center justify-between gap-8">
+    <!-- ==================== NEWSLETTER SECTION (FIGMA SPEC 1:1 EXACT COPY FROM blog-detail.html) ==================== -->
+    <section class="w-full bg-[#FDFBF3] py-14 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-[1123px] mx-auto relative rounded-[32px] sm:rounded-[44px] rounded-tr-none sm:rounded-tr-none bg-white overflow-hidden shadow-sm min-h-[320px] flex items-center p-8 sm:p-12 md:p-14">
         
-        <!-- Background Rice Field Accent -->
-        <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/hero-rice-field-bg.png'); ?>" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none mix-blend-overlay">
+        <!-- Background Layer: Orange Gradient + Green Ribbon + Outer Radius Clipping -->
+        <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+          <svg class="w-full h-full" viewBox="0 0 1123 320" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="newsletterOrangeGradDetail" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#FF8D00"/>
+                <stop offset="100%" stop-color="#FFB457"/>
+              </linearGradient>
+            </defs>
 
-        <!-- Left Content -->
-        <div class="relative z-10 max-w-[540px]">
-          <div class="flex items-center gap-2 mb-3">
-            <span class="w-[4px] h-[20px] bg-[#FF8D00] rounded-full inline-block"></span>
-            <span class="font-montserrat font-bold text-[14px] uppercase tracking-[0.11em] text-[#FBEAC4]">NEWSLETTER</span>
-          </div>
-          <h3 class="font-montserrat font-black text-[28px] sm:text-[34px] leading-[38px] sm:leading-[44px] text-white">
-            Stay Ahead with Starizo Insights
-          </h3>
-          <p class="font-montserrat font-medium text-[16px] leading-[26px] text-white/90 mt-3">
-            Subscribe to our technical newsletter for the latest research, market trends, and clean-label ingredient innovations.
-          </p>
+            <!-- Base White Background for Bottom Right Side -->
+            <rect width="1123" height="320" fill="#FFFFFF"/>
+            
+            <!-- Orange Main Body with linear-gradient(90deg, #FF8D00 0%, #FFB457 100%) -->
+            <path d="M0 0H1050C1110 100 1075 220 900 320H0V0Z" fill="url(#newsletterOrangeGradDetail)"/>
+            
+            <!-- Green Tapered Ribbon -->
+            <path d="M1050 0H1123C1123 110 1080 230 900 320C1075 220 1110 100 1050 0Z" fill="#00A256"/>
+          </svg>
         </div>
 
-        <!-- Right Form -->
-        <div class="relative z-10 w-full lg:w-auto">
-          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Starizo Insights!');" class="flex flex-col sm:flex-row gap-3 w-full max-w-[500px]">
-            <input type="email" required placeholder="Enter your email address" class="w-full sm:w-[320px] h-[50px] px-6 rounded-full border border-white/30 bg-white/10 text-white placeholder-white/70 focus:outline-none focus:bg-white focus:text-black focus:placeholder-gray-400 text-[15px] font-montserrat transition duration-200">
-            <button type="submit" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-bold text-[15px] px-8 h-[50px] rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-xl hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shrink-0 cursor-pointer">
-              Subscribe
-              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
+        <!-- Banner Content Area -->
+        <div class="relative z-10 max-w-[580px] flex flex-col gap-5 text-white">
+          
+          <!-- Category Tag -->
+          <span class="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.11em] uppercase text-white/90">
+            NEWSLETTER
+          </span>
+
+          <!-- Main Headline -->
+          <h2 class="font-montserrat font-extrabold text-[32px] sm:text-[40px] md:text-[44px] leading-[42px] sm:leading-[52px] text-white">
+            Get Insights That Matter
+          </h2>
+
+          <!-- Subtitle -->
+          <p class="font-montserrat font-medium text-[16px] sm:text-[18px] leading-[26px] sm:leading-[28px] text-white/95">
+            Monthly perspectives on ingredients, manufacturing, and formulation innovation.
+          </p>
+
+          <!-- Input + Submit Button Box -->
+          <form id="starizo-newsletter-form" class="mt-2 w-full max-w-[480px] bg-white rounded-[40px] p-[6px] pl-6 flex flex-col sm:flex-row items-center justify-between shadow-md border border-white/40 gap-2 relative">
+            <?php wp_nonce_field( 'starizo_newsletter_nonce', 'security' ); ?>
+            <input type="email" name="email" id="newsletter-email" placeholder="Enter your email address" class="w-full bg-transparent font-montserrat text-[15px] sm:text-[16px] text-black placeholder-[#828282] outline-none pr-2" required>
+            <button type="submit" id="newsletter-submit-btn" class="group w-[120px] h-[44px] rounded-[40px] border-2 border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white font-montserrat font-bold text-[15px] sm:text-[16px] flex items-center justify-center gap-1.5 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shrink-0 select-none cursor-pointer">
+              <span id="newsletter-btn-text">Submit</span>
+              <svg id="newsletter-btn-icon" class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </button>
           </form>
+
+          <!-- Response Message -->
+          <div id="newsletter-msg" class="hidden font-montserrat font-medium text-[14px] px-4 py-2 rounded-full mt-1 transition-all"></div>
+
         </div>
 
       </div>
-    </div>
+    </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('starizo-newsletter-form');
+        const emailInput = document.getElementById('newsletter-email');
+        const submitBtn = document.getElementById('newsletter-submit-btn');
+        const btnText = document.getElementById('newsletter-btn-text');
+        const msgBox = document.getElementById('newsletter-msg');
+        const ajaxUrl = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
+
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = emailInput.value.trim();
+                const nonce = form.querySelector('input[name="security"]').value;
+
+                if (!email) return;
+
+                btnText.textContent = '...';
+                submitBtn.disabled = true;
+                msgBox.classList.add('hidden');
+
+                const formData = new FormData();
+                formData.append('action', 'starizo_newsletter');
+                formData.append('email', email);
+                formData.append('security', nonce);
+
+                fetch(ajaxUrl, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Submit';
+
+                    msgBox.classList.remove('hidden', 'bg-red-500/20', 'text-red-100', 'bg-green-500/20', 'text-green-100', 'bg-white', 'text-black');
+                    
+                    if (data.success) {
+                        msgBox.classList.add('bg-white', 'text-[#00A256]', 'font-bold');
+                        msgBox.textContent = '✓ ' + data.data.message;
+                        emailInput.value = '';
+                    } else {
+                        msgBox.classList.add('bg-red-500/80', 'text-white');
+                        msgBox.textContent = '✕ ' + (data.data ? data.data.message : 'Subscription failed.');
+                    }
+                })
+                .catch(() => {
+                    submitBtn.disabled = false;
+                    btnText.textContent = 'Submit';
+                    msgBox.classList.remove('hidden');
+                    msgBox.classList.add('bg-red-500/80', 'text-white');
+                    msgBox.textContent = '✕ Something went wrong. Please try again.';
+                });
+            });
+        }
+    });
+    </script>
 
     <?php endwhile; ?>
 </div>
