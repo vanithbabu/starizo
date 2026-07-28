@@ -55,9 +55,12 @@ $cta_link = get_field('header_cta_link', 'option') ?: site_url('/contact');
         </nav>
 
         <!-- Contact -->
-        <a href="<?php echo esc_url( $cta_link ); ?>" class="bg-[#FF9100] text-white px-7 h-[46px] rounded-full flex items-center gap-2 font-bold hover:bg-[#e68300] transition-colors shrink-0">
+        <a href="<?php echo esc_url( $cta_link ); ?>" class="group bg-[#FF9100] text-white px-7 h-[46px] rounded-full flex items-center gap-2 font-bold hover:bg-[#e68300] hover:scale-[1.04] active:scale-[0.98] transition-all duration-300 shrink-0 shadow-sm hover:shadow-md select-none">
           <?php echo esc_html( $cta_text ); ?>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2">
+          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </a>
