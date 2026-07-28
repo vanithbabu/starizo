@@ -53,20 +53,20 @@ $image_url = $image ? esc_url( $image['url'] ) : get_template_directory_uri() . 
           </p>
 
           <!-- Action Buttons Group -->
-          <div class="flex flex-row items-center" style="width: 380px; max-width: 100%; height: 45px; gap: 19px; opacity: 1;">
+          <div class="flex flex-row items-center gap-4">
 
             <!-- Explore Products -->
-            <a href="<?php echo esc_url( $button_1_link ); ?>" class="font-montserrat font-semibold text-white flex items-center justify-center transition duration-200 select-none shrink-0" style="width: 209px; height: 45px; border-radius: 22px; border: 1px solid #FFFFFF; padding: 12px; gap: 10px; opacity: 1; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 15px; line-height: 21px; letter-spacing: 0;">
+            <a href="<?php echo esc_url( $button_1_link ); ?>" class="group border-2 border-white text-white hover:bg-white hover:text-[#00A256] font-montserrat font-semibold text-[15px] px-7 h-[46px] rounded-full flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shadow-md backdrop-blur-sm">
               <?php echo esc_html( $button_1_text ); ?>
-              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5] shrink-0" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5] shrink-0 transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </a>
 
             <!-- Contact Us -->
-            <a href="<?php echo esc_url( $button_2_link ); ?>" class="font-montserrat font-semibold text-white flex items-center justify-center transition duration-200 shadow-md select-none shrink-0" style="width: 152px; height: 45px; border-radius: 22px; background-color: #FF8D00; padding: 12px; gap: 10px; opacity: 1; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 15px; line-height: 21px; letter-spacing: 0;">
+            <a href="<?php echo esc_url( $button_2_link ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-semibold text-[15px] px-7 h-[46px] rounded-full flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shadow-md hover:shadow-xl">
               <?php echo esc_html( $button_2_text ); ?>
-              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5] shrink-0" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5] shrink-0 transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </a>
@@ -120,13 +120,13 @@ $image_url = $image ? esc_url( $image['url'] ) : get_template_directory_uri() . 
 
                 <!-- Action Buttons -->
                 <div class="flex flex-col gap-3 w-full max-w-[280px] mb-10">
-                    <a href="<?php echo esc_url( $button_1_link ); ?>" class="w-full h-[46px] border border-white rounded-[22px] flex items-center justify-center text-white font-semibold gap-2 backdrop-blur-sm">
+                    <a href="<?php echo esc_url( $button_1_link ); ?>" class="group w-full h-[46px] border-2 border-white hover:bg-white hover:text-[#00A256] rounded-full flex items-center justify-center text-white font-semibold gap-2 backdrop-blur-sm hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shadow-md">
                         <?php echo esc_html( $button_1_text ); ?>
-                        <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </a>
-                    <a href="<?php echo esc_url( $button_2_link ); ?>" class="w-full h-[46px] bg-[#FF8D00] rounded-[22px] flex items-center justify-center text-white font-semibold gap-2">
+                    <a href="<?php echo esc_url( $button_2_link ); ?>" class="group w-full h-[46px] bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] rounded-full flex items-center justify-center text-white font-semibold gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shadow-md hover:shadow-xl">
                         <?php echo esc_html( $button_2_text ); ?>
-                        <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </a>
                 </div>
 
