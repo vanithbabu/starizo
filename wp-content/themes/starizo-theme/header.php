@@ -47,17 +47,43 @@ $is_insights = is_page( 'insights' ) || is_home() || is_singular( 'post' ) || is
               ) );
               ?>
           <?php else : ?>
-            <!-- Products Dropdown -->
-            <div class="relative group py-2">
-              <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" class="text-[18px] <?php echo $is_products ? 'font-bold text-[#FF8D00]' : 'font-medium text-black hover:text-[#FF8D00]'; ?> transition flex items-center gap-1">
+            <!-- Products Dropdown (1:1 with Figma Component Spec) -->
+            <div class="relative group py-6">
+              <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" class="text-[18px] <?php echo $is_products ? 'font-bold text-[#FF8D00]' : 'font-medium text-black hover:text-[#FF8D00]'; ?> transition flex items-center gap-1.5 cursor-pointer">
                 <span>Products</span>
-                <svg class="w-4 h-4 fill-current transition-transform group-hover:rotate-180" viewBox="0 0 24 24">
-                  <path d="M7 10l5 5 5-5H7z" />
+                <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-[2.5] transform transition-transform group-hover:rotate-180" viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
               </a>
-              <div class="absolute left-0 top-full hidden group-hover:flex flex-col bg-white border border-gray-100 rounded-[16px] shadow-xl py-3 px-4 w-[240px] z-50 transition-all">
-                <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" class="font-montserrat font-bold text-[14px] py-2 text-black hover:text-[#FF8D00] border-b border-gray-100 transition-colors">Food & Beverage</a>
-                <a href="<?php echo esc_url( site_url('/cosmetics-personal-care') ); ?>" class="font-montserrat font-bold text-[14px] py-2 text-black hover:text-[#FF8D00] transition-colors">Cosmetics & Personal Care</a>
+
+              <!-- Dropdown Card matching Figma Screenshot 1:1 -->
+              <div class="absolute left-[-16px] top-[calc(100%-2px)] hidden group-hover:flex items-center gap-6 bg-white rounded-b-[24px] rounded-tr-none rounded-tl-none shadow-[0_10px_30px_rgba(0,0,0,0.06)] py-6 px-6 whitespace-nowrap z-50 transition-all duration-300">
+                
+                <!-- Food & Beverage -->
+                <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" class="flex items-center gap-3 group/item transition-all">
+                  <div class="w-10 h-10 rounded-full border-2 border-[#5DC671] bg-white flex items-center justify-center text-[#FF8D00] shrink-0 group-hover/item:bg-[#5DC671]/10 transition-colors shadow-sm">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#FF8D00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                      <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                      <line x1="6" y1="1" x2="6" y2="4"/>
+                      <line x1="10" y1="1" x2="10" y2="4"/>
+                      <line x1="14" y1="1" x2="14" y2="4"/>
+                    </svg>
+                  </div>
+                  <span class="font-montserrat font-semibold text-[16px] leading-[22px] text-[#5D3700] group-hover/item:text-[#FF8D00] transition-colors whitespace-nowrap">Food & Beverage</span>
+                </a>
+
+                <!-- Cosmetics & Personal Care -->
+                <a href="<?php echo esc_url( site_url('/cosmetics-personal-care') ); ?>" class="flex items-center gap-3 group/item transition-all">
+                  <div class="w-10 h-10 rounded-full border-2 border-[#5DC671] bg-white flex items-center justify-center text-[#FF8D00] shrink-0 group-hover/item:bg-[#5DC671]/10 transition-colors shadow-sm">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#FF8D00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="11" width="18" height="11" rx="2"/>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                  </div>
+                  <span class="font-montserrat font-semibold text-[16px] leading-[22px] text-[#5D3700] group-hover/item:text-[#FF8D00] transition-colors whitespace-nowrap">Cosmetics & Personal Care</span>
+                </a>
+
               </div>
             </div>
 
