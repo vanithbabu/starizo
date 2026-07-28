@@ -139,6 +139,44 @@ function starizo_inquiry_custom_column_data($column, $post_id) {
 add_action('manage_starizo_inquiry_posts_custom_column', 'starizo_inquiry_custom_column_data', 10, 2);
 
 /**
+ * Add Admin Meta Box for Inquiry Details
+ */
+function starizo_add_inquiry_meta_box() {
+    add_meta_box(
+        'starizo_inquiry_details',
+        'Inquiry Submitted Details',
+        'starizo_render_inquiry_meta_box',
+        'starizo_inquiry',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'starizo_add_inquiry_meta_box');
+
+function starizo_render_inquiry_meta_box($post) {
+    $full_name  = get_post_meta($post->ID, '_full_name', true);
+    $phone      = get_post_meta($post->ID, '_phone', true);
+    $email      = get_post_meta($post->ID, '_email', true);
+    $company    = get_post_meta($post->ID, '_company', true);
+    $industry   = get_post_meta($post->ID, '_industry', true);
+    $ingredient = get_post_meta($post->ID, '_ingredient', true);
+    $message    = get_post_meta($post->ID, '_message', true);
+    $ip         = get_post_meta($post->ID, '_ip_address', true);
+    ?>
+    <table class="widefat fixed striped" style="margin-top:10px;">
+        <tr><td style="width:200px; font-weight:bold;">Full Name:</td><td><?php echo esc_html($full_name ?: '—'); ?></td></tr>
+        <tr><td style="font-weight:bold;">Work Email:</td><td><a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email ?: '—'); ?></a></td></tr>
+        <tr><td style="font-weight:bold;">Phone Number:</td><td><?php echo esc_html($phone ?: '—'); ?></td></tr>
+        <tr><td style="font-weight:bold;">Company Name:</td><td><?php echo esc_html($company ?: '—'); ?></td></tr>
+        <tr><td style="font-weight:bold;">Industry:</td><td><?php echo esc_html($industry ?: '—'); ?></td></tr>
+        <tr><td style="font-weight:bold;">Ingredient of Interest:</td><td><?php echo esc_html($ingredient ?: '—'); ?></td></tr>
+        <tr><td style="font-weight:bold;">Message:</td><td><?php echo nl2br(esc_html($message ?: '—')); ?></td></tr>
+        <tr><td style="font-weight:bold;">IP Address:</td><td><?php echo esc_html($ip ?: '—'); ?></td></tr>
+    </table>
+    <?php
+}
+
+/**
  * Handle Contact Form AJAX Submission (Store in DB & Send HTML Email)
  */
 function starizo_handle_contact_submission() {

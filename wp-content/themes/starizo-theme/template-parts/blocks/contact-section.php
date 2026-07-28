@@ -338,46 +338,103 @@ $form_shortcode = get_sub_field('form_shortcode');
             <?php echo do_shortcode($form_shortcode); ?>
           </div>
         <?php else: ?>
-          <form action="#" method="POST" class="flex flex-col gap-4">
+          <form id="starizo-mobile-contact-form" action="<?php echo esc_url(admin_url('admin-ajax.php')); ?>" method="POST" class="flex flex-col gap-4">
+            <input type="hidden" name="action" value="starizo_submit_contact">
+            <input type="hidden" name="nonce" value="<?php echo wp_create_nonce('starizo_contact_nonce'); ?>">
+
+            <div id="mobile-contact-form-alert" class="hidden p-3 rounded font-montserrat text-xs"></div>
+
             <div class="flex flex-col gap-1">
               <label class="font-montserrat font-semibold text-[12px] text-black/80">Full Name*</label>
-              <input type="text" placeholder="John Doe" required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent">
+              <input type="text" name="full_name" placeholder="John Doe" required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent">
             </div>
             <div class="flex flex-col gap-1">
               <label class="font-montserrat font-semibold text-[12px] text-black/80">Phone Number*</label>
-              <input type="tel" placeholder="+1 012 3456 789" required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent">
+              <input type="tel" name="phone" placeholder="+1 012 3456 789" required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent">
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="font-montserrat font-semibold text-[12px] text-black/80">Work Email*</label>
+              <input type="email" name="email" placeholder="Enter Work Email" required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent">
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="font-montserrat font-semibold text-[12px] text-black/80">Company Name*</label>
+              <input type="text" name="company" placeholder="Enter Company Name" required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent">
             </div>
             <div class="flex flex-col gap-1">
               <label class="font-montserrat font-semibold text-[12px] text-black/80">Industry*</label>
-              <select required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent">
+              <select name="industry" required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent">
                 <option value="" disabled selected>Select Industry</option>
-                <option value="food">Food Manufacturers</option>
-                <option value="nutrition">Nutrition Brands</option>
-                <option value="pharma">Pharmaceutical</option>
-                <option value="personal-care">Personal Care</option>
-                <option value="industrial">Industrial Applications</option>
+                <option value="Food Manufacturers">Food Manufacturers</option>
+                <option value="Nutrition Brands">Nutrition Brands</option>
+                <option value="Pharmaceutical">Pharmaceutical</option>
+                <option value="Personal Care">Personal Care</option>
+                <option value="Industrial Applications">Industrial Applications</option>
               </select>
             </div>
             <div class="flex flex-col gap-1">
               <label class="font-montserrat font-semibold text-[12px] text-black/80">Ingredient of interest*</label>
-              <input type="text" placeholder="Enter Ingredient" required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent">
+              <input type="text" name="ingredient" placeholder="Enter Ingredient" required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent">
             </div>
             <div class="flex flex-col gap-1">
               <label class="font-montserrat font-semibold text-[12px] text-black/80">Message*</label>
-              <textarea rows="2" placeholder="Write your message.." required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent resize-none"></textarea>
+              <textarea name="message" rows="2" placeholder="Write your message.." required class="w-full pb-1 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[14px] bg-transparent resize-none"></textarea>
             </div>
 
             <div class="w-full flex justify-center mt-2">
-              <button type="submit"
+              <button type="submit" id="mobile-contact-submit-btn"
                 class="bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-semibold text-[14px] leading-[21px] rounded-[5px] flex items-center justify-center gap-[10px] shadow-sm select-none transition-colors"
-                style="width: 103px; height: 36px; padding: 4px 12px;">
-                <span>Submit</span>
+                style="width: 120px; height: 36px; padding: 4px 12px;">
+                <span id="mobile-btn-text">Submit</span>
                 <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
               </button>
             </div>
           </form>
+
+          <script>
+          document.addEventListener('DOMContentLoaded', () => {
+              const mobileForm = document.getElementById('starizo-mobile-contact-form');
+              const mobileAlert = document.getElementById('mobile-contact-form-alert');
+              const mobileSubmitBtn = document.getElementById('mobile-contact-submit-btn');
+              const mobileBtnText = document.getElementById('mobile-btn-text');
+
+              if (mobileForm) {
+                  mobileForm.addEventListener('submit', async (e) => {
+                      e.preventDefault();
+                      mobileBtnText.textContent = 'Sending...';
+                      mobileSubmitBtn.disabled = true;
+                      mobileAlert.classList.add('hidden');
+
+                      try {
+                          const formData = new FormData(mobileForm);
+                          const response = await fetch(mobileForm.action, {
+                              method: 'POST',
+                              body: formData
+                          });
+                          const result = await response.json();
+
+                          mobileAlert.classList.remove('hidden');
+                          if (result.success) {
+                              mobileAlert.className = 'p-3 rounded font-montserrat text-xs bg-green-50 text-green-800 border border-green-200 mb-2';
+                              mobileAlert.textContent = result.data.message;
+                              mobileForm.reset();
+                          } else {
+                              mobileAlert.className = 'p-3 rounded font-montserrat text-xs bg-red-50 text-red-800 border border-red-200 mb-2';
+                              mobileAlert.textContent = result.data.message || 'An error occurred.';
+                          }
+                      } catch (err) {
+                          mobileAlert.classList.remove('hidden');
+                          mobileAlert.className = 'p-3 rounded font-montserrat text-xs bg-red-50 text-red-800 border border-red-200 mb-2';
+                          mobileAlert.textContent = 'Connection error.';
+                      } finally {
+                          mobileBtnText.textContent = 'Submit';
+                          mobileSubmitBtn.disabled = false;
+                      }
+                  });
+              }
+          });
+          </script>
         <?php endif; ?>
       </div>
 
