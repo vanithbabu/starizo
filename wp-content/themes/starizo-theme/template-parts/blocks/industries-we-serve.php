@@ -62,16 +62,56 @@ $industries = [
           <?php endif; ?>
         </div>
 
-        <!-- 5 Cards row -->
-        <div class="grid grid-cols-5 gap-6">
-          <?php foreach ( $industries as $industry ) : ?>
-          <div style="background-color: #00A256; border-radius: 44px 8px 44px 8px;" class="p-3 flex flex-col justify-between shadow-md transition-transform duration-300 hover:-translate-y-1 overflow-hidden">
-            <div style="border-radius: 34px 3px 34px 3px;" class="relative w-full h-[280px] overflow-hidden">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/' . $industry['image'] ); ?>" alt="<?php echo esc_attr( $industry['title'] ); ?>" class="w-full h-full object-cover" loading="lazy">
+        <!-- 5 Interactive Accordion Cards row matching Figma 1:1 -->
+        <div class="flex flex-row gap-4 w-full h-[360px] items-stretch group/accordion">
+          <?php foreach ( $industries as $index => $industry ) : 
+            $is_first = ($index === 0);
+          ?>
+          <div class="industry-card flex-1 hover:flex-[2.2] <?php echo $is_first ? 'group-hover/accordion:flex-1 group-hover/accordion:[&_.expanded-content]:hidden group-hover/accordion:[&_.collapsed-content]:flex group-hover/accordion:bg-[#00A256]' : ''; ?> transition-all duration-500 ease-in-out cursor-pointer rounded-[44px_8px_44px_8px] p-3 flex flex-col justify-between shadow-lg relative overflow-hidden group/card bg-[#00A256] hover:bg-[#FF8D00]">
+            
+            <!-- Expanded State Content (Shows on Hover, or default active on 1st item when not hovering container) -->
+            <div class="expanded-content <?php echo $is_first ? 'flex' : 'hidden'; ?> group-hover/card:flex flex-col justify-between h-full w-full p-4 relative z-10 text-white animate-fadeIn">
+              <!-- Leaf Outline Watermark -->
+              <svg class="absolute bottom-2 right-2 w-32 h-32 text-white/20 pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M50 10 C20 40 20 80 50 90 C80 80 80 40 50 10 Z" />
+                <path d="M50 10 L50 90" />
+                <path d="M50 40 Q30 30 20 40" />
+                <path d="M50 60 Q30 50 20 60" />
+                <path d="M50 40 Q70 30 80 40" />
+                <path d="M50 60 Q70 50 80 60" />
+              </svg>
+
+              <div>
+                <h4 class="font-montserrat font-bold text-[20px] text-white leading-tight mb-4">
+                  <?php echo esc_html( $industry['title'] ); ?>
+                </h4>
+                <p class="font-montserrat font-medium text-[14px] text-white/90 leading-relaxed max-w-[200px]">
+                  <?php echo esc_html( $industry['description'] ?? 'Create consistency, texture, and ingredient performance.' ); ?>
+                </p>
+              </div>
+
+              <div class="mt-auto pt-4">
+                <span class="inline-flex items-center gap-2 font-montserrat font-bold text-[13px] text-white uppercase tracking-wider">
+                  Learn More
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </div>
             </div>
-            <div class="py-3 text-center">
-              <h4 class="font-montserrat font-bold text-[15px] text-white tracking-tight"><?php echo esc_html( $industry['title'] ); ?></h4>
+
+            <!-- Collapsed State Content (Shows when not hovered) -->
+            <div class="collapsed-content <?php echo $is_first ? 'hidden' : 'flex'; ?> group-hover/card:hidden flex-col justify-between h-full w-full">
+              <div style="border-radius: 34px 3px 34px 3px;" class="relative w-full h-[270px] overflow-hidden">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/' . $industry['image'] ); ?>" alt="<?php echo esc_attr( $industry['title'] ); ?>" class="w-full h-full object-cover" loading="lazy">
+              </div>
+              <div class="py-2 text-center">
+                <h4 class="font-montserrat font-bold text-[14px] text-white tracking-tight truncate px-1">
+                  <?php echo esc_html( $industry['title'] ); ?>
+                </h4>
+              </div>
             </div>
+
           </div>
           <?php endforeach; ?>
         </div>
