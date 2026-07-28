@@ -143,25 +143,29 @@ $form_shortcode = get_sub_field('form_shortcode');
             </p>
           </div>
 
-          <!-- Form Area -->
+          <!-- Form Area with AJAX backend storage & Email notification -->
           <?php if (!empty($form_shortcode)) : ?>
             <div class="contact-form-wrapper">
               <?php echo do_shortcode($form_shortcode); ?>
             </div>
           <?php else: ?>
-            <!-- Form Elements Fallback (3 Rows x 2 Columns) -->
-            <form action="#" method="POST" class="flex flex-col gap-8 w-full max-w-[595px]">
+            <!-- Form Elements Fallback with AJAX -->
+            <form id="starizo-desktop-contact-form" action="<?php echo esc_url(admin_url('admin-ajax.php')); ?>" method="POST" class="flex flex-col gap-8 w-full max-w-[595px]">
+              <input type="hidden" name="action" value="starizo_submit_contact">
+              <input type="hidden" name="nonce" value="<?php echo wp_create_nonce('starizo_contact_nonce'); ?>">
+
+              <div id="contact-form-alert" class="hidden p-4 rounded-lg font-montserrat text-sm transition-all duration-300"></div>
 
               <!-- Row 1: Full Name & Phone Number -->
               <div class="grid grid-cols-2 gap-8">
                 <div class="flex flex-col gap-2">
                   <label class="font-montserrat font-semibold text-[13px] text-black/80">Full Name<span class="text-red-500">*</span></label>
-                  <input type="text" placeholder="John Doe" required
+                  <input type="text" name="full_name" placeholder="John Doe" required
                     class="w-full pb-2 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[15px] font-medium text-black placeholder-gray-400 bg-transparent transition-colors">
                 </div>
                 <div class="flex flex-col gap-2">
                   <label class="font-montserrat font-semibold text-[13px] text-black/80">Phone Number<span class="text-red-500">*</span></label>
-                  <input type="tel" placeholder="+1 012 3456 789" required
+                  <input type="tel" name="phone" placeholder="+1 012 3456 789" required
                     class="w-full pb-2 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[15px] font-medium text-black placeholder-gray-400 bg-transparent transition-colors">
                 </div>
               </div>
@@ -170,12 +174,12 @@ $form_shortcode = get_sub_field('form_shortcode');
               <div class="grid grid-cols-2 gap-8">
                 <div class="flex flex-col gap-2">
                   <label class="font-montserrat font-semibold text-[13px] text-black/80">Work Email<span class="text-red-500">*</span></label>
-                  <input type="email" placeholder="Enter Work Email" required
+                  <input type="email" name="email" placeholder="Enter Work Email" required
                     class="w-full pb-2 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[15px] font-medium text-black placeholder-gray-400 bg-transparent transition-colors">
                 </div>
                 <div class="flex flex-col gap-2">
                   <label class="font-montserrat font-semibold text-[13px] text-black/80">Company name<span class="text-red-500">*</span></label>
-                  <input type="text" placeholder="Enter Company name" required
+                  <input type="text" name="company" placeholder="Enter Company name" required
                     class="w-full pb-2 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[15px] font-medium text-black placeholder-gray-400 bg-transparent transition-colors">
                 </div>
               </div>
@@ -185,14 +189,14 @@ $form_shortcode = get_sub_field('form_shortcode');
                 <div class="flex flex-col gap-2">
                   <label class="font-montserrat font-semibold text-[13px] text-black/80">Industry<span class="text-red-500">*</span></label>
                   <div class="relative">
-                    <select required
+                    <select name="industry" required
                       class="w-full pb-2 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[15px] font-medium text-black/70 bg-transparent appearance-none transition-colors cursor-pointer pr-6">
                       <option value="" disabled selected>Select Industry</option>
-                      <option value="food">Food Manufacturers</option>
-                      <option value="nutrition">Nutrition Brands</option>
-                      <option value="pharma">Pharmaceutical</option>
-                      <option value="personal-care">Personal Care</option>
-                      <option value="industrial">Industrial Applications</option>
+                      <option value="Food Manufacturers">Food Manufacturers</option>
+                      <option value="Nutrition Brands">Nutrition Brands</option>
+                      <option value="Pharmaceutical">Pharmaceutical</option>
+                      <option value="Personal Care">Personal Care</option>
+                      <option value="Industrial Applications">Industrial Applications</option>
                     </select>
                     <svg class="w-4 h-4 absolute right-0 bottom-3 pointer-events-none text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                       <polyline points="6 9 12 15 18 9"></polyline>
@@ -201,7 +205,7 @@ $form_shortcode = get_sub_field('form_shortcode');
                 </div>
                 <div class="flex flex-col gap-2">
                   <label class="font-montserrat font-semibold text-[13px] text-black/80">Ingredient of interest<span class="text-red-500">*</span></label>
-                  <input type="text" placeholder="Enter Ingredient" required
+                  <input type="text" name="ingredient" placeholder="Enter Ingredient" required
                     class="w-full pb-2 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[15px] font-medium text-black placeholder-gray-400 bg-transparent transition-colors">
                 </div>
               </div>
@@ -209,21 +213,65 @@ $form_shortcode = get_sub_field('form_shortcode');
               <!-- Message Field -->
               <div class="flex flex-col gap-2 w-full">
                 <label class="font-montserrat font-semibold text-[13px] text-black/80">Message<span class="text-red-500">*</span></label>
-                <textarea rows="2" placeholder="Write your message.." required
+                <textarea name="message" rows="2" placeholder="Write your message.." required
                   class="w-full pb-2 border-b border-gray-300 focus:border-[#FF8D00] outline-none text-[15px] font-medium text-black placeholder-gray-400 bg-transparent transition-colors resize-none"></textarea>
               </div>
 
               <!-- Submit Button -->
               <div class="w-full flex justify-end mt-4">
-                <button type="submit"
+                <button type="submit" id="contact-submit-btn"
                   class="w-[190px] h-[51px] bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-semibold text-[18px] rounded-[5px] flex items-center justify-center gap-2 shadow-md transition-all duration-200 select-none">
-                  <span>Submit</span>
+                  <span id="contact-btn-text">Submit</span>
                   <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </button>
               </div>
             </form>
+
+            <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const form = document.getElementById('starizo-desktop-contact-form');
+                const alertBox = document.getElementById('contact-form-alert');
+                const submitBtn = document.getElementById('contact-submit-btn');
+                const btnText = document.getElementById('contact-btn-text');
+
+                if (form) {
+                    form.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        btnText.textContent = 'Sending...';
+                        submitBtn.disabled = true;
+                        alertBox.classList.add('hidden');
+
+                        try {
+                            const formData = new FormData(form);
+                            const response = await fetch(form.action, {
+                                method: 'POST',
+                                body: formData
+                            });
+                            const result = await response.json();
+
+                            alertBox.classList.remove('hidden');
+                            if (result.success) {
+                                alertBox.className = 'p-4 rounded-lg font-montserrat text-sm bg-green-50 text-green-800 border border-green-200 mb-4';
+                                alertBox.textContent = result.data.message;
+                                form.reset();
+                            } else {
+                                alertBox.className = 'p-4 rounded-lg font-montserrat text-sm bg-red-50 text-red-800 border border-red-200 mb-4';
+                                alertBox.textContent = result.data.message || 'An error occurred. Please try again.';
+                            }
+                        } catch (err) {
+                            alertBox.classList.remove('hidden');
+                            alertBox.className = 'p-4 rounded-lg font-montserrat text-sm bg-red-50 text-red-800 border border-red-200 mb-4';
+                            alertBox.textContent = 'Connection error. Please try again.';
+                        } finally {
+                            btnText.textContent = 'Submit';
+                            submitBtn.disabled = false;
+                        }
+                    });
+                }
+            });
+            </script>
           <?php endif; ?>
         </div>
 

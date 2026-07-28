@@ -74,8 +74,148 @@ function starizo_register_post_types() {
 	);
 	register_post_type('job', $job_args);
 
+	// Inquiries CPT (Contact Submissions)
+	$inquiry_args = array(
+		'labels' => array(
+			'name' => 'Inquiries',
+			'singular_name' => 'Inquiry',
+			'menu_name' => 'Inquiries',
+			'add_new_item' => 'View Inquiry',
+			'edit_item' => 'Inquiry Details',
+			'all_items' => 'All Inquiries',
+		),
+		'public' => false,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'supports' => array('title'),
+		'menu_icon' => 'dashicons-email-alt',
+	);
+	register_post_type('starizo_inquiry', $inquiry_args);
+
 }
 add_action( 'init', 'starizo_register_post_types' );
+
+/**
+ * Custom Admin Columns for Inquiries CPT
+ */
+function starizo_inquiry_columns($columns) {
+    return array(
+        'cb' => '<input type="checkbox" />',
+        'title' => 'Name',
+        'email' => 'Work Email',
+        'phone' => 'Phone',
+        'company' => 'Company',
+        'industry' => 'Industry',
+        'ingredient' => 'Ingredient',
+        'date' => 'Submitted Date'
+    );
+}
+add_filter('manage_starizo_inquiry_posts_columns', 'starizo_inquiry_columns');
+
+function starizo_inquiry_custom_column_data($column, $post_id) {
+    switch ($column) {
+        case 'email':
+            $email = get_post_meta($post_id, '_email', true);
+            echo esc_html($email ?: '—');
+            break;
+        case 'phone':
+            $phone = get_post_meta($post_id, '_phone', true);
+            echo esc_html($phone ?: '—');
+            break;
+        case 'company':
+            $company = get_post_meta($post_id, '_company', true);
+            echo esc_html($company ?: '—');
+            break;
+        case 'industry':
+            $industry = get_post_meta($post_id, '_industry', true);
+            echo esc_html($industry ?: '—');
+            break;
+        case 'ingredient':
+            $ingredient = get_post_meta($post_id, '_ingredient', true);
+            echo esc_html($ingredient ?: '—');
+            break;
+    }
+}
+add_action('manage_starizo_inquiry_posts_custom_column', 'starizo_inquiry_custom_column_data', 10, 2);
+
+/**
+ * Handle Contact Form AJAX Submission (Store in DB & Send HTML Email)
+ */
+function starizo_handle_contact_submission() {
+    check_ajax_referer('starizo_contact_nonce', 'nonce');
+
+    $name       = isset($_POST['full_name']) ? sanitize_text_field($_POST['full_name']) : '';
+    $phone      = isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '';
+    $email      = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+    $company    = isset($_POST['company']) ? sanitize_text_field($_POST['company']) : '';
+    $industry   = isset($_POST['industry']) ? sanitize_text_field($_POST['industry']) : '';
+    $ingredient = isset($_POST['ingredient']) ? sanitize_text_field($_POST['ingredient']) : '';
+    $message    = isset($_POST['message']) ? sanitize_textarea_field($_POST['message']) : '';
+
+    if (empty($name) || empty($email) || empty($message)) {
+        wp_send_json_error(array('message' => 'Please fill in all required fields.'));
+    }
+
+    // 1. Store Submission in WP Backend (Custom Post Type)
+    $post_id = wp_insert_post(array(
+        'post_type'   => 'starizo_inquiry',
+        'post_title'  => $name . ' — ' . ($company ?: 'Direct Inquiry'),
+        'post_status' => 'publish',
+    ));
+
+    if ($post_id && !is_wp_error($post_id)) {
+        update_post_meta($post_id, '_full_name', $name);
+        update_post_meta($post_id, '_phone', $phone);
+        update_post_meta($post_id, '_email', $email);
+        update_post_meta($post_id, '_company', $company);
+        update_post_meta($post_id, '_industry', $industry);
+        update_post_meta($post_id, '_ingredient', $ingredient);
+        update_post_meta($post_id, '_message', $message);
+        update_post_meta($post_id, '_ip_address', $_SERVER['REMOTE_ADDR'] ?? '');
+    }
+
+    // 2. Send HTML Email Notification
+    $admin_email = get_option('admin_email');
+    $to = array('sales@starizo.com', $admin_email);
+    $subject = 'New Website Inquiry from ' . $name . ' (' . ($company ?: 'Individual') . ')';
+
+    $email_body = '
+    <html>
+    <body style="font-family: Arial, sans-serif; background-color: #FDFBF3; padding: 20px; color: #333;">
+      <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; border: 1px solid #EFE9DD; padding: 30px;">
+        <div style="text-align: center; border-bottom: 2px solid #FF8D00; padding-bottom: 15px; margin-bottom: 20px;">
+          <h2 style="color: #00A256; margin: 0;">STARIZO™ Contact Form Inquiry</h2>
+        </div>
+        <p style="font-size: 15px;">You have received a new contact inquiry from the Starizo website:</p>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+          <tr style="background: #FDF7E9;"><td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #eee;">Full Name:</td><td style="padding: 10px; border-bottom: 1px solid #eee;">' . esc_html($name) . '</td></tr>
+          <tr><td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #eee;">Work Email:</td><td style="padding: 10px; border-bottom: 1px solid #eee;"><a href="mailto:' . esc_attr($email) . '">' . esc_html($email) . '</a></td></tr>
+          <tr style="background: #FDF7E9;"><td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #eee;">Phone Number:</td><td style="padding: 10px; border-bottom: 1px solid #eee;">' . esc_html($phone ?: 'Not provided') . '</td></tr>
+          <tr><td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #eee;">Company Name:</td><td style="padding: 10px; border-bottom: 1px solid #eee;">' . esc_html($company ?: 'Not provided') . '</td></tr>
+          <tr style="background: #FDF7E9;"><td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #eee;">Industry:</td><td style="padding: 10px; border-bottom: 1px solid #eee;">' . esc_html($industry ?: 'Not specified') . '</td></tr>
+          <tr><td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #eee;">Ingredient of Interest:</td><td style="padding: 10px; border-bottom: 1px solid #eee;">' . esc_html($ingredient ?: 'Not specified') . '</td></tr>
+          <tr style="background: #FDF7E9;"><td style="padding: 10px; font-weight: bold; border-bottom: 1px solid #eee;">Message:</td><td style="padding: 10px; border-bottom: 1px solid #eee;">' . nl2br(esc_html($message)) . '</td></tr>
+        </table>
+        <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee; text-align: center; font-size: 12px; color: #888;">
+          Sent automatically from Starizo Website Contact System.
+        </div>
+      </div>
+    </body>
+    </html>
+    ';
+
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Starizo Web System <noreply@' . parse_url(home_url(), PHP_URL_HOST) . '>',
+        'Reply-To: ' . $name . ' <' . $email . '>'
+    );
+
+    wp_mail($to, $subject, $email_body, $headers);
+
+    wp_send_json_success(array('message' => 'Thank you! Your message has been sent successfully. We will get back to you shortly.'));
+}
+add_action('wp_ajax_starizo_submit_contact', 'starizo_handle_contact_submission');
+add_action('wp_ajax_nopriv_starizo_submit_contact', 'starizo_handle_contact_submission');
 
 /**
  * Setup Theme features
