@@ -47,28 +47,28 @@ if ( $image ) {
       <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/group.png' ); ?>" alt="" class="absolute right-0 top-0 h-[620px] w-auto object-contain object-right-top pointer-events-none z-[2]" />
 
       <!-- PRODUCT IMAGE -->
-      <div class="absolute bottom-[-5px] right-[-60px] w-[980px] h-[800px] z-[3] pointer-events-none">
+      <div class="absolute bottom-[-5px] right-[-60px] w-[980px] h-[650px] z-[3] pointer-events-none">
         <img src="<?php echo esc_url( $image_url ); ?>" class="w-full h-full object-contain object-bottom-center" loading="eager" fetchpriority="high">
       </div>
 
       <div class="relative z-[10] w-[1280px] h-full mx-auto">
         <!-- ================= HERO CONTENT ================= -->
-        <div class="absolute left-[80px] top-[145px] w-[580px] text-white z-20">
-          <p class="uppercase tracking-[0.18em] text-[13px] font-bold mb-3 text-white/95">
+        <div class="absolute left-[80px] top-[160px] w-[580px] text-white z-20">
+          <p class="uppercase tracking-[0.18em] text-[14px] font-bold mb-4 text-white/95">
             <?php echo esc_html( $subheading ); ?>
           </p>
 
-          <h1 class="text-[52px] leading-[58px] font-black mb-4 tracking-tight">
+          <h1 class="text-[58px] leading-[64px] font-black mb-5 tracking-tight">
             <?php echo wp_kses_post( $heading ); ?>
           </h1>
 
-          <p class="text-[16px] leading-[28px] text-white/90 mb-7 max-w-[500px]">
+          <p class="text-[17px] leading-[30px] text-white/90 mb-8 max-w-[520px]">
             <?php echo esc_html( $description ); ?>
           </p>
 
           <div class="flex items-center gap-4">
             <?php if ( $button_1_link && $button_1_text ) : ?>
-            <a href="<?php echo esc_url( $button_1_link ); ?>" class="border-2 border-white rounded-full h-[48px] px-7 flex items-center gap-2 text-white font-bold text-[15px] hover:bg-white hover:text-[#00A256] transition-colors select-none">
+            <a href="<?php echo esc_url( $button_1_link ); ?>" class="border-2 border-white rounded-full h-[52px] px-8 flex items-center gap-2 text-white font-bold text-[16px] hover:bg-white hover:text-[#00A256] transition-colors select-none">
               <?php echo esc_html( $button_1_text ); ?>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -77,7 +77,7 @@ if ( $image ) {
             <?php endif; ?>
             
             <?php if ( $button_2_link && $button_2_text ) : ?>
-            <a href="<?php echo esc_url( $button_2_link ); ?>" class="bg-[#FF9100] rounded-full h-[48px] px-8 flex items-center gap-2 text-white font-bold text-[15px] hover:bg-[#e68300] transition-colors select-none shadow-sm">
+            <a href="<?php echo esc_url( $button_2_link ); ?>" class="bg-[#FF9100] rounded-full h-[52px] px-8 flex items-center gap-2 text-white font-bold text-[16px] hover:bg-[#e68300] transition-colors select-none shadow-sm">
               <?php echo esc_html( $button_2_text ); ?>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -88,9 +88,10 @@ if ( $image ) {
         </div>
 
         <!-- ================= BOTTOM BAR ================= -->
-        <div class="absolute left-[80px] bottom-[30px] z-20">
-          <p class="font-bold text-[#5D3700] text-[15px] mb-3">
-            Meet your ingredient partner:
+        <div class="absolute left-[80px] bottom-[35px] z-20">
+          <div class="w-8 h-[3px] bg-[#FF9100] mb-2"></div>
+          <p class="font-bold text-[#5D3700] text-[16px] mb-3">
+            Meet your ingredient partner.
           </p>
 
           <div class="flex items-center gap-6">
