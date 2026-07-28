@@ -51,6 +51,20 @@ function starizo_register_post_types() {
 	);
 	register_post_type('product', $product_args);
 
+	// Product Category Taxonomy
+	register_taxonomy('product_cat', 'product', array(
+		'labels' => array(
+			'name' => 'Categories',
+			'singular_name' => 'Category',
+			'menu_name' => 'Categories',
+		),
+		'hierarchical' => true,
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array('slug' => 'product-category'),
+	));
+
 	// Job / Careers CPT
 	$job_args = array(
 		'labels' => array(

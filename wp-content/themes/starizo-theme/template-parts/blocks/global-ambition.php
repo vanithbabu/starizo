@@ -40,27 +40,27 @@ $banner_button_link = get_sub_field( 'banner_button_link' ) ?: '#';
             </p>
           </div>
 
-          <!-- Right overlapping cards collage -->
-          <div class="col-span-6 relative w-full" style="aspect-ratio: 1050 / 680;">
+          <!-- Right overlapping cards collage with dynamic hover animations -->
+          <div class="col-span-6 relative w-full group/collage" style="aspect-ratio: 1050 / 680;">
             <!-- Image 1 -->
-            <div class="absolute z-30 overflow-hidden bg-white shadow-xl border-[2.5px] border-[#00A256] rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-transform duration-300 hover:scale-[1.01]" style="left: 0%; top: 0%; width: 80%; height: 52%;">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-worker.png' ); ?>" alt="Starizo worker" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px]" loading="lazy">
+            <div class="absolute z-30 overflow-hidden bg-white shadow-xl border-[2.5px] border-[#00A256] rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-all duration-500 ease-out hover:z-40 hover:scale-[1.06] hover:shadow-2xl cursor-pointer" style="left: 0%; top: 0%; width: 80%; height: 52%;">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-worker.png' ); ?>" alt="Starizo worker" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px] transition-transform duration-700 hover:scale-110" loading="lazy">
             </div>
 
             <!-- Image 2 -->
-            <div class="absolute z-20 overflow-hidden bg-white shadow-lg border-[2.5px] border-[#00A256]/70 rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-transform duration-300 hover:scale-[1.01]" style="left: 5%; top: 18%; width: 80%; height: 50%;">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-table.png' ); ?>" alt="Breakfast table" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px]" loading="lazy">
+            <div class="absolute z-20 overflow-hidden bg-white shadow-lg border-[2.5px] border-[#00A256]/70 rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-all duration-500 ease-out hover:z-40 hover:scale-[1.06] hover:shadow-2xl cursor-pointer" style="left: 5%; top: 18%; width: 80%; height: 50%;">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-table.png' ); ?>" alt="Breakfast table" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px] transition-transform duration-700 hover:scale-110" loading="lazy">
             </div>
 
             <!-- Image 3 -->
-            <div class="absolute z-10 overflow-hidden bg-white shadow-md border-[2.5px] border-[#00A256]/40 rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-transform duration-300 hover:scale-[1.01]" style="left: 10%; top: 36%; width: 80%; height: 50%;">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-crop.png' ); ?>" alt="Rice plant" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px]" loading="lazy">
+            <div class="absolute z-10 overflow-hidden bg-white shadow-md border-[2.5px] border-[#00A256]/40 rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-all duration-500 ease-out hover:z-40 hover:scale-[1.06] hover:shadow-2xl cursor-pointer" style="left: 10%; top: 36%; width: 80%; height: 50%;">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-crop.png' ); ?>" alt="Rice plant" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px] transition-transform duration-700 hover:scale-110" loading="lazy">
             </div>
           </div>
         </div>
 
-        <!-- Banner Card -->
-        <div class="w-full bg-[#00A256] rounded-[34px] overflow-hidden shadow-xl p-8 md:p-10 grid grid-cols-12 items-center relative">
+        <!-- Banner Card with interactive group hover -->
+        <div class="w-full bg-[#00A256] rounded-[34px] overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 p-8 md:p-10 grid grid-cols-12 items-center relative group/banner">
           <!-- Looper-1 background image overlay -->
           <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/Looper-1.png' ); ?>" alt="" class="absolute inset-0 opacity-100 pointer-events-none select-none z-0">
 
@@ -73,9 +73,9 @@ $banner_button_link = get_sub_field( 'banner_button_link' ) ?: '#';
               <?php echo wp_kses_post( $banner_description ); ?>
             </p>
             <?php if ( $banner_button_link && $banner_button_text ) : ?>
-            <a href="<?php echo esc_url( $banner_button_link ); ?>" class="h-[46px] bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[15px] px-8 rounded-full flex items-center gap-2 transition duration-200 select-none shadow-md">
+            <a href="<?php echo esc_url( $banner_button_link ); ?>" class="group bg-[#FF8D00] hover:bg-[#e07c00] hover:scale-[1.04] active:scale-[0.98] text-white font-montserrat font-bold text-[15px] px-8 h-[46px] rounded-full flex items-center gap-2 transition-all duration-300 select-none shadow-md hover:shadow-lg">
               <?php echo esc_html( $banner_button_text ); ?>
-              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </a>
@@ -86,7 +86,7 @@ $banner_button_link = get_sub_field( 'banner_button_link' ) ?: '#';
           <div class="col-span-5 relative z-10 flex items-center justify-end">
             <!-- Leaf Framed Photo Box -->
             <div class="relative w-full h-[240px] rounded-tl-[44px] rounded-br-[44px] rounded-tr-[10px] rounded-bl-[10px] overflow-hidden shadow-lg">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/partner-plant.png' ); ?>" alt="Starizo plant facility" class="w-full h-full object-cover" loading="lazy">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/partner-plant.png' ); ?>" alt="Starizo plant facility" class="w-full h-full object-cover group-hover/banner:scale-105 transition-transform duration-500" loading="lazy">
             </div>
 
             <!-- Golden Rice Stalk -->
