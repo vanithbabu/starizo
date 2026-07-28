@@ -62,107 +62,115 @@ $has_products = $products_query->have_posts();
             </p>
           </div>
 
-          <!-- Product Cards Track Wrapper (Food & Beverage Active by Default) -->
-          <div class="relative z-10 max-w-full mx-auto overflow-hidden mb-12" id="product-cards-slider-desktop">
+          <!-- Product Cards Track Wrapper (Swiper.js Powered) -->
+          <div class="relative z-10 max-w-full mx-auto mb-12" id="product-cards-slider-desktop">
             
-            <!-- Track 1: Food & Beverage -->
-            <div id="cards-track-food" class="flex gap-5 overflow-x-auto py-1 hide-scrollbar transition-all duration-300">
-              <?php
-              $food_query = new WP_Query( array(
-                  'post_type'      => 'product',
-                  'posts_per_page' => 8,
-                  'tax_query'      => array(
-                      array(
-                          'taxonomy' => 'product_cat',
-                          'field'    => 'slug',
-                          'terms'    => 'food-beverage',
-                      ),
-                  ),
-              ) );
-              if ( $food_query->have_posts() ) :
-                  while ( $food_query->have_posts() ) : $food_query->the_post();
-                      $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/product-rice-starch.png';
-                      $excerpt   = get_the_excerpt() ?: 'Clean-label starch with superior texture, stability, and process performance.';
-              ?>
-              <div class="w-[380px] min-w-[380px] max-w-[380px] h-[210px] shrink-0 bg-[#FDFBF3] rounded-[16px] border border-[#EFE9DD] shadow-sm p-4 flex items-center gap-4 hover:shadow-md hover:border-[#FF8D00]/40 transition-all duration-200">
-                <div class="w-[120px] h-[170px] shrink-0 bg-white rounded-tl-[6px] rounded-br-[6px] p-2 flex items-center justify-center border border-gray-100 shadow-sm overflow-hidden">
-                  <img src="<?php echo esc_url( $thumbnail ); ?>" alt="<?php the_title_attribute(); ?>" class="w-full h-full object-contain">
-                </div>
+            <!-- Swiper 1: Food & Beverage -->
+            <div id="cards-track-food" class="swiper product-swiper-food w-full overflow-hidden py-2">
+              <div class="swiper-wrapper">
+                <?php
+                $food_query = new WP_Query( array(
+                    'post_type'      => 'product',
+                    'posts_per_page' => 8,
+                    'tax_query'      => array(
+                        array(
+                            'taxonomy' => 'product_cat',
+                            'field'    => 'slug',
+                            'terms'    => 'food-beverage',
+                        ),
+                    ),
+                ) );
+                if ( $food_query->have_posts() ) :
+                    while ( $food_query->have_posts() ) : $food_query->the_post();
+                        $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/product-rice-starch.png';
+                        $excerpt   = get_the_excerpt() ?: 'Clean-label starch with superior texture, stability, and process performance.';
+                ?>
+                <div class="swiper-slide !w-[380px]">
+                  <div class="w-[380px] h-[210px] bg-[#FDFBF3] rounded-[16px] border border-[#EFE9DD] shadow-sm p-4 flex items-center gap-4 hover:shadow-md hover:border-[#FF8D00]/40 transition-all duration-200">
+                    <div class="w-[120px] h-[170px] shrink-0 bg-white rounded-tl-[6px] rounded-br-[6px] p-2 flex items-center justify-center border border-gray-100 shadow-sm overflow-hidden">
+                      <img src="<?php echo esc_url( $thumbnail ); ?>" alt="<?php the_title_attribute(); ?>" class="w-full h-full object-contain">
+                    </div>
 
-                <div class="w-[220px] min-w-[220px] max-w-[220px] h-[170px] flex flex-col justify-between py-1">
-                  <div>
-                    <h4 class="font-montserrat font-bold text-[20px] leading-[28px] text-[#222222] mb-1"><?php the_title(); ?></h4>
-                    <p class="font-montserrat font-normal text-[14px] leading-[20px] text-black/75 mb-3 line-clamp-2">
-                      <?php echo esc_html( $excerpt ); ?>
-                    </p>
-                    <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-black/80 text-center mb-2">
-                      Food • Bakery
+                    <div class="w-[220px] h-[170px] flex flex-col justify-between py-1">
+                      <div>
+                        <h4 class="font-montserrat font-bold text-[20px] leading-[28px] text-[#222222] mb-1"><?php the_title(); ?></h4>
+                        <p class="font-montserrat font-normal text-[14px] leading-[20px] text-black/75 mb-3 line-clamp-2">
+                          <?php echo esc_html( $excerpt ); ?>
+                        </p>
+                        <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-black/80 text-center mb-2">
+                          Food • Bakery
+                        </div>
+                      </div>
+
+                      <a href="<?php the_permalink(); ?>" class="group font-montserrat font-bold text-[16px] leading-[20px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1.5 transition duration-150 w-fit select-none">
+                        View Product
+                        <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </a>
                     </div>
                   </div>
-
-                  <a href="<?php the_permalink(); ?>" class="group font-montserrat font-bold text-[16px] leading-[20px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1.5 transition duration-150 w-fit select-none">
-                    View Product
-                    <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24">
-                      <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                  </a>
                 </div>
+                <?php
+                    endwhile;
+                    wp_reset_postdata();
+                endif;
+                ?>
               </div>
-              <?php
-                  endwhile;
-                  wp_reset_postdata();
-              endif;
-              ?>
             </div>
 
-            <!-- Track 2: Cosmetics & Personal Care (Hidden by Default) -->
-            <div id="cards-track-cosmetics" class="hidden flex gap-5 overflow-x-auto py-1 hide-scrollbar transition-all duration-300">
-              <?php
-              $cosmetics_query = new WP_Query( array(
-                  'post_type'      => 'product',
-                  'posts_per_page' => 8,
-                  'tax_query'      => array(
-                      array(
-                          'taxonomy' => 'product_cat',
-                          'field'    => 'slug',
-                          'terms'    => 'cosmetics-personal-care',
-                      ),
-                  ),
-              ) );
-              if ( $cosmetics_query->have_posts() ) :
-                  while ( $cosmetics_query->have_posts() ) : $cosmetics_query->the_post();
-                      $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/food-rice.png';
-                      $excerpt   = get_the_excerpt() ?: 'Natural biopolymer texturizer providing sensory elegance and silky finish.';
-              ?>
-              <div class="w-[380px] min-w-[380px] max-w-[380px] h-[210px] shrink-0 bg-[#FDFBF3] rounded-[16px] border border-[#EFE9DD] shadow-sm p-4 flex items-center gap-4 hover:shadow-md hover:border-[#00A256]/40 transition-all duration-200">
-                <div class="w-[120px] h-[170px] shrink-0 bg-white rounded-tl-[6px] rounded-br-[6px] p-2 flex items-center justify-center border border-gray-100 shadow-sm overflow-hidden">
-                  <img src="<?php echo esc_url( $thumbnail ); ?>" alt="<?php the_title_attribute(); ?>" class="w-full h-full object-contain">
-                </div>
+            <!-- Swiper 2: Cosmetics & Personal Care (Hidden by Default) -->
+            <div id="cards-track-cosmetics" class="swiper product-swiper-cosmetics w-full overflow-hidden py-2 !hidden">
+              <div class="swiper-wrapper">
+                <?php
+                $cosmetics_query = new WP_Query( array(
+                    'post_type'      => 'product',
+                    'posts_per_page' => 8,
+                    'tax_query'      => array(
+                        array(
+                            'taxonomy' => 'product_cat',
+                            'field'    => 'slug',
+                            'terms'    => 'cosmetics-personal-care',
+                        ),
+                    ),
+                ) );
+                if ( $cosmetics_query->have_posts() ) :
+                    while ( $cosmetics_query->have_posts() ) : $cosmetics_query->the_post();
+                        $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/food-rice.png';
+                        $excerpt   = get_the_excerpt() ?: 'Natural biopolymer texturizer providing sensory elegance and silky finish.';
+                ?>
+                <div class="swiper-slide !w-[380px]">
+                  <div class="w-[380px] h-[210px] bg-[#FDFBF3] rounded-[16px] border border-[#EFE9DD] shadow-sm p-4 flex items-center gap-4 hover:shadow-md hover:border-[#00A256]/40 transition-all duration-200">
+                    <div class="w-[120px] h-[170px] shrink-0 bg-white rounded-tl-[6px] rounded-br-[6px] p-2 flex items-center justify-center border border-gray-100 shadow-sm overflow-hidden">
+                      <img src="<?php echo esc_url( $thumbnail ); ?>" alt="<?php the_title_attribute(); ?>" class="w-full h-full object-contain">
+                    </div>
 
-                <div class="w-[220px] min-w-[220px] max-w-[220px] h-[170px] flex flex-col justify-between py-1">
-                  <div>
-                    <h4 class="font-montserrat font-bold text-[20px] leading-[28px] text-[#222222] mb-1"><?php the_title(); ?></h4>
-                    <p class="font-montserrat font-normal text-[14px] leading-[20px] text-black/75 mb-3 line-clamp-2">
-                      <?php echo esc_html( $excerpt ); ?>
-                    </p>
-                    <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-black/80 text-center mb-2">
-                      Cosmetics • Skincare
+                    <div class="w-[220px] h-[170px] flex flex-col justify-between py-1">
+                      <div>
+                        <h4 class="font-montserrat font-bold text-[20px] leading-[28px] text-[#222222] mb-1"><?php the_title(); ?></h4>
+                        <p class="font-montserrat font-normal text-[14px] leading-[20px] text-black/75 mb-3 line-clamp-2">
+                          <?php echo esc_html( $excerpt ); ?>
+                        </p>
+                        <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-black/80 text-center mb-2">
+                          Cosmetics • Skincare
+                        </div>
+                      </div>
+
+                      <a href="<?php the_permalink(); ?>" class="group font-montserrat font-bold text-[16px] leading-[20px] text-[#00A256] hover:text-[#008043] flex items-center gap-1.5 transition duration-150 w-fit select-none">
+                        View Product
+                        <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </a>
                     </div>
                   </div>
-
-                  <a href="<?php the_permalink(); ?>" class="group font-montserrat font-bold text-[16px] leading-[20px] text-[#00A256] hover:text-[#008043] flex items-center gap-1.5 transition duration-150 w-fit select-none">
-                    View Product
-                    <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24">
-                      <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                  </a>
                 </div>
+                <?php
+                    endwhile;
+                    wp_reset_postdata();
+                endif;
+                ?>
               </div>
-              <?php
-                  endwhile;
-                  wp_reset_postdata();
-              endif;
-              ?>
             </div>
 
           </div>
@@ -172,12 +180,11 @@ $has_products = $products_query->have_posts();
             <!-- Left spacer to balance the arrows and keep button truly centered -->
             <div class="flex-1"></div>
 
-            <!-- Explore Products button — pill shaped -->
+            <!-- Explore Products button — pill shaped with standardized gradient hover -->
             <a href="<?php echo esc_url( $button_link ); ?>"
-              class="shrink-0 flex items-center justify-center gap-[10px] border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white font-montserrat font-bold text-[15px] transition duration-200 select-none bg-white shadow-sm"
-              style="width:222px; height:45px; padding:12px 17px; border-radius:42px;">
+              class="group shrink-0 flex items-center justify-center gap-[10px] bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[15px] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shadow-md hover:shadow-xl px-8 h-[46px] rounded-full">
               <?php echo esc_html( $button_text ); ?>
-              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </a>
@@ -185,14 +192,14 @@ $has_products = $products_query->have_posts();
             <!-- Right: Carousel circle arrows -->
             <div class="flex-1 flex items-center justify-end gap-3 select-none">
               <button id="carousel-prev-desktop" aria-label="Previous Products"
-                class="flex items-center justify-center border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white transition duration-200 focus:outline-none"
+                class="flex items-center justify-center border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white transition duration-200 focus:outline-none cursor-pointer"
                 style="width:45px; height:45px; border-radius:50%;">
                 <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
               </button>
               <button id="carousel-next-desktop" aria-label="Next Products"
-                class="flex items-center justify-center border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white transition duration-200 focus:outline-none"
+                class="flex items-center justify-center border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white transition duration-200 focus:outline-none cursor-pointer"
                 style="width:45px; height:45px; border-radius:50%;">
                 <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
                   <polyline points="9 18 15 12 9 6"></polyline>
@@ -209,60 +216,60 @@ $has_products = $products_query->have_posts();
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const foodTrack = document.getElementById('cards-track-food');
-    const cosmeticsTrack = document.getElementById('cards-track-cosmetics');
-    const prevBtn = document.getElementById('carousel-prev-desktop');
-    const nextBtn = document.getElementById('carousel-next-desktop');
+    function initSwipers() {
+        if (typeof Swiper === 'undefined') return;
 
-    const foodTab = document.getElementById('tab-food-desktop');
-    const cosmeticsTab = document.getElementById('tab-cosmetics-desktop');
+        const foodSwiper = new Swiper('.product-swiper-food', {
+            slidesPerView: 'auto',
+            spaceBetween: 20,
+            loop: false,
+            grabCursor: true,
+            navigation: {
+                nextEl: '#carousel-next-desktop',
+                prevEl: '#carousel-prev-desktop',
+            },
+        });
 
-    function getActiveTrack() {
-        if (foodTrack && !foodTrack.classList.contains('hidden')) {
-            return foodTrack;
+        const cosmeticsSwiper = new Swiper('.product-swiper-cosmetics', {
+            slidesPerView: 'auto',
+            spaceBetween: 20,
+            loop: false,
+            grabCursor: true,
+            navigation: {
+                nextEl: '#carousel-next-desktop',
+                prevEl: '#carousel-prev-desktop',
+            },
+        });
+
+        const foodTab = document.getElementById('tab-food-desktop');
+        const cosmeticsTab = document.getElementById('tab-cosmetics-desktop');
+        const foodTrack = document.getElementById('cards-track-food');
+        const cosmeticsTrack = document.getElementById('cards-track-cosmetics');
+
+        if (foodTab && cosmeticsTab && foodTrack && cosmeticsTrack) {
+            foodTab.addEventListener('click', (e) => {
+                e.preventDefault();
+                foodTab.className = 'flex items-center gap-4 bg-white text-[#FF8D00] font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
+                cosmeticsTab.className = 'flex items-center gap-4 bg-white text-black/50 hover:text-black font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
+                
+                foodTrack.classList.remove('!hidden');
+                cosmeticsTrack.classList.add('!hidden');
+                foodSwiper.update();
+            });
+
+            cosmeticsTab.addEventListener('click', (e) => {
+                e.preventDefault();
+                cosmeticsTab.className = 'flex items-center gap-4 bg-white text-[#FF8D00] font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
+                foodTab.className = 'flex items-center gap-4 bg-white text-black/50 hover:text-black font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
+                
+                cosmeticsTrack.classList.remove('!hidden');
+                foodTrack.classList.add('!hidden');
+                cosmeticsSwiper.update();
+            });
         }
-        return cosmeticsTrack;
     }
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const activeTrack = getActiveTrack();
-            if (activeTrack) {
-                activeTrack.scrollBy({ left: 400, behavior: 'smooth' });
-            }
-        });
-    }
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const activeTrack = getActiveTrack();
-            if (activeTrack) {
-                activeTrack.scrollBy({ left: -400, behavior: 'smooth' });
-            }
-        });
-    }
-
-    if (foodTab && cosmeticsTab && foodTrack && cosmeticsTrack) {
-        foodTab.addEventListener('click', (e) => {
-            e.preventDefault();
-            foodTab.className = 'flex items-center gap-4 bg-white text-[#FF8D00] font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
-            cosmeticsTab.className = 'flex items-center gap-4 bg-white text-black/50 hover:text-black font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
-            
-            foodTrack.classList.remove('hidden');
-            cosmeticsTrack.classList.add('hidden');
-        });
-
-        cosmeticsTab.addEventListener('click', (e) => {
-            e.preventDefault();
-            cosmeticsTab.className = 'flex items-center gap-4 bg-white text-[#FF8D00] font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
-            foodTab.className = 'flex items-center gap-4 bg-white text-black/50 hover:text-black font-montserrat font-bold text-[16px] leading-[29px] tracking-normal transition duration-200 focus:outline-none select-none';
-            
-            cosmeticsTrack.classList.remove('hidden');
-            foodTrack.classList.add('hidden');
-        });
-    }
+    initSwipers();
 });
 </script>
 

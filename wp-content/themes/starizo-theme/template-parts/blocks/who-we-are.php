@@ -45,9 +45,9 @@ if ( $image ) {
             </p>
 
             <?php if ( $button_link && $button_text ) : ?>
-            <a href="<?php echo esc_url( $button_link ); ?>" class="h-[48px] bg-starizo-orange hover:bg-starizo-orange-dark text-white font-bold text-[16px] px-8 rounded-full flex items-center gap-2 transition duration-200 select-none">
+            <a href="<?php echo esc_url( $button_link ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-bold text-[15px] xl:text-[16px] h-[48px] px-8 rounded-full flex items-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md hover:shadow-xl select-none">
               <?php echo esc_html( $button_text ); ?>
-              <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </a>
