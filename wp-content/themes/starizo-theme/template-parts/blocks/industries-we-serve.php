@@ -62,17 +62,23 @@ $industries = [
           <?php endif; ?>
         </div>
 
-        <!-- 5 Interactive Accordion Cards row matching Figma 1:1 -->
-        <div class="flex flex-row gap-4 w-full h-[360px] items-stretch group/accordion">
-          <?php foreach ( $industries as $index => $industry ) : 
-            $is_first = ($index === 0);
-          ?>
-          <div class="industry-card flex-1 hover:flex-[2.2] <?php echo $is_first ? 'group-hover/accordion:flex-1 group-hover/accordion:[&_.expanded-content]:hidden group-hover/accordion:[&_.collapsed-content]:flex group-hover/accordion:bg-[#00A256]' : ''; ?> transition-all duration-500 ease-in-out cursor-pointer rounded-[44px_8px_44px_8px] p-3 flex flex-col justify-between shadow-lg relative overflow-hidden group/card bg-[#00A256] hover:bg-[#FF8D00]">
+        <!-- 5 Cards row with bottom-to-top slide hover animation -->
+        <div class="grid grid-cols-5 gap-6">
+          <?php foreach ( $industries as $industry ) : ?>
+          <div style="background-color: #00A256; border-radius: 44px 8px 44px 8px;" class="p-3 flex flex-col justify-between shadow-md relative overflow-hidden group cursor-pointer h-[350px]">
             
-            <!-- Expanded State Content (Shows on Hover, or default active on 1st item when not hovering container) -->
-            <div class="expanded-content <?php echo $is_first ? 'flex' : 'hidden'; ?> group-hover/card:flex flex-col justify-between h-full w-full p-4 relative z-10 text-white animate-fadeIn">
-              <!-- Leaf Outline Watermark -->
-              <svg class="absolute bottom-2 right-2 w-32 h-32 text-white/20 pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+            <!-- Standard Collapsed Base View -->
+            <div style="border-radius: 34px 3px 34px 3px;" class="relative w-full h-[270px] overflow-hidden shrink-0">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/' . $industry['image'] ); ?>" alt="<?php echo esc_attr( $industry['title'] ); ?>" class="w-full h-full object-cover" loading="lazy">
+            </div>
+            <div class="py-2 text-center shrink-0">
+              <h4 class="font-montserrat font-bold text-[15px] text-white tracking-tight"><?php echo esc_html( $industry['title'] ); ?></h4>
+            </div>
+
+            <!-- Slide-Up Hover Overlay (Bottom to Top Animation) -->
+            <div class="absolute inset-0 bg-[#00A256] p-5 flex flex-col justify-between z-20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out text-white pointer-events-none group-hover:pointer-events-auto" style="border-radius: 44px 8px 44px 8px;">
+              <!-- Background Leaf Line Watermark Pattern -->
+              <svg class="absolute bottom-2 right-2 w-36 h-36 opacity-25 pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M50 10 C20 40 20 80 50 90 C80 80 80 40 50 10 Z" />
                 <path d="M50 10 L50 90" />
                 <path d="M50 40 Q30 30 20 40" />
@@ -82,33 +88,21 @@ $industries = [
               </svg>
 
               <div>
-                <h4 class="font-montserrat font-bold text-[20px] text-white leading-tight mb-4">
+                <h4 class="font-montserrat font-bold text-[19px] text-white leading-tight mb-3">
                   <?php echo esc_html( $industry['title'] ); ?>
                 </h4>
-                <p class="font-montserrat font-medium text-[14px] text-white/90 leading-relaxed max-w-[200px]">
+                <p class="font-montserrat font-medium text-[13px] text-white/95 leading-relaxed">
                   <?php echo esc_html( $industry['description'] ?? 'Create consistency, texture, and ingredient performance.' ); ?>
                 </p>
               </div>
 
-              <div class="mt-auto pt-4">
-                <span class="inline-flex items-center gap-2 font-montserrat font-bold text-[13px] text-white uppercase tracking-wider">
+              <div class="pt-4 border-t border-white/20 mt-auto">
+                <span class="inline-flex items-center gap-2 font-montserrat font-bold text-[12px] text-white uppercase tracking-wider">
                   Learn More
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </span>
-              </div>
-            </div>
-
-            <!-- Collapsed State Content (Shows when not hovered) -->
-            <div class="collapsed-content <?php echo $is_first ? 'hidden' : 'flex'; ?> group-hover/card:hidden flex-col justify-between h-full w-full">
-              <div style="border-radius: 34px 3px 34px 3px;" class="relative w-full h-[270px] overflow-hidden">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/' . $industry['image'] ); ?>" alt="<?php echo esc_attr( $industry['title'] ); ?>" class="w-full h-full object-cover" loading="lazy">
-              </div>
-              <div class="py-2 text-center">
-                <h4 class="font-montserrat font-bold text-[14px] text-white tracking-tight truncate px-1">
-                  <?php echo esc_html( $industry['title'] ); ?>
-                </h4>
               </div>
             </div>
 

@@ -53,22 +53,22 @@ if ( $image ) {
 
       <div class="relative z-[10] w-[1280px] h-full mx-auto">
         <!-- ================= HERO CONTENT ================= -->
-        <div class="absolute left-[80px] top-[190px] w-[560px] text-white">
-          <p class="uppercase tracking-[0.18em] text-[14px] font-bold mb-5 text-white/95">
+        <div class="absolute left-[80px] top-[145px] w-[580px] text-white z-20">
+          <p class="uppercase tracking-[0.18em] text-[13px] font-bold mb-3 text-white/95">
             <?php echo esc_html( $subheading ); ?>
           </p>
 
-          <h1 class="text-[60px] leading-[68px] font-black mb-6">
+          <h1 class="text-[52px] leading-[58px] font-black mb-4 tracking-tight">
             <?php echo wp_kses_post( $heading ); ?>
           </h1>
 
-          <p class="text-[18px] leading-[32px] text-white/90 mb-9 max-w-[500px]">
+          <p class="text-[16px] leading-[28px] text-white/90 mb-7 max-w-[500px]">
             <?php echo esc_html( $description ); ?>
           </p>
 
           <div class="flex items-center gap-4">
             <?php if ( $button_1_link && $button_1_text ) : ?>
-            <a href="<?php echo esc_url( $button_1_link ); ?>" class="border-2 border-white rounded-full h-[50px] px-7 flex items-center gap-2 text-white font-bold hover:bg-white hover:text-[#00A256] transition-colors select-none">
+            <a href="<?php echo esc_url( $button_1_link ); ?>" class="border-2 border-white rounded-full h-[48px] px-7 flex items-center gap-2 text-white font-bold text-[15px] hover:bg-white hover:text-[#00A256] transition-colors select-none">
               <?php echo esc_html( $button_1_text ); ?>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -77,7 +77,7 @@ if ( $image ) {
             <?php endif; ?>
             
             <?php if ( $button_2_link && $button_2_text ) : ?>
-            <a href="<?php echo esc_url( $button_2_link ); ?>" class="bg-[#FF9100] rounded-full h-[50px] px-8 flex items-center gap-2 text-white font-bold hover:bg-[#e68300] transition-colors select-none shadow-sm">
+            <a href="<?php echo esc_url( $button_2_link ); ?>" class="bg-[#FF9100] rounded-full h-[48px] px-8 flex items-center gap-2 text-white font-bold text-[15px] hover:bg-[#e68300] transition-colors select-none shadow-sm">
               <?php echo esc_html( $button_2_text ); ?>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -88,22 +88,22 @@ if ( $image ) {
         </div>
 
         <!-- ================= BOTTOM BAR ================= -->
-        <div class="absolute left-[80px] bottom-[35px] z-20">
-          <p class="font-bold text-starizo-brown text-[16px] mb-4">
-            Meet your ingredient partner.
+        <div class="absolute left-[80px] bottom-[30px] z-20">
+          <p class="font-bold text-[#5D3700] text-[15px] mb-3">
+            Meet your ingredient partner:
           </p>
 
           <div class="flex items-center gap-6">
             <?php
             $partner_badges = array('Starches', 'Sweeteners', 'Proteins', 'Dietary Fibres', 'Functional Ingredients');
             foreach($partner_badges as $badge) : ?>
-            <div class="flex items-center gap-2.5">
-              <div class="w-6 h-6 rounded-full bg-[#00A256] flex items-center justify-center text-white shrink-0 shadow-sm">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+            <div class="flex items-center gap-2">
+              <div class="w-5 h-5 rounded-full bg-[#00A256] flex items-center justify-center text-white shrink-0 shadow-sm">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
               </div>
-              <span class="font-montserrat font-semibold text-[14px] text-black/85">
+              <span class="font-montserrat font-semibold text-[14px] text-black/90">
                 <?php echo esc_html($badge); ?>
               </span>
             </div>
