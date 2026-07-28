@@ -31,8 +31,8 @@ if ( $image ) {
 }
 ?>
 
-<!-- Desktop / Laptop Layout View (lg: 1024px+ screens) -->
-<div class="hidden lg:block w-full">
+<!-- Desktop / Laptop Layout View (xl: 1280px+ screens) -->
+<div class="hidden xl:block w-full">
     <section class="relative w-full h-[860px] bg-[#FBEAC4] overflow-hidden">
       <!-- Cream background -->
       <div class="absolute inset-0 bg-[#FBEAC4] z-0"></div>
@@ -54,32 +54,32 @@ if ( $image ) {
       <div class="relative z-[10] w-[1280px] h-full mx-auto">
         <!-- ================= HERO CONTENT ================= -->
         <div class="absolute left-[80px] top-[190px] w-[560px] text-white z-20">
-          <p class="uppercase tracking-[0.18em] text-[13px] xl:text-[14px] font-bold mb-3 xl:mb-4 text-white/95">
+          <p class="uppercase tracking-[0.18em] text-[14px] font-bold mb-4 text-white/95">
             <?php echo esc_html( $subheading ); ?>
           </p>
 
-          <h1 class="text-[46px] lg:text-[50px] xl:text-[60px] leading-[52px] lg:leading-[56px] xl:leading-[68px] font-black mb-4 xl:mb-5 tracking-tight">
+          <h1 class="text-[52px] xl:text-[60px] leading-[58px] xl:leading-[68px] font-black mb-5 tracking-tight">
             <?php echo wp_kses_post( $heading ); ?>
           </h1>
 
-          <p class="text-[15px] lg:text-[16px] xl:text-[18px] leading-[25px] lg:leading-[28px] xl:leading-[32px] text-white/90 mb-6 xl:mb-8 max-w-[520px]">
+          <p class="text-[16px] xl:text-[18px] leading-[28px] xl:leading-[32px] text-white/90 mb-8 max-w-[520px]">
             <?php echo esc_html( $description ); ?>
           </p>
 
-          <div class="flex items-center gap-4 xl:gap-5">
+          <div class="flex items-center gap-5">
             <?php if ( $button_1_link && $button_1_text ) : ?>
-            <a href="<?php echo esc_url( $button_1_link ); ?>" class="border-2 border-white rounded-full h-[46px] xl:h-[50px] px-6 xl:px-8 flex items-center gap-2 text-white font-semibold text-[15px] xl:text-[16px] hover:bg-white hover:text-[#00A256] transition-colors select-none">
+            <a href="<?php echo esc_url( $button_1_link ); ?>" class="group border-2 border-white rounded-full h-[50px] px-8 flex items-center gap-2 text-white font-semibold text-[16px] hover:bg-white hover:text-[#00A256] transition-all duration-300 select-none">
               <?php echo esc_html( $button_1_text ); ?>
-              <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </a>
             <?php endif; ?>
             
             <?php if ( $button_2_link && $button_2_text ) : ?>
-            <a href="<?php echo esc_url( $button_2_link ); ?>" class="bg-[#FF9100] rounded-full h-[46px] xl:h-[50px] px-6 xl:px-8 flex items-center gap-2 text-white font-semibold text-[15px] xl:text-[16px] hover:bg-[#e68300] transition-colors select-none shadow-sm">
+            <a href="<?php echo esc_url( $button_2_link ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-semibold text-[16px] h-[50px] px-8 rounded-full flex items-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md hover:shadow-xl select-none">
               <?php echo esc_html( $button_2_text ); ?>
-              <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </a>
@@ -89,12 +89,12 @@ if ( $image ) {
 
         <!-- ================= BOTTOM BAR ================= -->
         <div class="absolute left-[80px] bottom-[40px] z-20">
-          <div class="w-8 h-[3px] bg-[#FF9100] mb-3"></div>
-          <p class="font-bold text-starizo-brown text-[16px] mb-5">
+          <div class="w-8 h-[3px] bg-[#FF8D00] mb-3"></div>
+          <p class="font-bold text-[#5D3700] text-[16px] mb-5">
             Meet your ingredient partner:
           </p>
 
-          <div class="flex flex-wrap items-center gap-4 lg:gap-6 xl:gap-8">
+          <div class="flex flex-wrap items-center gap-6 xl:gap-8">
             <?php
             $partner_badges = array('Starches', 'Sweeteners', 'Proteins', 'Dietary Fibres', 'Functional Ingredients');
             foreach($partner_badges as $badge) : ?>
@@ -104,7 +104,7 @@ if ( $image ) {
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
               </div>
-              <span class="font-montserrat font-semibold text-[13px] xl:text-[14px] text-black/90 whitespace-nowrap">
+              <span class="font-montserrat font-semibold text-[14px] text-black/90 whitespace-nowrap">
                 <?php echo esc_html($badge); ?>
               </span>
             </div>

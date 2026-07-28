@@ -32,9 +32,9 @@ $floating_image_url = $floating_image ? esc_url($floating_image['url']) : get_te
       </p>
 
       <!-- Button -->
-      <a href="<?php echo esc_url( $button_link ); ?>" class="font-montserrat font-semibold text-white flex items-center justify-center transition duration-200 select-none shrink-0 hover:bg-[#e07c00] shadow-sm" style="width: 158px; height: 45px; border-radius: 22px; background-color: #FF8D00; padding: 6px 19px; gap: 2px; font-weight: 600; font-size: 18px; line-height: 21px;">
+      <a href="<?php echo esc_url( $button_link ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-semibold text-[18px] px-8 h-[45px] rounded-full flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md hover:shadow-xl select-none shrink-0">
         <span style="display: inline-flex; align-items: center;"><?php echo esc_html( $button_text ); ?></span>
-        <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5] shrink-0 ml-1" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 stroke-current fill-none stroke-[2.5] shrink-0 ml-1" viewBox="0 0 24 24">
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
       </a>

@@ -40,21 +40,21 @@ $banner_button_link = get_sub_field( 'banner_button_link' ) ?: '#';
             </p>
           </div>
 
-          <!-- Right overlapping cards collage with dynamic hover animations -->
-          <div class="col-span-6 relative w-full group/collage" style="aspect-ratio: 1050 / 680;">
-            <!-- Image 1 -->
-            <div class="absolute z-30 overflow-hidden bg-white shadow-xl border-[2.5px] border-[#00A256] rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-all duration-500 ease-out hover:z-40 hover:scale-[1.06] hover:shadow-2xl cursor-pointer" style="left: 0%; top: 0%; width: 80%; height: 52%;">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-worker.png' ); ?>" alt="Starizo worker" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px] transition-transform duration-700 hover:scale-110" loading="lazy">
+          <!-- Right overlapping cards collage with dynamic deck fan-out hover animations -->
+          <div class="col-span-6 relative w-full group/collage cursor-pointer" style="aspect-ratio: 1050 / 680;">
+            <!-- Image 1 (Worker - Top Layer) -->
+            <div class="absolute z-30 overflow-hidden bg-white shadow-xl border-[2.5px] border-[#00A256] rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-all duration-700 ease-out group-hover/collage:-translate-y-6 group-hover/collage:-rotate-2 group-hover/collage:shadow-2xl hover:!z-50 hover:!scale-[1.05]" style="left: 0%; top: 0%; width: 80%; height: 52%;">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-worker.png' ); ?>" alt="Starizo worker" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px] transition-transform duration-700 group-hover/collage:scale-105 hover:!scale-110" loading="lazy">
             </div>
 
-            <!-- Image 2 -->
-            <div class="absolute z-20 overflow-hidden bg-white shadow-lg border-[2.5px] border-[#00A256]/70 rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-all duration-500 ease-out hover:z-40 hover:scale-[1.06] hover:shadow-2xl cursor-pointer" style="left: 5%; top: 18%; width: 80%; height: 50%;">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-table.png' ); ?>" alt="Breakfast table" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px] transition-transform duration-700 hover:scale-110" loading="lazy">
+            <!-- Image 2 (Table - Middle Layer) -->
+            <div class="absolute z-20 overflow-hidden bg-white shadow-lg border-[2.5px] border-[#00A256]/70 rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-all duration-700 ease-out group-hover/collage:translate-x-6 group-hover/collage:-translate-y-1 group-hover/collage:rotate-1 group-hover/collage:shadow-2xl hover:!z-50 hover:!scale-[1.05]" style="left: 5%; top: 18%; width: 80%; height: 50%;">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-table.png' ); ?>" alt="Breakfast table" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px] transition-transform duration-700 group-hover/collage:scale-105 hover:!scale-110" loading="lazy">
             </div>
 
-            <!-- Image 3 -->
-            <div class="absolute z-10 overflow-hidden bg-white shadow-md border-[2.5px] border-[#00A256]/40 rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-all duration-500 ease-out hover:z-40 hover:scale-[1.06] hover:shadow-2xl cursor-pointer" style="left: 10%; top: 36%; width: 80%; height: 50%;">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-crop.png' ); ?>" alt="Rice plant" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px] transition-transform duration-700 hover:scale-110" loading="lazy">
+            <!-- Image 3 (Rice Crop - Bottom Layer) -->
+            <div class="absolute z-10 overflow-hidden bg-white shadow-md border-[2.5px] border-[#00A256]/40 rounded-tl-[40px] rounded-br-[40px] rounded-tr-[10px] rounded-bl-[10px] transition-all duration-700 ease-out group-hover/collage:translate-x-12 group-hover/collage:translate-y-5 group-hover/collage:rotate-3 group-hover/collage:shadow-2xl hover:!z-50 hover:!scale-[1.05]" style="left: 10%; top: 36%; width: 80%; height: 50%;">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/ambition-crop.png' ); ?>" alt="Rice plant" class="w-full h-full object-cover rounded-tl-[34px] rounded-br-[34px] rounded-tr-[6px] rounded-bl-[6px] transition-transform duration-700 group-hover/collage:scale-105 hover:!scale-110" loading="lazy">
             </div>
           </div>
         </div>
