@@ -421,5 +421,45 @@ function starizo_handle_newsletter_subscription() {
 add_action( 'wp_ajax_starizo_newsletter', 'starizo_handle_newsletter_subscription' );
 add_action( 'wp_ajax_nopriv_starizo_newsletter', 'starizo_handle_newsletter_subscription' );
 
+/**
+ * Custom Template Routing for Category Pages (Food & Beverage / Cosmetics)
+ */
+function starizo_custom_template_include( $template ) {
+    if ( is_page( array( 'food-beverage', 'food-and-beverage' ) ) || is_tax( 'product_cat', array( 'food-beverage', 'food-and-beverage' ) ) ) {
+        $food_template = get_template_directory() . '/page-food-beverage.php';
+        if ( file_exists( $food_template ) ) {
+            return $food_template;
+        }
+    }
+
+    if ( is_page( array( 'cosmetics-personal-care', 'cosmetics-and-personal-care' ) ) || is_tax( 'product_cat', array( 'cosmetics-personal-care', 'cosmetics-and-personal-care' ) ) ) {
+        $cosmetics_template = get_template_directory() . '/page-cosmetics-personal-care.php';
+        if ( file_exists( $cosmetics_template ) ) {
+            return $cosmetics_template;
+        }
+    }
+
+    // Fallback: If 404 or non-matched route, check URI string
+    if ( is_404() || ! is_singular() ) {
+        $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? strtolower( $_SERVER['REQUEST_URI'] ) : '';
+        if ( strpos( $request_uri, 'food' ) !== false ) {
+            $food_template = get_template_directory() . '/page-food-beverage.php';
+            if ( file_exists( $food_template ) ) {
+                return $food_template;
+            }
+        }
+        if ( strpos( $request_uri, 'cosmetic' ) !== false ) {
+            $cosmetics_template = get_template_directory() . '/page-cosmetics-personal-care.php';
+            if ( file_exists( $cosmetics_template ) ) {
+                return $cosmetics_template;
+            }
+        }
+    }
+
+    return $template;
+}
+add_filter( 'template_include', 'starizo_custom_template_include', 99 );
+
+
 
 
