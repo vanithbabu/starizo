@@ -12,6 +12,7 @@ get_header();
   get_template_part('template-parts/blocks/careers-culture');
   get_template_part('template-parts/blocks/careers-open-roles');
   get_template_part('template-parts/blocks/careers-bottom-hero');
+  get_template_part('template-parts/blocks/careers-faq-banner');
   ?>
 </main>
 
