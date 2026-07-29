@@ -15,38 +15,38 @@ get_header();
   <div class="hidden xl:block w-full">
 
     <!-- 1. HERO SECTION -->
-    <section class="w-full relative overflow-hidden min-h-[calc(100vh-80px)] min-h-[720px] lg:min-h-[820px] bg-[#FDFBF3] py-12 flex items-center">
+    <section class="w-full relative overflow-hidden min-h-[calc(100vh-80px)] min-h-[720px] lg:min-h-[820px] bg-[#FDFBF3] pt-3 pb-16 flex items-center">
 
-      <!-- Background Image -->
-      <div class="absolute inset-0 w-full h-full z-0">
+      <!-- Full Cover Background Image -->
+      <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
         <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/food&Bevarges-hero.png' ); ?>" alt="Food &amp; Beverage Ingredients"
-          class="w-full h-full object-cover object-right-top">
+          class="w-full h-full object-cover object-right">
       </div>
 
-      <!-- Left Hero Content Container -->
-      <div class="relative z-20 max-w-[1280px] mx-auto px-6 sm:px-10 md:px-14 lg:px-16 py-12 my-auto w-full">
-        <div class="flex flex-col items-start gap-[42px] max-w-[393px]">
+      <!-- Desktop Hero Left Content Container -->
+      <div class="relative z-10 max-w-[1240px] mx-auto px-6 sm:px-10 md:px-14 lg:px-16 pt-16 pb-16 flex items-center justify-start w-full">
+        
+        <div class="w-[480px] max-w-full flex flex-col items-start gap-6 text-left my-auto pt-16">
 
-          <!-- Top Text Group -->
-          <div class="flex flex-col items-start gap-[14px] w-full">
-            <span class="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.11em] uppercase text-black">
-              FOOD &amp; BEVERAGE
-            </span>
+          <!-- Category Tag -->
+          <span class="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.11em] uppercase text-black">
+            FOOD &amp; BEVERAGE
+          </span>
 
-            <h1 class="font-montserrat font-black text-[38px] lg:text-[42px] leading-[48px] lg:leading-[54px] tracking-tight w-full max-w-[393px]"
-              style="background: linear-gradient(145.88deg, #00A256 20.19%, #5DC671 105.95%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-              Ingredients Built To Perform Inside Real Food.
-            </h1>
+          <!-- Main Heading -->
+          <h1 class="font-montserrat font-extrabold text-[42px] leading-[52px] tracking-tight text-[#00A256] w-[460px] max-w-full">
+            Ingredients Built To<br>Perform Inside<br>Real Food.
+          </h1>
 
-            <p class="font-montserrat font-medium text-[16px] lg:text-[18px] leading-[26px] lg:leading-[30px] text-black/90 w-full max-w-[393px]">
-              Today’s consumers expect more from food. Cleaner labels. Better experiences. Reliable quality. Our rice-derived ingredient portfolio helps manufacturers create products that perform across processing, shelf life, and consumption.
-            </p>
-          </div>
+          <!-- Description Paragraph -->
+          <p class="font-montserrat font-medium text-[18px] leading-[30px] tracking-normal text-black/90 w-[506px] max-w-full">
+            Today’s consumers expect more from food. Cleaner labels. Better experiences. Reliable quality. Our rice-derived ingredient portfolio helps manufacturers create products that perform across processing, shelf life, and consumption.
+          </p>
 
           <!-- Contact Us Button -->
-          <div>
+          <div class="pt-2">
             <a href="<?php echo esc_url( site_url( '/contact' ) ); ?>"
-              class="h-[46px] bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[15px] px-8 rounded-full inline-flex items-center gap-2 transition duration-200 select-none shadow-md">
+              class="h-[46px] bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[15px] px-7 rounded-full inline-flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 select-none">
               Contact Us
               <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -55,6 +55,7 @@ get_header();
           </div>
 
         </div>
+
       </div>
 
     </section>
