@@ -1,0 +1,13 @@
+# Ignore HTML static site directory
+starizo/
+/starizo
+
+# OS / System files
+.DS_Store
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node modules
+node_modules/
+wp-content/themes/starizo-theme/node_modules/

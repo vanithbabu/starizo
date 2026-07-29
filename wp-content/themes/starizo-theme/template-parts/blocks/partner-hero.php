@@ -6,10 +6,11 @@
 $heading     = get_sub_field( 'heading' ) ?: 'Better Ingredients.<br>Stronger Together.';
 $description = get_sub_field( 'description' ) ?: 'At STARIZO, partnerships begin long before production and continue far beyond delivery. We combine rice-derived ingredient expertise, application understanding, and manufacturing excellence to support businesses creating the next generation of food, nutrition, and industrial products.';
 $button_text = get_sub_field( 'button_text' ) ?: 'Become a Partner';
-$button_link = get_sub_field( 'button_link' ) ?: '/contact';
+$button_link_raw = get_sub_field( 'button_link' );
+$button_link = ( $button_link_raw && '#' !== $button_link_raw ) ? $button_link_raw : site_url( '/contact' );
 
-$image = get_sub_field('image');
-$image_url = $image ? esc_url($image['url']) : get_template_directory_uri() . '/public/assets/ partner-with-us-hero.png';
+$image     = get_sub_field( 'image' );
+$image_url = ( is_array($image) && !empty($image['url']) ) ? esc_url($image['url']) : get_template_directory_uri() . '/public/assets/partner-with-us-hero.png';
 
 $highlights = get_sub_field('highlights');
 if ( empty( $highlights ) ) {

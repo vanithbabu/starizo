@@ -9,7 +9,8 @@ $heading       = get_sub_field( 'heading' ) ?: 'From Traditional Farming.<br>To 
 $description_1 = get_sub_field( 'description_1' ) ?: 'Agriculture shaped who we are. Innovation shapes what we do. STARIZO connects traditional farming knowledge with modern manufacturing to produce quality rice ingredients.';
 $description_2 = get_sub_field( 'description_2' ) ?: 'We source responsibly, process rigorously, and hold every batch to standards that don\'t bend. This approach helps us deliver reliable products for various industrial applications.';
 $button_text   = get_sub_field( 'button_text' ) ?: 'Learn More';
-$button_link   = get_sub_field( 'button_link' ) ?: '#';
+$button_link_raw = get_sub_field( 'button_link' );
+$button_link   = ( $button_link_raw && '#' !== $button_link_raw ) ? $button_link_raw : site_url( '/about' );
 $image         = get_sub_field( 'image' );
 
 $image_url = get_template_directory_uri() . '/public/assets/home-who-we-are.png';
@@ -32,7 +33,7 @@ if ( $image ) {
           <div class="col-span-7 flex flex-col items-start">
             <div class="flex items-center gap-3 mb-6">
               <div class="w-[6px] h-[33px] bg-[#FF8D00] rounded-full"></div>
-              <span class="font-montserrat font-bold text-[16px] text-starizo-brown uppercase tracking-[0.11em] leading-none">WHO WE ARE</span>
+              <span class="font-montserrat font-normal text-[16px] lg:text-[22px] leading-[30px] lg:leading-[54px] tracking-[0.11em] text-[#5D3700] uppercase">WHO WE ARE</span>
             </div>
             <h2 class="text-[36px] font-black text-black leading-[46px] tracking-tight mb-6">
               <?php echo wp_kses_post( $heading ); ?>
@@ -54,10 +55,10 @@ if ( $image ) {
             <?php endif; ?>
           </div>
 
-          <!-- Right image column — smaller, compact -->
+          <!-- Right image column — smaller, compact with leaf corner frame -->
           <div class="col-span-5 flex justify-center items-center">
-            <div class="w-full h-full">
-              <img src="<?php echo esc_url( $image_url ); ?>" alt="Who We Are" class="w-full h-full object-cover rounded-[54px] rounded-tr-[6px] rounded-bl-[6px]" loading="lazy">
+            <div class="w-full h-full border-2 border-[#00A256] rounded-tl-[54px] rounded-br-[54px] rounded-tr-none rounded-bl-none overflow-hidden shadow-lg">
+              <img src="<?php echo esc_url( $image_url ); ?>" alt="Who We Are" class="w-full h-full object-cover" loading="lazy">
             </div>
           </div>
         </div>
@@ -132,8 +133,8 @@ if ( $image ) {
         <div class="flex items-center gap-3.5 relative pr-3 border-r-2 border-[#FF8D00]">
           <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/contries.svg' ); ?>" alt="Countries" class="w-9 h-9 shrink-0 object-contain">
           <div class="flex flex-col min-w-0 gap-1">
-            <span class="font-montserrat font-bold text-[13px] text-black leading-tight whitespace-nowrap"><span class="font-extrabold text-[15px]">20+</span> Countries</span>
-            <span class="font-montserrat font-medium text-[12px] text-black/70 leading-tight mt-0.5 whitespace-nowrap">Served</span>
+            <span class="font-montserrat font-bold text-[13px] text-black leading-tight"><span class="font-extrabold text-[15px]">20+</span> Countries</span>
+            <span class="font-montserrat font-medium text-[12px] text-black/70 leading-tight mt-0.5">Served</span>
           </div>
         </div>
 
@@ -141,8 +142,8 @@ if ( $image ) {
         <div class="flex items-center gap-3.5 pl-3">
           <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/trasable.svg' ); ?>" alt="Traceable" class="w-9 h-9 shrink-0 object-contain">
           <div class="flex flex-col min-w-0">
-            <span class="font-montserrat font-bold text-[13px] text-black leading-tight whitespace-nowrap"><span class="font-extrabold text-[15px]">100%</span> Traceable</span>
-            <span class="font-montserrat font-medium text-[12px] text-black/70 leading-tight mt-0.5 whitespace-nowrap">Procurement</span>
+            <span class="font-montserrat font-bold text-[13px] text-black leading-tight"><span class="font-extrabold text-[15px]">100%</span> Traceable</span>
+            <span class="font-montserrat font-medium text-[12px] text-black/70 leading-tight mt-0.5">Procurement</span>
           </div>
         </div>
 
@@ -150,8 +151,8 @@ if ( $image ) {
         <div class="flex items-center gap-2.5 relative pr-3">
           <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/certificate.svg' ); ?>" alt="Certifications" class="w-9 h-9 shrink-0 object-contain">
           <div class="flex flex-col min-w-0">
-            <span class="font-montserrat font-bold text-[13px] text-black leading-tight whitespace-nowrap">Multiple Industry</span>
-            <span class="font-montserrat font-medium text-[12px] text-black/70 leading-tight mt-0.5 whitespace-nowrap">Certifications</span>
+            <span class="font-montserrat font-bold text-[13px] text-black leading-tight">Multiple Industry</span>
+            <span class="font-montserrat font-medium text-[12px] text-black/70 leading-tight mt-0.5">Certifications</span>
           </div>
           <!-- Orange Vertical Divider Line -->
           <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[3px] h-[36px] bg-[#FF8D00] rounded-full"></div>
@@ -161,8 +162,8 @@ if ( $image ) {
         <div class="flex items-center gap-2.5 pl-3">
           <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/batch-quality.svg' ); ?>" alt="Batch Quality" class="w-9 h-9 shrink-0 object-contain">
           <div class="flex flex-col min-w-0">
-            <span class="font-montserrat font-bold text-[13px] text-black leading-tight whitespace-nowrap">Consistent</span>
-            <span class="font-montserrat font-medium text-[12px] text-black/70 leading-tight mt-0.5 whitespace-nowrap">Batch Quality</span>
+            <span class="font-montserrat font-bold text-[13px] text-black leading-tight">Consistent</span>
+            <span class="font-montserrat font-medium text-[12px] text-black/70 leading-tight mt-0.5">Batch Quality</span>
           </div>
         </div>
       </div>

@@ -67,7 +67,7 @@
             "label": "Button URL",
             "name": "hero_button_url",
             "aria-label": "",
-            "type": "url",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,

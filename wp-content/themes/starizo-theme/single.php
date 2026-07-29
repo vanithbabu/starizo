@@ -54,7 +54,9 @@ get_header();
             <span class="font-montserrat font-semibold text-[18px] leading-[30px] tracking-normal text-black">
               Share
             </span>
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/share-icon.svg'); ?>" alt="Share" class="w-[24px] h-[24px] cursor-pointer hover:opacity-80 transition-opacity">
+            <button type="button" aria-label="Share article" class="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-black/5 transition-colors focus:outline-none cursor-pointer">
+              <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/share-icon.svg'); ?>" alt="Share" class="w-[24px] h-[24px]">
+            </button>
           </div>
         </div>
       </div>

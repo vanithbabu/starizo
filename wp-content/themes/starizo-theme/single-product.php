@@ -100,9 +100,13 @@
               class="absolute pointer-events-none select-none z-0"
               style="width: 372.77px; height: 487.60px; opacity: 1;">
 
-            <!-- 2. Foreground Rice Bag Image: rice-bag-hero.png (Figma: width 365px, height 484px, opacity 1) -->
+            <!-- 2. Foreground Rice Bag Image: rice-bag-hero.png -->
+            <?php
+            $hero_pouch_img = get_field('product_hero_image');
+            $hero_pouch_url = ( is_array($hero_pouch_img) && !empty($hero_pouch_img['url']) ) ? $hero_pouch_img['url'] : ( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ?: get_template_directory_uri() . '/public/assets/rice-bag-hero.png' );
+            ?>
             <div class="relative z-10 filter drop-shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/rice-bag-hero.png' ); ?>" alt="STARIZO <?php the_title(); ?> Pouch"
+              <img src="<?php echo esc_url( $hero_pouch_url ); ?>" alt="STARIZO <?php the_title_attribute(); ?> Pouch"
                 class="object-contain mx-auto"
                 style="width: 365px; height: 484px;">
             </div>
@@ -599,46 +603,6 @@
 
   <!-- ==================== MOBILE LAYOUT VIEW (xl:hidden) ==================== -->
   <div class="block xl:hidden w-full min-h-screen bg-white overflow-x-hidden">
-
-    <!-- Mobile Header (copied 1:1 from Home page index.html) -->
-    <header class="w-full h-[90px] bg-white flex items-center px-6 justify-between relative z-30 shadow-sm">
-      <a href="./index.html" class="flex items-center focus:outline-none" aria-label="Starizo Home">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/logo.svg' ); ?>" alt="starizo™" class="h-8 w-auto">
-      </a>
-
-      <div class="flex items-center gap-3">
-        <!-- Contact Us -->
-        <a href="#"
-          class="bg-starizo-orange hover:bg-starizo-orange-dark text-white font-bold text-[12px] h-8 px-4 rounded-[16px] transition duration-200 flex items-center justify-center shadow-sm select-none">
-          Contact Us
-        </a>
-
-        <!-- Hamburger menu icon -->
-        <button id="mobile-menu-btn"
-          class="w-9 h-9 flex flex-col justify-center items-center gap-1.5 text-starizo-brown focus:outline-none"
-          aria-label="Toggle Navigation Menu">
-          <div class="w-6 h-0.5 bg-current rounded-full"></div>
-          <div class="w-6 h-0.5 bg-current rounded-full"></div>
-          <div class="w-6 h-0.5 bg-current rounded-full"></div>
-        </button>
-      </div>
-
-      <!-- Mobile navigation menu dropdown -->
-      <div id="mobile-dropdown"
-        class="hidden absolute top-[90px] left-0 right-0 bg-white border-b border-gray-100 shadow-md p-6 z-50 flex flex-col gap-4">
-        <a href="./product-rice-starch.html"
-          class="text-[16px] text-starizo-brown hover:text-starizo-orange py-2 border-b border-gray-50 transition duration-200">Products</a>
-        <a href="./about.html"
-          class="text-[16px] text-starizo-brown hover:text-starizo-orange py-2 border-b border-gray-50 transition duration-200">About Us</a>
-        <a href="#"
-          class="text-[16px] text-starizo-brown hover:text-starizo-orange py-2 border-b border-gray-50 transition duration-200">Partner
-          with Us</a>
-        <a href="./careers.html"
-          class="text-[16px] text-starizo-brown hover:text-starizo-orange py-2 border-b border-gray-50 transition duration-200">Careers</a>
-        <a href="#"
-          class="text-[16px] text-starizo-brown hover:text-starizo-orange py-2 transition duration-200">Insights</a>
-      </div>
-    </header>
 
     <!-- Mobile Hero Main Section (Target Specs: white bg, 342px width container, gap 24px) -->
     <section class="w-full bg-white px-6 pt-8 pb-4 flex flex-col items-start text-left">
