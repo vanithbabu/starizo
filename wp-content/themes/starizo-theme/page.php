@@ -3,20 +3,6 @@
  * The template for displaying all single pages
  */
 
-$post_obj = get_post();
-$slug     = $post_obj ? get_post_field( 'post_name', $post_obj ) : '';
-$title    = $post_obj ? strtolower( get_the_title( $post_obj ) ) : '';
-
-if ( is_page( array( 'food-beverage', 'food-and-beverage' ) ) || strpos( $slug, 'food' ) !== false || strpos( $title, 'food' ) !== false ) {
-    include get_template_directory() . '/page-food-beverage.php';
-    return;
-}
-
-if ( is_page( array( 'cosmetics-personal-care', 'cosmetics-and-personal-care' ) ) || strpos( $slug, 'cosmetic' ) !== false || strpos( $title, 'cosmetic' ) !== false ) {
-    include get_template_directory() . '/page-cosmetics-personal-care.php';
-    return;
-}
-
 get_header();
 
 while ( have_posts() ) :
