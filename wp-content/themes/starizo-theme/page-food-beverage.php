@@ -15,7 +15,7 @@ get_header();
   <div class="hidden xl:block w-full">
 
     <!-- 1. HERO SECTION -->
-    <section class="w-full relative overflow-hidden min-h-[640px] bg-[#FDFBF3] pt-6 pb-16">
+    <section class="w-full relative overflow-hidden min-h-[calc(100vh-80px)] min-h-[720px] lg:min-h-[820px] bg-[#FDFBF3] py-12 flex items-center">
 
       <!-- Background Image -->
       <div class="absolute inset-0 w-full h-full z-0">
@@ -24,7 +24,7 @@ get_header();
       </div>
 
       <!-- Left Hero Content Container -->
-      <div class="relative z-20 max-w-[1280px] mx-auto px-6 sm:px-10 md:px-14 lg:px-16 pt-16 pb-12">
+      <div class="relative z-20 max-w-[1280px] mx-auto px-6 sm:px-10 md:px-14 lg:px-16 py-12 my-auto w-full">
         <div class="flex flex-col items-start gap-[42px] max-w-[393px]">
 
           <!-- Top Text Group -->
@@ -387,7 +387,7 @@ get_header();
   <div class="block xl:hidden w-full">
 
     <!-- 1. Mobile Hero Section -->
-    <section class="w-full relative overflow-hidden bg-[#FDFBF3] min-h-[580px] pt-6 pb-8 px-5 flex flex-col justify-between items-center text-center">
+    <section class="w-full relative overflow-hidden bg-[#FDFBF3] min-h-[calc(100vh-70px)] min-h-[640px] pt-6 pb-8 px-5 flex flex-col justify-between items-center text-center">
       
       <!-- Full Cover Background Image -->
       <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
