@@ -17,7 +17,7 @@ $subheading    = get_sub_field( 'subheading' ) ?: 'MADE IN INDIA. TRUSTED WORLDW
 $description   = get_sub_field( 'description' ) ?: 'GMO-free rice ingredients with transparent labeling, manufactured for quality, sustainability, and flexible usage across industries.';
 $button_1_text = get_sub_field( 'button_1_text' ) ?: 'Explore Products';
 $button_1_link_raw = get_sub_field( 'button_1_link' );
-$button_1_link = ( $button_1_link_raw && '#' !== $button_1_link_raw ) ? $button_1_link_raw : site_url( '/food-beverage' );
+$button_1_link = ( $button_1_link_raw && '#' !== $button_1_link_raw ) ? $button_1_link_raw : site_url( '/product-category/food-beverage' );
 
 $button_2_text = get_sub_field( 'button_2_text' ) ?: 'Contact Us';
 $button_2_link_raw = get_sub_field( 'button_2_link' );

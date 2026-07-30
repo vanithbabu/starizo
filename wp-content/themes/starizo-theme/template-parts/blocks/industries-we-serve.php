@@ -9,7 +9,7 @@ $heading     = get_sub_field( 'heading' ) ?: 'Built To Perform Across Industries
 $subheading  = get_sub_field( 'subheading' ) ?: 'INDUSTRIES WE SERVE';
 $button_text = get_sub_field( 'button_text' ) ?: 'Explore Applications';
 $button_link_raw = get_sub_field( 'button_link' );
-$button_link = ( $button_link_raw && '#' !== $button_link_raw ) ? $button_link_raw : site_url( '/food-beverage' );
+$button_link = ( $button_link_raw && '#' !== $button_link_raw ) ? $button_link_raw : site_url( '/product-category/food-beverage' );
 
 $industries = [
     [

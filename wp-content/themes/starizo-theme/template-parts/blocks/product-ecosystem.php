@@ -9,7 +9,7 @@ $heading     = get_sub_field( 'heading' ) ?: 'OUR PRODUCT ECOSYSTEM';
 $description = get_sub_field( 'description' ) ?: 'View our inventory of <strong class="text-black font-bold">rice-based ingredients engineered with care</strong> for texture, nutrition, functionality, and formulation versatility.';
 $button_text = get_sub_field( 'button_text' ) ?: 'Explore Products';
 $button_link_raw = get_sub_field( 'button_link' );
-$button_link = ( $button_link_raw && '#' !== $button_link_raw ) ? $button_link_raw : site_url( '/food-beverage' );
+$button_link = ( $button_link_raw && '#' !== $button_link_raw ) ? $button_link_raw : site_url( '/product-category/food-beverage' );
 
 // Query Products
 $args = array(
@@ -119,8 +119,8 @@ $has_products = $products_query->have_posts();
                     // Static HTML Fallback Cards for Food & Beverage
                     $fallback_food = array(
                         array('title' => 'Rice Starch', 'desc' => 'Clean-label starch with superior texture, stability, and process performance.', 'link' => site_url('/product/rice-starch'), 'img' => 'product-rice-starch.png'),
-                        array('title' => 'Rice Protein', 'desc' => 'Plant-based high-purity protein ideal for sports nutrition & bakery.', 'link' => site_url('/food-beverage'), 'img' => 'product-rice-protein.png'),
-                        array('title' => 'Rice Maltodextrin', 'desc' => 'Premium bulking agent providing smooth mouthfeel and solubility.', 'link' => site_url('/food-beverage'), 'img' => 'product-rice-maltodextrin.png'),
+                        array('title' => 'Rice Protein', 'desc' => 'Plant-based high-purity protein ideal for sports nutrition & bakery.', 'link' => site_url('/product-category/food-beverage'), 'img' => 'product-rice-protein.png'),
+                        array('title' => 'Rice Maltodextrin', 'desc' => 'Premium bulking agent providing smooth mouthfeel and solubility.', 'link' => site_url('/product-category/food-beverage'), 'img' => 'product-rice-maltodextrin.png'),
                     );
                     foreach ( $fallback_food as $item ) :
                 ?>
@@ -209,8 +209,8 @@ $has_products = $products_query->have_posts();
                 else :
                     // Static HTML Fallback Cards for Cosmetics & Personal Care
                     $fallback_cosmetics = array(
-                        array('title' => 'Rice Biopolymer', 'desc' => 'Natural biopolymer texturizer providing sensory elegance and silky finish.', 'link' => site_url('/cosmetics-personal-care'), 'img' => 'food-rice.png'),
-                        array('title' => 'Hydrolyzed Rice Protein', 'desc' => 'Bio-available amino acid complex for hair & skincare conditioning.', 'link' => site_url('/cosmetics-personal-care'), 'img' => 'product-rice-starch.png'),
+                        array('title' => 'Rice Biopolymer', 'desc' => 'Natural biopolymer texturizer providing sensory elegance and silky finish.', 'link' => site_url('/product-category/cosmetics-personal-care'), 'img' => 'food-rice.png'),
+                        array('title' => 'Hydrolyzed Rice Protein', 'desc' => 'Bio-available amino acid complex for hair & skincare conditioning.', 'link' => site_url('/product-category/cosmetics-personal-care'), 'img' => 'product-rice-starch.png'),
                     );
                     foreach ( $fallback_cosmetics as $item ) :
                 ?>
@@ -255,7 +255,7 @@ $has_products = $products_query->have_posts();
             <div class="flex-1"></div>
 
             <!-- Explore Products button — pill shaped with standardized gradient hover -->
-            <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" id="explore-products-btn-desktop"
+            <a href="<?php echo esc_url( site_url('/product-category/food-beverage') ); ?>" id="explore-products-btn-desktop"
               class="group shrink-0 flex items-center justify-center gap-[10px] bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-montserrat font-bold text-[15px] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 select-none shadow-md hover:shadow-xl px-8 h-[46px] rounded-full">
               <?php echo esc_html( $button_text ); ?>
               <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
@@ -290,8 +290,8 @@ $has_products = $products_query->have_posts();
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const foodUrl = "<?php echo esc_url( site_url('/food-beverage') ); ?>";
-    const cosmeticsUrl = "<?php echo esc_url( site_url('/cosmetics-personal-care') ); ?>";
+    const foodUrl = "<?php echo esc_url( site_url('/product-category/food-beverage') ); ?>";
+    const cosmeticsUrl = "<?php echo esc_url( site_url('/product-category/cosmetics-personal-care') ); ?>";
 
     const exploreBtnDesktop = document.getElementById('explore-products-btn-desktop');
     const exploreBtnMobile = document.getElementById('explore-products-btn-mobile');
@@ -506,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
               // Fallback cards for Food & Beverage mobile
               $m_fallback_food = array(
                   array('title' => 'Rice Glucose Syrup', 'desc' => 'Clean-label Rice Glucose Syrup with superior texture...', 'link' => site_url('/product/rice-starch'), 'img' => 'product-rice-starch.png'),
-                  array('title' => 'IMO Powder', 'desc' => 'Clean-label IMO Powder with superior texture, stability...', 'link' => site_url('/food-beverage'), 'img' => 'product-rice-protein.png'),
+                  array('title' => 'IMO Powder', 'desc' => 'Clean-label IMO Powder with superior texture, stability...', 'link' => site_url('/product-category/food-beverage'), 'img' => 'product-rice-protein.png'),
                   array('title' => 'Rice Starch', 'desc' => 'Clean-label starch with superior texture, stability...', 'link' => site_url('/product/rice-starch'), 'img' => 'product-rice-maltodextrin.png'),
               );
               foreach ( $m_fallback_food as $item ) :
@@ -590,8 +590,8 @@ document.addEventListener('DOMContentLoaded', () => {
           else :
               // Fallback cards for Cosmetics & Personal Care mobile
               $m_fallback_cosmetics = array(
-                  array('title' => 'Bio Rice Powder', 'desc' => 'Natural biopolymer texturizer providing...', 'link' => site_url('/cosmetics-personal-care'), 'img' => 'food-rice.png'),
-                  array('title' => 'Cosmetic Rice Starch', 'desc' => 'Natural biopolymer texturizer providing...', 'link' => site_url('/cosmetics-personal-care'), 'img' => 'product-rice-starch.png'),
+                  array('title' => 'Bio Rice Powder', 'desc' => 'Natural biopolymer texturizer providing...', 'link' => site_url('/product-category/cosmetics-personal-care'), 'img' => 'food-rice.png'),
+                  array('title' => 'Cosmetic Rice Starch', 'desc' => 'Natural biopolymer texturizer providing...', 'link' => site_url('/product-category/cosmetics-personal-care'), 'img' => 'product-rice-starch.png'),
               );
               foreach ( $m_fallback_cosmetics as $item ) :
           ?>
@@ -625,7 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ?>
         </div>
 
-        <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" id="explore-products-btn-mobile" class="h-[46px] bg-white border-2 border-[#FF8D00] hover:bg-[#FF8D00] hover:text-white text-[#FF8D00] font-montserrat font-bold text-[14px] px-8 rounded-full flex items-center justify-center gap-2 select-none shadow-sm transition duration-200 mt-4">
+        <a href="<?php echo esc_url( site_url('/product-category/food-beverage') ); ?>" id="explore-products-btn-mobile" class="h-[46px] bg-white border-2 border-[#FF8D00] hover:bg-[#FF8D00] hover:text-white text-[#FF8D00] font-montserrat font-bold text-[14px] px-8 rounded-full flex items-center justify-center gap-2 select-none shadow-sm transition duration-200 mt-4">
           <?php echo esc_html( $button_text ); ?>
           <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
             <polyline points="9 18 15 12 9 6"></polyline>

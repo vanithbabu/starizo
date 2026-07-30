@@ -54,7 +54,7 @@ $is_insights = is_page( 'insights' ) || is_home() || is_singular( 'post' ) || is
               <div class="w-[483px] max-w-full h-[39px] flex items-center justify-between gap-[27px]">
                 
                 <!-- Food & Beverage Option -->
-                <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" class="flex items-center gap-[12px] group/item text-[#5D3700] hover:text-[#FF8D00] transition-colors">
+                <a href="<?php echo esc_url( site_url('/product-category/food-beverage') ); ?>" class="flex items-center gap-[12px] group/item text-[#5D3700] hover:text-[#FF8D00] transition-colors">
                   <div class="w-[39px] h-[39px] rounded-full border border-[#00A256] flex items-center justify-center shrink-0 bg-white group-hover/item:border-[#FF8D00] transition-colors">
                     <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/food-beverage-icon.svg' ); ?>" alt="Food &amp; Beverage" class="w-[24.64px] h-[25.16px] object-contain">
                   </div>
@@ -62,7 +62,7 @@ $is_insights = is_page( 'insights' ) || is_home() || is_singular( 'post' ) || is
                 </a>
 
                 <!-- Cosmetics & Personal Care Option -->
-                <a href="<?php echo esc_url( site_url('/cosmetics-personal-care') ); ?>" class="flex items-center gap-[12px] group/item text-[#5D3700] hover:text-[#FF8D00] transition-colors">
+                <a href="<?php echo esc_url( site_url('/product-category/cosmetics-personal-care') ); ?>" class="flex items-center gap-[12px] group/item text-[#5D3700] hover:text-[#FF8D00] transition-colors">
                   <div class="w-[39px] h-[39px] rounded-full border border-[#00A256] flex items-center justify-center shrink-0 bg-white group-hover/item:border-[#FF8D00] transition-colors">
                     <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/cosmitics-icon.svg' ); ?>" alt="Cosmetics &amp; Personal Care" class="w-[24.64px] h-[25.16px] object-contain">
                   </div>
@@ -200,13 +200,13 @@ $is_insights = is_page( 'insights' ) || is_home() || is_singular( 'post' ) || is
 
                 <!-- Submenu items -->
                 <div id="mobile-accordion-menu" class="hidden flex flex-col gap-2 pt-3 pb-1 pl-2">
-                    <a href="<?php echo esc_url( site_url('/food-beverage') ); ?>" class="flex items-center gap-3 min-h-[44px] py-2 <?php echo is_page('food-beverage') ? 'text-[#FF8D00]' : 'text-black hover:text-[#FF8D00]'; ?> font-montserrat font-medium text-[14px] leading-[20px] tracking-[-0.02em] transition-colors">
+                    <a href="<?php echo esc_url( site_url('/product-category/food-beverage') ); ?>" class="flex items-center gap-3 min-h-[44px] py-2 <?php echo is_page('food-beverage') ? 'text-[#FF8D00]' : 'text-black hover:text-[#FF8D00]'; ?> font-montserrat font-medium text-[14px] leading-[20px] tracking-[-0.02em] transition-colors">
                         <div class="w-7 h-7 rounded-full border border-[#00A256] bg-white flex items-center justify-center shrink-0">
                             <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/food-beverage-icon.svg' ); ?>" alt="Food &amp; Beverage" class="w-4 h-4 object-contain">
                         </div>
                         Food & Beverage
                     </a>
-                    <a href="<?php echo esc_url( site_url('/cosmetics-personal-care') ); ?>" class="flex items-center gap-3 min-h-[44px] py-2 <?php echo is_page('cosmetics-personal-care') ? 'text-[#FF8D00]' : 'text-black hover:text-[#FF8D00]'; ?> font-montserrat font-medium text-[14px] leading-[20px] tracking-[-0.02em] transition-colors">
+                    <a href="<?php echo esc_url( site_url('/product-category/cosmetics-personal-care') ); ?>" class="flex items-center gap-3 min-h-[44px] py-2 <?php echo is_page('cosmetics-personal-care') ? 'text-[#FF8D00]' : 'text-black hover:text-[#FF8D00]'; ?> font-montserrat font-medium text-[14px] leading-[20px] tracking-[-0.02em] transition-colors">
                         <div class="w-7 h-7 rounded-full border border-[#00A256] bg-white flex items-center justify-center shrink-0">
                             <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/cosmitics-icon.svg' ); ?>" alt="Cosmetics &amp; Personal Care" class="w-4 h-4 object-contain">
                         </div>
