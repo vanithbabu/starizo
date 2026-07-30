@@ -275,14 +275,76 @@ get_header(); ?>
       <p class="font-montserrat font-medium text-[16px] md:text-[18px] text-white/90 leading-relaxed">
         Subscribe to receive our technical publications, whitepapers, and formulation guides directly to your inbox.
       </p>
-      <form class="w-full max-w-[480px] flex flex-col sm:flex-row gap-3">
-        <input type="email" placeholder="Enter your email address" required class="flex-1 h-[48px] px-5 rounded-full text-black placeholder:text-gray-400 font-montserrat text-[15px] focus:outline-none focus:ring-2 focus:ring-[#FF8D00]">
-        <button type="submit" class="h-[48px] px-8 bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[15px] rounded-full transition shadow-md whitespace-nowrap">
-          Subscribe
-        </button>
+      <form id="starizo-newsletter-form-home" class="w-full max-w-[480px] flex flex-col gap-3">
+        <div class="flex flex-col sm:flex-row gap-3">
+          <?php wp_nonce_field( 'starizo_newsletter_nonce', 'security' ); ?>
+          <input type="email" name="email" id="newsletter-email-home" placeholder="Enter your email address" required class="flex-1 h-[48px] px-5 rounded-full text-black placeholder:text-gray-400 font-montserrat text-[15px] focus:outline-none focus:ring-2 focus:ring-[#FF8D00]">
+          <button type="submit" id="newsletter-submit-btn-home" class="h-[48px] px-8 bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[15px] rounded-full transition shadow-md whitespace-nowrap">
+            <span id="newsletter-btn-text-home">Subscribe</span>
+          </button>
+        </div>
+        <div id="newsletter-msg-home" class="hidden font-montserrat font-medium text-[14px] px-4 py-2 rounded-full mt-1 transition-all text-center"></div>
       </form>
     </div>
   </section>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const formHome = document.getElementById('starizo-newsletter-form-home');
+      const emailInputHome = document.getElementById('newsletter-email-home');
+      const submitBtnHome = document.getElementById('newsletter-submit-btn-home');
+      const btnTextHome = document.getElementById('newsletter-btn-text-home');
+      const msgBoxHome = document.getElementById('newsletter-msg-home');
+      const ajaxUrlHome = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
+
+      if (formHome) {
+          formHome.addEventListener('submit', (e) => {
+              e.preventDefault();
+              const email = emailInputHome.value.trim();
+              const nonce = formHome.querySelector('input[name="security"]').value;
+
+              if (!email) return;
+
+              btnTextHome.textContent = '...';
+              submitBtnHome.disabled = true;
+              msgBoxHome.classList.add('hidden');
+              msgBoxHome.className = 'hidden font-montserrat font-medium text-[14px] px-4 py-2 rounded-full mt-1 transition-all text-center';
+
+              const formData = new FormData();
+              formData.append('action', 'starizo_newsletter');
+              formData.append('email', email);
+              formData.append('security', nonce);
+
+              fetch(ajaxUrlHome, {
+                  method: 'POST',
+                  body: formData
+              })
+              .then(response => response.json())
+              .then(data => {
+                  msgBoxHome.classList.remove('hidden');
+                  msgBoxHome.textContent = data.data.message || (data.success ? 'Success!' : 'An error occurred.');
+                  
+                  if (data.success) {
+                      msgBoxHome.classList.add('bg-[#E8F8F5]', 'text-[#00A256]', 'border', 'border-[#00A256]/20');
+                      emailInputHome.value = '';
+                  } else {
+                      msgBoxHome.classList.add('bg-[#FDEDED]', 'text-[#EB5757]', 'border', 'border-[#EB5757]/20');
+                  }
+              })
+              .catch(err => {
+                  console.error(err);
+                  msgBoxHome.classList.remove('hidden');
+                  msgBoxHome.textContent = 'A network error occurred. Please try again.';
+                  msgBoxHome.classList.add('bg-[#FDEDED]', 'text-[#EB5757]', 'border', 'border-[#EB5757]/20');
+              })
+              .finally(() => {
+                  btnTextHome.textContent = 'Subscribe';
+                  submitBtnHome.disabled = false;
+              });
+          });
+      }
+  });
+  </script>
 
 </main>
 
