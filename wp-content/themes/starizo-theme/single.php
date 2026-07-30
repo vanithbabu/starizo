@@ -6,8 +6,8 @@
 get_header(); 
 ?>
 
-<!-- ==================== DESKTOP & MOBILE LAYOUT ==================== -->
-<div class="w-full font-montserrat bg-[#FDFBF3] text-black min-h-screen antialiased overflow-x-hidden pt-24 pb-20">
+<!-- ==================== DESKTOP LAYOUT (hidden lg:block) ==================== -->
+<div class="hidden lg:block w-full font-montserrat bg-[#FDFBF3] text-black min-h-screen antialiased overflow-x-hidden pt-24 pb-20">
     
     <?php while ( have_posts() ) : the_post(); 
         $reading_time = starizo_reading_time( get_the_content() );
@@ -20,15 +20,15 @@ get_header();
         $author_name = get_the_author();
     ?>
 
-    <!-- Breadcrumb -->
+    <!-- Desktop Breadcrumb -->
     <div class="w-full max-w-[1120px] mx-auto px-6 lg:px-0 mb-4 mt-6">
       <nav aria-label="Breadcrumb" class="flex items-center gap-1.5 text-[12px] leading-none">
-        <a href="<?php echo get_permalink( get_option( 'page_for_posts' ) ); ?>" class="font-montserrat font-medium text-[#7F7F7F] hover:text-[#FF8D00] transition-colors">Insights</a>
+        <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>" class="font-montserrat font-medium text-[#7F7F7F] hover:text-[#FF8D00] transition-colors">Insights</a>
         <span class="font-montserrat font-normal text-[#7F7F7F]">/ Insights Details</span>
       </nav>
     </div>
 
-    <!-- HERO CARD CONTAINER -->
+    <!-- DESKTOP HERO CARD CONTAINER -->
     <div class="relative w-full max-w-[1120px] mx-auto bg-white border border-[#E8E8EA] rounded-tr-[40.63px] rounded-bl-[40.63px] p-6 lg:p-[23px] flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-0 lg:h-[558px] shadow-sm">
       
       <!-- Left Text Content Area -->
@@ -67,7 +67,7 @@ get_header();
       </div>
     </div>
 
-    <!-- ARTICLE CONTENT & SIDEBAR SECTION -->
+    <!-- DESKTOP ARTICLE CONTENT & SIDEBAR SECTION -->
     <div class="w-full max-w-[1120px] mx-auto mt-10 flex flex-col lg:flex-row gap-[35px] items-start px-6 lg:px-0">
       
       <!-- LEFT SIDEBAR -->
@@ -110,10 +110,8 @@ get_header();
 
     </div>
 
-    <!-- ==================== RELATED READING SECTION (DYNAMIC 1:1 WITH blog-detail.html) ==================== -->
+    <!-- DESKTOP RELATED READING SECTION -->
     <div class="w-full max-w-[1120px] mx-auto mt-16 pb-12 flex flex-col gap-8 px-4 lg:px-0">
-      
-      <!-- Heading with Vertical Orange Accent Bar -->
       <div class="flex items-center gap-3">
         <span class="w-[4px] h-[24px] bg-[#FF8D00] rounded-full inline-block"></span>
         <h2 class="font-montserrat font-normal text-[18px] leading-[28px] tracking-[0.11em] uppercase text-[#B86200]">
@@ -121,7 +119,6 @@ get_header();
         </h2>
       </div>
 
-      <!-- 3-Card Grid (Dynamic WP_Query 1:1 with blog-detail.html) -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
         <?php
         $cat_ids = array();
@@ -139,7 +136,6 @@ get_header();
         $related_query = new WP_Query($related_args);
         
         if ( ! $related_query->have_posts() ) {
-            // Fallback to latest 3 posts if no category match
             $related_query = new WP_Query( array(
                 'post_type'      => 'post',
                 'posts_per_page' => 3,
@@ -196,11 +192,10 @@ get_header();
       </div>
     </div>
 
-    <!-- ==================== NEWSLETTER SECTION (FIGMA SPEC 1:1 EXACT COPY FROM blog-detail.html) ==================== -->
+    <!-- DESKTOP NEWSLETTER SECTION -->
     <section class="w-full bg-[#FDFBF3] py-14 px-4 sm:px-6 lg:px-8">
       <div class="max-w-[1123px] mx-auto relative rounded-[32px] sm:rounded-[44px] rounded-tr-none sm:rounded-tr-none bg-white overflow-hidden shadow-sm min-h-[320px] flex items-center p-8 sm:p-12 md:p-14">
         
-        <!-- Background Layer: Orange Gradient + Green Ribbon + Outer Radius Clipping -->
         <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
           <svg class="w-full h-full" viewBox="0 0 1123 320" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -209,126 +204,224 @@ get_header();
                 <stop offset="100%" stop-color="#FFB457"/>
               </linearGradient>
             </defs>
-
-            <!-- Base White Background for Bottom Right Side -->
             <rect width="1123" height="320" fill="#FFFFFF"/>
-            
-            <!-- Orange Main Body with linear-gradient(90deg, #FF8D00 0%, #FFB457 100%) -->
             <path d="M0 0H1050C1110 100 1075 220 900 320H0V0Z" fill="url(#newsletterOrangeGradDetail)"/>
-            
-            <!-- Green Tapered Ribbon -->
             <path d="M1050 0H1123C1123 110 1080 230 900 320C1075 220 1110 100 1050 0Z" fill="#00A256"/>
           </svg>
         </div>
 
-        <!-- Banner Content Area -->
         <div class="relative z-10 max-w-[580px] flex flex-col gap-5 text-white">
-          
-          <!-- Category Tag -->
           <span class="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.11em] uppercase text-white/90">
             NEWSLETTER
           </span>
-
-          <!-- Main Headline -->
           <h2 class="font-montserrat font-extrabold text-[32px] sm:text-[40px] md:text-[44px] leading-[42px] sm:leading-[52px] text-white">
             Get Insights That Matter
           </h2>
-
-          <!-- Subtitle -->
           <p class="font-montserrat font-medium text-[16px] sm:text-[18px] leading-[26px] sm:leading-[28px] text-white/95">
             Monthly perspectives on ingredients, manufacturing, and formulation innovation.
           </p>
 
-          <!-- Input + Submit Button Box -->
-          <form id="starizo-newsletter-form" class="mt-2 w-full max-w-[480px] bg-white rounded-[40px] p-[6px] pl-6 flex flex-col sm:flex-row items-center justify-between shadow-md border border-white/40 gap-2 relative">
+          <form id="starizo-newsletter-form" class="mt-2 w-full max-w-[480px] bg-white rounded-full p-[4px] sm:p-[6px] pl-3.5 sm:pl-6 flex items-center justify-between shadow-md border border-white/40 gap-1.5 sm:gap-2">
             <?php wp_nonce_field( 'starizo_newsletter_nonce', 'security' ); ?>
-            <input type="email" name="email" id="newsletter-email" placeholder="Enter your email address" class="w-full bg-transparent font-montserrat text-[15px] sm:text-[16px] text-black placeholder-[#828282] outline-none pr-2" required>
-            <button type="submit" id="newsletter-submit-btn" class="group w-[120px] h-[44px] rounded-[40px] border-2 border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white font-montserrat font-bold text-[15px] sm:text-[16px] flex items-center justify-center gap-1.5 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shrink-0 select-none cursor-pointer">
+            <input type="email" name="email" id="newsletter-email" placeholder="Enter your email address" class="w-full bg-transparent font-montserrat font-medium text-[12px] sm:text-[16px] text-black placeholder-[#828282] outline-none pr-1" required>
+            <button type="submit" id="newsletter-submit-btn" class="px-3.5 sm:px-5 h-[36px] sm:h-[44px] rounded-full border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white font-montserrat font-semibold text-[12px] sm:text-[16px] flex items-center justify-center gap-1 sm:gap-1.5 transition-all shrink-0 select-none cursor-pointer whitespace-nowrap">
               <span id="newsletter-btn-text">Submit</span>
-              <svg id="newsletter-btn-icon" class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <svg id="newsletter-btn-icon" class="w-3.5 sm:w-4 h-3.5 sm:h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </button>
           </form>
-
-          <!-- Response Message -->
           <div id="newsletter-msg" class="hidden font-montserrat font-medium text-[14px] px-4 py-2 rounded-full mt-1 transition-all"></div>
-
         </div>
 
       </div>
     </section>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('starizo-newsletter-form');
-        const emailInput = document.getElementById('newsletter-email');
-        const submitBtn = document.getElementById('newsletter-submit-btn');
-        const btnText = document.getElementById('newsletter-btn-text');
-        const msgBox = document.getElementById('newsletter-msg');
-        const ajaxUrl = '<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>';
+    <?php endwhile; ?>
+</div>
 
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = emailInput.value.trim();
-                const nonce = form.querySelector('input[name="security"]').value;
-
-                if (!email) return;
-
-                btnText.textContent = '...';
-                submitBtn.disabled = true;
-                msgBox.classList.add('hidden');
-
-                const formData = new FormData();
-                formData.append('action', 'starizo_newsletter');
-                formData.append('email', email);
-                formData.append('security', nonce);
-
-                fetch(ajaxUrl, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(res => res.json())
-                .then(data => {
-                    submitBtn.disabled = false;
-                    btnText.textContent = 'Submit';
-
-                    msgBox.classList.remove('hidden', 'bg-red-500/20', 'text-red-100', 'bg-green-500/20', 'text-green-100', 'bg-white', 'text-black');
-                    
-                    if (data.success) {
-                        msgBox.classList.add('bg-white', 'text-[#00A256]', 'font-bold');
-                        msgBox.textContent = '✓ ' + data.data.message;
-                        emailInput.value = '';
-                    } else {
-                        msgBox.classList.add('bg-red-500/80', 'text-white');
-                        msgBox.textContent = '✕ ' + (data.data ? data.data.message : 'Subscription failed.');
-                    }
-                })
-                .catch(() => {
-                    submitBtn.disabled = false;
-                    btnText.textContent = 'Submit';
-                    msgBox.classList.remove('hidden');
-                    msgBox.classList.add('bg-red-500/80', 'text-white');
-                    msgBox.textContent = '✕ Something went wrong. Please try again.';
-                });
-            });
+<!-- ==================== MOBILE LAYOUT (block lg:hidden 1:1 FIGMA MATCHING blog-detail.html) ==================== -->
+<div class="block lg:hidden w-full font-montserrat bg-[#FDFBF3] text-black min-h-screen antialiased overflow-x-hidden pt-3 pb-12">
+    <?php rewind_posts(); while ( have_posts() ) : the_post(); 
+        $reading_time = starizo_reading_time( get_the_content() );
+        $category = get_the_category(); 
+        $cat_name = !empty($category) ? $category[0]->name : 'Insight';
+        $thumb = get_the_post_thumbnail_url(get_the_ID(), 'full');
+        if (!$thumb) {
+            $thumb = get_template_directory_uri() . '/public/assets/blog-detail-paddie.png';
         }
-    });
-    </script>
+    ?>
+    <main class="w-full px-4 pt-1 pb-4 flex flex-col gap-5 bg-[#FDFBF3]">
+      
+      <!-- Mobile Breadcrumb -->
+      <nav aria-label="Breadcrumb" class="flex items-center gap-1.5 text-[12px] leading-none">
+        <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>" class="font-montserrat font-medium text-[#7F7F7F]">Insights</a>
+        <span class="font-montserrat font-normal text-[#7F7F7F]">/ Insights Details</span>
+      </nav>
 
+      <!-- Mobile Hero Card Container (1:1 Figma Spec) -->
+      <div class="w-full bg-white border border-[#E8E8EA] rounded-[32px] p-6 flex flex-col gap-4 shadow-sm">
+        <span class="font-montserrat font-bold text-[12px] leading-[18px] tracking-[0.11em] uppercase bg-gradient-to-r from-[#00A256] to-[#5DC671] bg-clip-text text-transparent block">
+          <?php echo esc_html($cat_name); ?>
+        </span>
+
+        <h1 class="font-montserrat font-extrabold text-[22px] leading-[29px] text-black">
+          <?php the_title(); ?>
+        </h1>
+
+        <p class="font-montserrat font-medium text-[14px] leading-[22px] text-[#333333]">
+          <?php echo wp_trim_words( get_the_excerpt(), 22, '...' ); ?>
+        </p>
+
+        <div class="w-full h-[220px] rounded-[24px] overflow-hidden my-1 bg-gray-100">
+          <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>" class="w-full h-full object-cover">
+        </div>
+
+        <div class="pt-1 flex items-center">
+          <button type="button" aria-label="Share article" class="focus:outline-none cursor-pointer">
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/share-icon.svg'); ?>" alt="Share" class="w-[22px] h-[22px] hover:opacity-80 transition-opacity">
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Article Body Content Container -->
+      <article class="w-full max-w-[337px] mx-auto flex flex-col gap-[20px] text-black pt-2 opacity-100 blog-content-wrapper-mobile">
+        <div class="font-montserrat font-medium text-[15px] leading-[26px] text-[#333333]">
+          <?php the_content(); ?>
+        </div>
+      </article>
+
+      <!-- Mobile Green CTA Card -->
+      <div class="w-full max-w-[337px] mx-auto rounded-tr-[44px] rounded-bl-[44px] bg-gradient-to-br from-[#00A256] to-[#27B96C] p-6 flex flex-col justify-between shadow-md text-white my-2">
+        <div class="flex flex-col gap-2">
+          <h3 class="font-montserrat font-extrabold text-[22px] leading-[28px] text-white">
+            Partner with ingredients That Perform.
+          </h3>
+          <p class="font-montserrat font-medium text-[15px] leading-[24px] text-white/95 mt-1">
+            Let’s build better products together.
+          </p>
+        </div>
+        <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="mt-5 w-full h-[42px] bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[14px] rounded-full flex items-center justify-center gap-2 shadow-md transition-all select-none">
+          <span>Contact Us</span>
+          <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      </div>
+
+      <!-- Mobile Related Reading Section (1:1 Figma Spec) -->
+      <div class="w-full max-w-[344px] mx-auto flex flex-col gap-4 mt-4">
+        <div class="flex items-center gap-2.5">
+          <span class="w-[3px] h-[20px] bg-[#FF8D00] rounded-full inline-block"></span>
+          <h2 class="font-montserrat font-normal text-[16px] leading-[24px] tracking-[0.11em] uppercase text-[#B86200]">
+            RELATED READING
+          </h2>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <?php
+          if( isset($related_query) && $related_query->have_posts() ) :
+              $related_query->rewind_posts();
+              while( $related_query->have_posts() ) : $related_query->the_post();
+                  $rel_reading_time = starizo_reading_time( get_the_content() );
+                  $rel_thumb = get_the_post_thumbnail_url(get_the_ID(), 'large') ?: get_template_directory_uri() . '/public/assets/blog-industries.png';
+                  $rel_cat = get_the_category();
+                  $rel_cat_name = !empty($rel_cat) ? $rel_cat[0]->name : 'Clean Label';
+          ?>
+          <div class="w-full max-w-[344px] min-h-[546px] bg-white border border-[#E8E8EA] shadow-[0px_4px_18.5px_0px_rgba(0,0,0,0.06)] rounded-tr-[38.22px] rounded-bl-[38.22px] p-[13.9px] flex flex-col justify-between mx-auto">
+            <div class="w-full h-[208.45px] overflow-hidden rounded-tr-[38.22px] rounded-bl-[38.22px] shrink-0">
+              <img src="<?php echo esc_url($rel_thumb); ?>" alt="<?php the_title_attribute(); ?>" class="w-full h-full object-cover">
+            </div>
+
+            <div class="p-2 flex flex-col gap-2 flex-1 mt-2">
+              <span class="font-montserrat font-bold text-[12px] leading-[18px] tracking-[0.11em] uppercase bg-gradient-to-r from-[#00A256] to-[#5DC671] bg-clip-text text-transparent block">
+                <?php echo esc_html($rel_cat_name); ?>
+              </span>
+              <h3 class="font-montserrat font-bold text-[18px] leading-[24px] text-black">
+                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+              </h3>
+              <p class="font-montserrat font-medium text-[14px] leading-[22px] text-[#333333] line-clamp-3">
+                <?php echo wp_trim_words( get_the_excerpt(), 18, '...' ); ?>
+              </p>
+            </div>
+
+            <div class="p-2 pt-2 border-t border-gray-100 flex flex-col gap-2">
+              <span class="font-['Work_Sans'] font-normal text-[13px] text-[#828282]">
+                <?php echo get_the_date('F j, Y'); ?> | <?php echo esc_html($rel_reading_time); ?>
+              </span>
+              <a href="<?php the_permalink(); ?>" class="font-montserrat font-semibold text-[15px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1 transition duration-150 select-none">
+                <span>Read More</span>
+                <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+            </div>
+          </div>
+          <?php endwhile; wp_reset_postdata(); endif; ?>
+        </div>
+      </div>
+
+      <!-- Mobile Newsletter Section (1:1 Spec) -->
+      <div class="w-full max-w-[360px] mx-auto relative rounded-[28px] rounded-tr-none bg-white overflow-hidden shadow-md min-h-[280px] p-6 flex flex-col justify-between my-4">
+        <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+          <svg class="w-full h-full" viewBox="0 0 360 280" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="mobileNewsletterOrangeGradDetail" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#FF8D00"/>
+                <stop offset="100%" stop-color="#FFB457"/>
+              </linearGradient>
+            </defs>
+            <rect width="360" height="280" fill="#FFFFFF"/>
+            <path d="M0 0H330C350 100 340 200 270 280H0V0Z" fill="url(#mobileNewsletterOrangeGradDetail)"/>
+            <path d="M330 0H360C360 110 345 200 270 280C340 200 350 100 330 0Z" fill="#00A256"/>
+          </svg>
+        </div>
+
+        <div class="relative z-10 flex flex-col gap-3 text-white">
+          <span class="font-montserrat font-bold text-[12px] leading-[22px] tracking-[0.11em] uppercase text-white">
+            NEWSLETTER
+          </span>
+          <h2 class="font-montserrat font-black text-[22px] leading-[30px] tracking-normal text-white">
+            Get Insights That Matter
+          </h2>
+          <p class="font-montserrat font-medium text-[12px] leading-[24px] tracking-normal text-white/95">
+            Monthly perspectives on ingredients, manufacturing, and formulation innovation.
+          </p>
+          <form id="starizo-newsletter-form-mobile" class="mt-2 w-full max-w-[320px] bg-white rounded-full p-[4px] pl-3 flex items-center justify-between shadow-sm border border-white/40 gap-1.5">
+            <?php wp_nonce_field( 'starizo_newsletter_nonce', 'security' ); ?>
+            <input type="email" name="email" placeholder="Enter your email address" class="w-full bg-transparent font-montserrat font-medium text-[11px] text-black placeholder-[#828282] outline-none pr-1" required>
+            <button type="submit" class="px-3 h-[32px] rounded-full border border-[#FF8D00] text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white font-montserrat font-semibold text-[11px] flex items-center justify-center gap-1 transition-all shrink-0 select-none cursor-pointer whitespace-nowrap">
+              <span>Submit</span>
+              <svg class="w-3 h-3 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </main>
     <?php endwhile; ?>
 </div>
 
 <!-- Extra styles for blog content -->
 <style>
-.blog-content-wrapper p {
-    margin-bottom: 1.5rem;
+.blog-content-wrapper p, .blog-content-wrapper-mobile p {
+    margin-bottom: 1.25rem;
 }
-.blog-content-wrapper ul {
+.blog-content-wrapper-mobile p {
+    font-size: 15px;
+    line-height: 26px;
+    color: #333333;
+}
+.blog-content-wrapper-mobile h2 {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #00A256 0%, #5DC671 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+.blog-content-wrapper ul, .blog-content-wrapper-mobile ul {
     list-style-type: disc;
     padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
-.blog-content-wrapper li {
+.blog-content-wrapper li, .blog-content-wrapper-mobile li {
     margin-bottom: 0.5rem;
 }
 </style>
