@@ -52,34 +52,30 @@ $button_link = get_sub_field('button_link') ?: '#open-roles';
 </div>
 
 <!-- ========== MOBILE VIEW ========== -->
-<div class="xl:hidden w-full bg-[#FDFBF3] overflow-x-hidden pt-12 pb-12">
-  <div class="relative w-full max-w-[500px] mx-auto px-4 md:px-8">
-    <div class="relative w-full z-10 flex flex-col mt-6 gap-6">
-      <div class="flex flex-col gap-2">
-        <span class="text-[12px] md:text-[14px] font-bold tracking-[0.15em] text-black uppercase"><?php echo esc_html($tagline); ?></span>
-        <h1 class="text-[32px] md:text-[42px] font-black text-transparent bg-clip-text bg-gradient-to-r from-starizo-green-start to-starizo-green-end leading-[1.2] tracking-tight">
-          <?php echo wp_kses_post($headline); ?>
-        </h1>
-      </div>
-      <p class="text-[16px] md:text-[18px] font-medium leading-[1.6] text-black opacity-90">
-        <?php echo esc_html($description); ?>
-      </p>
-      <a href="<?php echo esc_url($button_link); ?>"
-        class="w-auto px-6 h-[45px] self-start bg-[#FF8D00] hover:bg-[#E07C00] text-white font-semibold text-[16px] rounded-[22px] shadow-[0px_4px_12px_rgba(255,141,0,0.3)] transition-all duration-300 flex items-center justify-center gap-2 group">
-        <?php echo esc_html($button_text); ?>
-        <svg class="w-4 h-4 fill-current transform group-hover:translate-x-0.5 transition-transform duration-200"
-          viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M5.15736 2.93105L9.76836 7.61605C9.86948 7.71827 9.92621 7.85626 9.92621 8.00005C9.92621 8.14384 9.86948 8.28183 9.76836 8.38405L5.15835 13.0691C5.05728 13.1719 5.00064 13.3103 5.00064 13.4546C5.00064 13.5988 5.05728 13.7372 5.15835 13.8401C5.20773 13.8907 5.26675 13.931 5.33192 13.9584C5.3971 13.9859 5.46712 14.0001 5.53786 14.0001C5.60859 14.0001 5.67861 13.9859 5.74379 13.9584C5.80896 13.931 5.86798 13.8907 5.91735 13.8401L10.5274 9.15605C10.8303 8.84753 11 8.43243 11 8.00005C11 7.56768 10.8303 7.15257 10.5274 6.84405L5.91736 2.16005C5.86796 2.10925 5.80889 2.06887 5.74362 2.04129C5.67835 2.01372 5.60821 1.99951 5.53736 1.99951C5.4665 1.99951 5.39636 2.01372 5.3311 2.04129C5.26583 2.06887 5.20675 2.10925 5.15736 2.16005C5.05628 2.26291 4.99964 2.40135 4.99964 2.54555C4.99964 2.68976 5.05628 2.8282 5.15736 2.93105Z"
-            fill="currentColor" />
-        </svg>
-      </a>
+<div class="xl:hidden w-full bg-[#FDFBF3] overflow-x-hidden pb-12 pt-4">
+  <!-- Hero Image Block with Orange Curve & Wall Logo -->
+  <div class="relative w-full h-[360px] sm:h-[372px]">
+    <div class="absolute left-[20px] sm:left-[40px] right-0 top-0 bottom-0 border-l-[6px] border-[#FF8D00] rounded-bl-[100px] sm:rounded-bl-[132px] overflow-hidden shadow-md">
+      <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/masked-hero-image.png' ); ?>" alt="Starizo interview" class="w-full h-full object-cover object-top">
+      <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/wall-logo.svg' ); ?>" alt="starizo™" class="absolute right-6 top-8 w-[84px] h-[29px] pointer-events-none z-10">
     </div>
+  </div>
 
-    <!-- Mobile Image Representation (Cut from Desktop composite) -->
-    <div class="relative w-full aspect-[4/3] mt-10 rounded-[20px] overflow-hidden shadow-lg z-0">
-      <img src="<?php echo get_template_directory_uri(); ?>/public/assets/masked-hero-image.png" alt="Starizo careers"
-        class="w-full h-full object-cover">
-    </div>
+  <!-- Hero Text Content -->
+  <div class="px-6 mt-8 flex flex-col items-start max-w-[343px]">
+    <span class="text-[14px] sm:text-[16px] font-bold tracking-[0.15em] text-black mb-3 uppercase"><?php echo esc_html($tagline); ?></span>
+    <h1 class="text-[22px] sm:text-[24px] font-bold leading-[30px] text-transparent bg-clip-text bg-gradient-to-br from-[#00A256] to-[#5DC671] mb-3">
+      <?php echo wp_kses_post($headline); ?>
+    </h1>
+    <p class="text-[15px] sm:text-[16px] font-medium leading-[26px] sm:leading-[30px] text-black mb-6">
+      <?php echo esc_html($description); ?>
+    </p>
+    <a href="<?php echo esc_url($button_link); ?>"
+      class="w-[167px] h-[45px] bg-[#FF8D00] hover:bg-[#E07C00] text-white font-semibold text-[13px] rounded-[22px] shadow-[0px_4px_12px_rgba(255,141,0,0.3)] transition-all duration-300 flex items-center justify-between px-[18px] group select-none">
+      <span><?php echo esc_html($button_text); ?></span>
+      <svg class="w-4 h-4 fill-current transform group-hover:translate-x-0.5 transition-transform duration-200" viewBox="0 0 16 16">
+        <path d="M5.15736 2.93105L9.76836 7.61605C9.86948 7.71827 9.92621 7.85626 9.92621 8.00005C9.92621 8.14384 9.86948 8.28183 9.76836 8.38405L5.15835 13.0691C5.05728 13.1719 5.00064 13.3103 5.00064 13.4546C5.00064 13.5988 5.05728 13.7372 5.15835 13.8401C5.20773 13.8907 5.26675 13.931 5.33192 13.9584C5.3971 13.9859 5.46712 14.0001 5.53786 14.0001C5.60859 14.0001 5.67861 13.9859 5.74379 13.9584C5.80896 13.931 5.86798 13.8907 5.91735 13.8401L10.5274 9.15605C10.8303 8.84753 11 8.43243 11 8.00005C11 7.56768 10.8303 7.15257 10.5274 6.84405L5.91736 2.16005C5.86796 2.10925 5.80889 2.06887 5.74362 2.04129C5.67835 2.01372 5.60821 1.99951 5.53736 1.99951C5.4665 1.99951 5.39636 2.01372 5.3311 2.04129C5.26583 2.06887 5.20675 2.10925 5.15736 2.16005C5.05628 2.26291 4.99964 2.40135 4.99964 2.54555C4.99964 2.68976 5.05628 2.8282 5.15736 2.93105Z" fill="currentColor"/>
+      </svg>
+    </a>
   </div>
 </div>
