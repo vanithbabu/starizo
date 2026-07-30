@@ -1,0 +1,6 @@
+.DS_Store
+*.DS_Store
+*.html
+starizo/
+node_modules/
+.vite/
