@@ -265,6 +265,7 @@ get_header(); ?>
           });
       });
   });
+  </script>
   <!-- ==================== NEWSLETTER CTA BANNER ==================== -->
   <section class="w-full bg-[#00A256] py-16 px-6 text-white text-center">
     <div class="max-w-[720px] mx-auto flex flex-col items-center gap-6">

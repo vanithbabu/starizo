@@ -421,3 +421,75 @@ function starizo_handle_newsletter_subscription() {
 add_action( 'wp_ajax_starizo_newsletter', 'starizo_handle_newsletter_subscription' );
 add_action( 'wp_ajax_nopriv_starizo_newsletter', 'starizo_handle_newsletter_subscription' );
 
+/**
+ * Add Newsletter Subscribers Menu in Admin
+ */
+function starizo_newsletter_admin_menu() {
+    add_menu_page(
+        'Newsletter Subscribers',
+        'Newsletter',
+        'manage_options',
+        'starizo-newsletter',
+        'starizo_newsletter_admin_page',
+        'dashicons-email-alt',
+        30
+    );
+}
+add_action( 'admin_menu', 'starizo_newsletter_admin_menu' );
+
+function starizo_newsletter_admin_page() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        return;
+    }
+
+    $subscribers = get_option( 'starizo_subscribers', array() );
+
+    echo '<div class="wrap">';
+    echo '<h1 class="wp-heading-inline">Newsletter Subscribers</h1>';
+    echo '<a href="' . esc_url( admin_url( 'admin.php?page=starizo-newsletter&export_subscribers=1' ) ) . '" class="page-title-action">Export to CSV</a>';
+    echo '<hr class="wp-header-end">';
+    
+    if ( empty( $subscribers ) ) {
+        echo '<p>No subscribers yet.</p>';
+    } else {
+        echo '<table class="wp-list-table widefat fixed striped">';
+        echo '<thead><tr><th style="width: 50px;">#</th><th>Email Address</th></tr></thead>';
+        echo '<tbody>';
+        $count = 1;
+        
+        // Reverse array to show newest first
+        $subscribers = array_reverse($subscribers);
+        
+        foreach ( $subscribers as $email ) {
+            echo '<tr><td>' . esc_html( $count ) . '</td><td>' . esc_html( $email ) . '</td></tr>';
+            $count++;
+        }
+        echo '</tbody>';
+        echo '</table>';
+    }
+    
+    echo '</div>';
+}
+
+function starizo_export_subscribers_csv() {
+    if ( isset( $_GET['export_subscribers'] ) && $_GET['export_subscribers'] == '1' && current_user_can( 'manage_options' ) ) {
+        $subscribers = get_option( 'starizo_subscribers', array() );
+        $subscribers = array_reverse($subscribers);
+        
+        header( 'Content-Type: text/csv; charset=utf-8' );
+        header( 'Content-Disposition: attachment; filename="starizo-subscribers-' . date( 'Y-m-d' ) . '.csv"' );
+        $output = fopen( 'php://output', 'w' );
+        
+        // Output CSV header
+        fputcsv( $output, array( 'Email' ) );
+        
+        // Output data
+        foreach ( $subscribers as $email ) {
+            fputcsv( $output, array( $email ) );
+        }
+        
+        fclose( $output );
+        exit;
+    }
+}
+add_action( 'admin_init', 'starizo_export_subscribers_csv' );
