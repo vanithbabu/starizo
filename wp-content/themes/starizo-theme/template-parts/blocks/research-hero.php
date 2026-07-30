@@ -37,7 +37,7 @@ $foreground_image = get_sub_field('foreground_image');
           </span>
 
           <!-- Main Title -->
-          <h1 class="font-montserrat font-black text-[#00A256]" style="font-size: 42px; line-height: 52px;">
+          <h1 class="font-montserrat font-black text-[#00A256] text-[28px] md:text-[42px] leading-[36px] md:leading-[52px]">
             <?php echo wp_kses_post($main_title); ?>
           </h1>
 

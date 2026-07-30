@@ -88,7 +88,7 @@
                             "label": "Button 1 Link",
                             "name": "button_1_link",
                             "aria-label": "",
-                            "type": "url",
+                            "type": "text",
                             "instructions": "",
                             "required": false,
                             "conditional_logic": false,
@@ -125,7 +125,7 @@
                             "label": "Button 2 Link",
                             "name": "button_2_link",
                             "aria-label": "",
-                            "type": "url",
+                            "type": "text",
                             "instructions": "",
                             "required": false,
                             "conditional_logic": false,
@@ -142,7 +142,7 @@
                             "label": "Video URL",
                             "name": "video_url",
                             "aria-label": "",
-                            "type": "url",
+                            "type": "text",
                             "instructions": "",
                             "required": false,
                             "conditional_logic": false,
@@ -229,7 +229,7 @@
                             "label": "Button Link",
                             "name": "button_link",
                             "aria-label": "",
-                            "type": "url",
+                            "type": "text",
                             "instructions": "",
                             "required": false,
                             "conditional_logic": false,
@@ -501,7 +501,7 @@
                             "label": "Button Link",
                             "name": "button_link",
                             "aria-label": "",
-                            "type": "url",
+                            "type": "text",
                             "instructions": "",
                             "required": false,
                             "conditional_logic": false,
@@ -588,7 +588,7 @@
                             "label": "Button Link",
                             "name": "button_link",
                             "aria-label": "",
-                            "type": "url",
+                            "type": "text",
                             "instructions": "",
                             "required": false,
                             "conditional_logic": false,
@@ -755,7 +755,7 @@
                             "label": "Banner Button Link",
                             "name": "banner_button_link",
                             "aria-label": "",
-                            "type": "url",
+                            "type": "text",
                             "instructions": "",
                             "required": false,
                             "conditional_logic": false,
@@ -842,7 +842,7 @@
                             "label": "Button Link",
                             "name": "button_link",
                             "aria-label": "",
-                            "type": "url",
+                            "type": "text",
                             "instructions": "",
                             "required": false,
                             "conditional_logic": false,
@@ -886,7 +886,7 @@
                             "key": "field_about_hero_btn1_link",
                             "label": "Button 1 Link",
                             "name": "button_1_link",
-                            "type": "url"
+                            "type": "text"
                         },
                         {
                             "key": "field_about_hero_btn2_text",
@@ -898,7 +898,7 @@
                             "key": "field_about_hero_btn2_link",
                             "label": "Button 2 Link",
                             "name": "button_2_link",
-                            "type": "url"
+                            "type": "text"
                         },
                         {
                             "key": "field_about_hero_image",
@@ -1064,7 +1064,7 @@
                             "key": "field_cta_btn_link",
                             "label": "Button Link",
                             "name": "button_link",
-                            "type": "url"
+                            "type": "text"
                         },
                         {
                             "key": "field_cta_image",
@@ -1110,7 +1110,7 @@
                             "key": "field_ph_btn_link",
                             "label": "Button Link",
                             "name": "button_link",
-                            "type": "url"
+                            "type": "text"
                         },
                         {
                             "key": "field_ph_image",
@@ -1278,7 +1278,7 @@
                             "key": "field_iws_btn_link",
                             "label": "Button Link",
                             "name": "button_link",
-                            "type": "url"
+                            "type": "text"
                         },
                         {
                             "key": "field_iws_industries",
@@ -1364,7 +1364,7 @@
                             "key": "field_faq_btn_link",
                             "label": "Info Card Button Link",
                             "name": "info_button_link",
-                            "type": "url"
+                            "type": "text"
                         }
                     ]
                 },
@@ -1604,7 +1604,7 @@
                                     "key": "field_cs_social_url",
                                     "label": "URL",
                                     "name": "url",
-                                    "type": "url"
+                                    "type": "text"
                                 }
                             ]
                         },

@@ -265,7 +265,23 @@ get_header(); ?>
           });
       });
   });
-  </script>
+  <!-- ==================== NEWSLETTER CTA BANNER ==================== -->
+  <section class="w-full bg-[#00A256] py-16 px-6 text-white text-center">
+    <div class="max-w-[720px] mx-auto flex flex-col items-center gap-6">
+      <h2 class="font-montserrat font-black text-[28px] md:text-[36px] leading-tight">
+        Stay Updated with Starizo Insights
+      </h2>
+      <p class="font-montserrat font-medium text-[16px] md:text-[18px] text-white/90 leading-relaxed">
+        Subscribe to receive our technical publications, whitepapers, and formulation guides directly to your inbox.
+      </p>
+      <form class="w-full max-w-[480px] flex flex-col sm:flex-row gap-3">
+        <input type="email" placeholder="Enter your email address" required class="flex-1 h-[48px] px-5 rounded-full text-black placeholder:text-gray-400 font-montserrat text-[15px] focus:outline-none focus:ring-2 focus:ring-[#FF8D00]">
+        <button type="submit" class="h-[48px] px-8 bg-[#FF8D00] hover:bg-[#e07c00] text-white font-montserrat font-bold text-[15px] rounded-full transition shadow-md whitespace-nowrap">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
 
 </main>
 

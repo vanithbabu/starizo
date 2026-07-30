@@ -78,7 +78,7 @@ $button_link = get_sub_field('button_link') ?: '#open-roles';
 
     <!-- Mobile Image Representation (Cut from Desktop composite) -->
     <div class="relative w-full aspect-[4/3] mt-10 rounded-[20px] overflow-hidden shadow-lg z-0">
-      <img src="<?php echo get_template_directory_uri(); ?>/public/assets/rectangle_34624796.png" alt="Starizo careers"
+      <img src="<?php echo get_template_directory_uri(); ?>/public/assets/masked-hero-image.png" alt="Starizo careers"
         class="w-full h-full object-cover">
     </div>
   </div>

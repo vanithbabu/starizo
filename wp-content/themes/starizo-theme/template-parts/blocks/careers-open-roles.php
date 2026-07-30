@@ -30,8 +30,6 @@ $view_all_link = get_sub_field('view_all_link') ?: '#';
 
     <!-- Job List Card Container -->
     <div class="bg-starizo-green-forest text-white rounded-[44px] px-6 md:px-12 py-10 shadow-2xl relative overflow-hidden">
-    <!-- Job List Card Container -->
-    <div class="bg-starizo-green-forest text-white rounded-[44px] px-6 md:px-12 py-10 shadow-2xl relative overflow-hidden">
       <div>
         <?php
         $jobs_query = new WP_Query( array(
@@ -64,7 +62,41 @@ $view_all_link = get_sub_field('view_all_link') ?: '#';
               </div>
               <div class="col-span-2 md:col-span-2 flex justify-between md:justify-end items-center gap-4">
                 <span class="text-[15px] md:text-[18px] text-white/80"><?php echo esc_html($type); ?></span>
-                <a href="<?php echo esc_url($link); ?>" class="w-[38px] h-[38px] border border-white/40 hover:bg-white/10 text-white rounded-full flex items-center justify-center shadow-lg transition duration-200" aria-label="Apply to <?php echo esc_attr($job_title); ?>">
+                <a href="<?php echo esc_url($link); ?>" class="w-[44px] h-[44px] min-w-[44px] min-h-[44px] border border-white/40 hover:bg-white/10 text-white rounded-full flex items-center justify-center shadow-lg transition duration-200" aria-label="Apply to <?php echo esc_attr($job_title); ?>">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </div>
+        <?php
+            endwhile;
+            wp_reset_postdata();
+        elseif (have_rows('roles')) :
+            while (have_rows('roles')) : the_row();
+                $job_title = get_sub_field('title');
+                $dept = get_sub_field('department');
+                $loc = get_sub_field('location');
+                $type = get_sub_field('type');
+                $link = get_sub_field('link');
+        ?>
+            <!-- Job Row -->
+            <div class="grid grid-cols-2 md:grid-cols-12 gap-y-4 gap-x-2 py-6 md:py-8 items-center px-4 hover:bg-white/5 transition duration-200 border-b border-dashed border-white/20 last:border-b-0">
+              <div class="col-span-2 md:col-span-5">
+                <h4 class="text-[18px] md:text-[20px] font-extrabold tracking-tight text-white"><?php echo esc_html($job_title); ?></h4>
+              </div>
+              <div class="col-span-1 md:col-span-3">
+                <span class="text-[15px] md:text-[18px] text-white/80"><?php echo esc_html($dept); ?></span>
+              </div>
+              <div class="col-span-1 md:col-span-2 flex items-center gap-2">
+                <svg class="w-[13px] h-[18px] text-white/70 shrink-0" viewBox="0 0 13 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M6.28295 0C9.44415 0 12.0064 2.56303 12.0064 5.72423C12.0064 8.6662 8.62618 12.2552 6.93569 14.7436C6.78396 14.9664 6.55231 15.0892 6.28289 15.0892C6.01348 15.0892 5.78183 14.9664 5.63009 14.7436C3.93888 12.2552 0.55861 8.66639 0.55861 5.72423C0.55861 2.56303 3.12099 0 6.28295 0ZM9.61581 14.1388C9.20355 13.9989 8.983 13.5519 9.12287 13.1396C9.26276 12.7274 9.70981 12.5068 10.1221 12.646C10.8104 12.8806 11.3847 13.1848 11.7948 13.5385C12.2899 13.9656 12.566 14.4719 12.566 15.0381C12.566 15.9951 11.76 16.7929 10.4573 17.308C9.37671 17.735 7.8994 18 6.28299 18C4.66728 18 3.19 17.7358 2.10867 17.308C0.806026 16.7928 0 15.995 0 15.0381C0 14.4719 0.276065 13.9656 0.771219 13.5385C1.18126 13.1848 1.75486 12.8806 2.44392 12.646C2.85618 12.5061 3.30323 12.7274 3.4431 13.1396C3.58299 13.5519 3.36168 13.9989 2.95016 14.1388C2.4491 14.3098 2.05459 14.5111 1.80221 14.7294C1.65936 14.8523 1.58016 14.9589 1.58016 15.0381C1.58016 15.2801 2.00427 15.5695 2.68889 15.8396C3.59557 16.1979 4.86558 16.4199 6.2838 16.4199C7.70117 16.4199 8.97131 16.1979 9.87871 15.8396C10.5633 15.5688 10.9874 15.2801 10.9874 15.0381C10.9874 14.9589 10.9075 14.8523 10.7654 14.7294C10.513 14.5111 10.1178 14.3098 9.61744 14.1388H9.61581ZM6.28295 8.29919C7.70549 8.29919 8.85867 7.14606 8.85867 5.72347C8.85867 4.30093 7.70554 3.14775 6.28295 3.14775C4.86035 3.14775 3.70723 4.30087 3.70723 5.72347C3.70723 7.14601 4.86035 8.29919 6.28295 8.29919Z" fill="currentColor" />
+                </svg>
+                <span class="text-[15px] md:text-[18px] text-white/80"><?php echo esc_html($loc); ?></span>
+              </div>
+              <div class="col-span-2 md:col-span-2 flex justify-between md:justify-end items-center gap-4">
+                <span class="text-[15px] md:text-[18px] text-white/80"><?php echo esc_html($type); ?></span>
+                <a href="<?php echo esc_url($link); ?>" class="w-[44px] h-[44px] min-w-[44px] min-h-[44px] border border-white/40 hover:bg-white/10 text-white rounded-full flex items-center justify-center shadow-lg transition duration-200" aria-label="Apply to <?php echo esc_attr($job_title); ?>">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>

@@ -12,7 +12,8 @@ $description_2      = get_sub_field( 'description_2' ) ?: 'We source raw materia
 $banner_heading     = get_sub_field( 'banner_heading' ) ?: 'Looking for an Efficient Rice Manufacturing Partner?';
 $banner_description = get_sub_field( 'banner_description' ) ?: 'Whether you\'re crafting new formulations or scaling rice-based ingredient production, our team is ready to help you advance with confidence.';
 $banner_button_text = get_sub_field( 'banner_button_text' ) ?: 'Contact Us';
-$banner_button_link = get_sub_field( 'banner_button_link' ) ?: '#';
+$banner_button_link_raw = get_sub_field( 'banner_button_link' );
+$banner_button_link = ( $banner_button_link_raw && '#' !== $banner_button_link_raw ) ? $banner_button_link_raw : site_url( '/contact' );
 ?>
 
 <!-- Desktop Layout View -->
@@ -25,7 +26,7 @@ $banner_button_link = get_sub_field( 'banner_button_link' ) ?: '#';
           <div class="col-span-6 flex flex-col items-start">
             <div class="flex items-center gap-3 mb-6">
               <div class="w-[6px] h-[33px] bg-[#FF8D00] rounded-full"></div>
-              <span class="font-montserrat font-bold text-[16px] text-starizo-brown uppercase tracking-[0.11em] leading-none">
+              <span class="font-montserrat font-normal text-[16px] lg:text-[22px] leading-[30px] lg:leading-[54px] tracking-[0.11em] text-[#5D3700] uppercase">
                 <?php echo esc_html( $subheading ); ?>
               </span>
             </div>
@@ -61,8 +62,8 @@ $banner_button_link = get_sub_field( 'banner_button_link' ) ?: '#';
 
         <!-- Banner Card with interactive group hover -->
         <div class="w-full bg-[#00A256] rounded-[34px] overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 p-8 md:p-10 grid grid-cols-12 items-center relative group/banner">
-          <!-- Looper-1 background image overlay -->
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/Looper-1.png' ); ?>" alt="" class="absolute inset-0 opacity-100 pointer-events-none select-none z-0">
+          <!-- Looper-1 background image overlay (Displaying top portion aligned at top edge of container) -->
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/Looper-1.png' ); ?>" alt="" class="absolute inset-0 w-full h-full object-cover object-left-top opacity-100 pointer-events-none select-none z-0">
 
           <!-- Text content -->
           <div class="col-span-7 text-white z-10 flex flex-col items-start pr-4">
@@ -90,7 +91,7 @@ $banner_button_link = get_sub_field( 'banner_button_link' ) ?: '#';
             </div>
 
             <!-- Golden Rice Stalk -->
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/rice-g.png' ); ?>" alt="Rice grain" class="absolute -right-2 -bottom-6 h-[130px] w-auto z-30 pointer-events-none select-none object-contain drop-shadow-xl" loading="lazy">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/rice-g.png' ); ?>" alt="Rice grain" class="absolute -right-2 -bottom-6 h-[135px] w-auto z-30 pointer-events-none select-none object-contain drop-shadow-xl" loading="lazy">
           </div>
         </div>
 

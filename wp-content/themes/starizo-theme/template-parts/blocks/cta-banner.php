@@ -6,7 +6,8 @@
 $heading     = get_sub_field( 'heading' ) ?: 'Let’s Build The Next Generation Of Ingredient Solutions';
 $description = get_sub_field( 'description' ) ?: 'Whether you\'re developing a new formulation or scaling production, our team is ready to support your next stage of growth.';
 $button_text = get_sub_field( 'button_text' ) ?: 'Contact Us';
-$button_link = get_sub_field( 'button_link' ) ?: '/contact';
+$button_link_raw = get_sub_field( 'button_link' );
+$button_link = ( $button_link_raw && '#' !== $button_link_raw ) ? $button_link_raw : site_url( '/contact' );
 
 $image = get_sub_field('image');
 $image_url = $image ? esc_url($image['url']) : get_template_directory_uri() . '/public/assets/about-let.png';
@@ -15,7 +16,7 @@ $floating_image = get_sub_field('floating_image');
 $floating_image_url = $floating_image ? esc_url($floating_image['url']) : get_template_directory_uri() . '/public/assets/rice-g.png';
 ?>
 
-<section class="w-full bg-[#FDFBF3] py-12 md:py-16 border-b border-gray-100 overflow-hidden">
+<section class="w-full bg-[#FDFBF3] py-12 md:py-16 border-b border-gray-100 relative">
   <div class="w-full max-w-[1280px] mx-auto min-h-[242px] px-4 sm:px-6 md:px-8 flex flex-col md:flex-row items-center justify-between gap-12 lg:gap-12">
 
     <!-- Left Container -->
@@ -50,7 +51,7 @@ $floating_image_url = $floating_image ? esc_url($floating_image['url']) : get_te
       </div>
 
       <!-- Floating Graphic Overlay -->
-      <img src="<?php echo esc_url( $floating_image_url ); ?>" alt="" class="absolute pointer-events-none select-none z-20 object-contain" style="width: 130px; height: 182px; right: -20px; md:right: -55px; bottom: -20px;">
+      <img src="<?php echo esc_url( $floating_image_url ); ?>" alt="" class="absolute pointer-events-none select-none z-20 object-contain" style="width: 130px; height: 182px; right: -50px; bottom: -20px;">
 
     </div>
 

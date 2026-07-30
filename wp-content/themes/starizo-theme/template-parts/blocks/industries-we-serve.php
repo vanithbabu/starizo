@@ -8,7 +8,8 @@
 $heading     = get_sub_field( 'heading' ) ?: 'Built To Perform Across Industries';
 $subheading  = get_sub_field( 'subheading' ) ?: 'INDUSTRIES WE SERVE';
 $button_text = get_sub_field( 'button_text' ) ?: 'Explore Applications';
-$button_link = get_sub_field( 'button_link' ) ?: '#';
+$button_link_raw = get_sub_field( 'button_link' );
+$button_link = ( $button_link_raw && '#' !== $button_link_raw ) ? $button_link_raw : site_url( '/food-beverage' );
 
 $industries = [
     [
@@ -44,7 +45,7 @@ $industries = [
           <div>
             <div class="flex items-center gap-3 mb-4">
               <div class="w-[6px] h-[33px] bg-[#FF8D00] rounded-full"></div>
-              <span class="font-montserrat font-bold text-[16px] text-starizo-brown uppercase tracking-[0.11em] leading-none">
+              <span class="font-montserrat font-normal text-[16px] lg:text-[22px] leading-[30px] lg:leading-[54px] tracking-[0.11em] text-[#5D3700] uppercase">
                 <?php echo esc_html( $subheading ); ?>
               </span>
             </div>

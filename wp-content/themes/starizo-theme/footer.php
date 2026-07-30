@@ -48,8 +48,8 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                   ) );
               } else {
                   echo '<ul class="space-y-2">
-                          <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Food &amp; Beverage</a></li>
-                          <li><a href="#" class="text-[12px] text-black leading-[16px] hover:text-starizo-orange transition-colors block">Cosmetics &amp; Personal Care</a></li>
+                          <li><a href="' . esc_url(site_url('/product-category/food-beverage')) . '" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Food &amp; Beverage</a></li>
+                          <li><a href="' . esc_url(site_url('/product-category/cosmetics-personal-care')) . '" class="text-[12px] text-black leading-[16px] hover:text-starizo-orange transition-colors block">Cosmetics &amp; Personal Care</a></li>
                         </ul>';
               }
               ?>
@@ -68,9 +68,9 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                   ) );
               } else {
                   echo '<ul class="space-y-2">
-                          <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Our Story</a></li>
-                          <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Research Lab</a></li>
-                          <li><a href="#" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Technology &amp; Quality</a></li>
+                          <li><a href="' . esc_url(site_url('/about#story')) . '" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Our Story</a></li>
+                          <li><a href="' . esc_url(site_url('/research-lab')) . '" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Research Lab</a></li>
+                          <li><a href="' . esc_url(site_url('/about#technology')) . '" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Technology &amp; Quality</a></li>
                         </ul>';
               }
               ?>
@@ -89,10 +89,10 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                   ) );
               } else {
                   echo '<ul class="space-y-2">
-                          <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Plant</a></li>
-                          <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Careers</a></li>
-                          <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Insights</a></li>
-                          <li><a href="#" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Contact</a></li>
+                          <li><a href="' . esc_url(site_url('/plant')) . '" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Plant</a></li>
+                          <li><a href="' . esc_url(site_url('/careers')) . '" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Careers</a></li>
+                          <li><a href="' . esc_url(site_url('/insights')) . '" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Insights</a></li>
+                          <li><a href="' . esc_url(site_url('/contact')) . '" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Contact</a></li>
                         </ul>';
               }
               ?>
@@ -127,86 +127,74 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
 </div>
 
 <!-- Mobile Layout Container for Footer -->
-<div class="xl:hidden w-full overflow-x-hidden">
+<div class="xl:hidden w-full">
     <footer class="w-full bg-[#FDF7E9] text-black">
 
-      <div class="px-6 pt-10 pb-12 w-full max-w-[341px] mx-auto">
+      <div class="px-5 pt-10 pb-12 w-full max-w-[341px] mx-auto">
 
         <!-- Brand Logo -->
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-block mb-8" aria-label="Starizo Home">
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-block mb-6" aria-label="Starizo Home">
           <img src="<?php echo esc_url($footer_logo); ?>" alt="<?php bloginfo('name'); ?>" class="h-9 w-auto">
         </a>
 
         <!-- 2-Column Links Grid -->
-        <div class="grid grid-cols-2 gap-x-6 gap-y-6">
+        <div class="grid grid-cols-2 gap-x-6 gap-y-4 mb-6">
 
           <!-- Column 1 (Left) -->
-          <div class="flex flex-col">
-            <h4 class="font-montserrat font-bold text-[12px] leading-[20px] tracking-[0em] text-black mb-3">Products</h4>
+          <div class="flex flex-col gap-3 min-w-0">
+            <h4 class="font-montserrat font-bold text-[14px] leading-[20px] tracking-[0em] text-black">Products</h4>
             <?php
             if ( has_nav_menu('footer_products') ) {
                 wp_nav_menu( array(
                     'theme_location' => 'footer_products',
                     'container' => false,
-                    'menu_class' => 'flex flex-col gap-2 mb-6 font-montserrat font-normal text-[12px] leading-[20px] tracking-[0em] text-black/80',
+                    'menu_class' => 'flex flex-col gap-2 font-montserrat font-medium text-[13px] leading-[20px] tracking-[0em] text-black/90 mb-2',
                     'fallback_cb' => false,
                 ) );
             } else {
-                echo '<ul class="flex flex-col gap-2 mb-6 font-montserrat font-normal text-[12px] leading-[20px] tracking-[0em] text-black/80">
-                        <li><a href="#" class="hover:text-starizo-orange transition-colors block">Food &amp; Beverage</a></li>
-                        <li><a href="#" class="hover:text-starizo-orange transition-colors block leading-[16px]">Cosmetics &amp;<br>Personal Care</a></li>
+                echo '<ul class="flex flex-col gap-2 font-montserrat font-medium text-[13px] leading-[20px] tracking-[0em] text-black/90 mb-2">
+                        <li><a href="' . esc_url(site_url('/product-category/food-beverage')) . '" class="hover:text-starizo-orange transition-colors">Food &amp; Beverage</a></li>
+                        <li><a href="' . esc_url(site_url('/product-category/cosmetics-personal-care')) . '" class="hover:text-starizo-orange transition-colors leading-[16px]">Cosmetics &amp;<br>Personal Care</a></li>
                       </ul>';
             }
             ?>
 
-            <div class="flex flex-col gap-3 font-montserrat font-bold text-[12px] leading-[20px] tracking-[0em] text-black mb-6">
+            <div class="flex flex-col gap-3 font-montserrat font-bold text-[14px] leading-[20px] tracking-[0em] text-black">
               <?php
               if ( has_nav_menu('footer_partner') ) {
                   wp_nav_menu( array(
                       'theme_location' => 'footer_partner',
                       'container' => false,
-                      'items_wrap' => '%3$s', // No ul wrapper because the original design is just a flex flex-col of links
+                      'items_wrap' => '%3$s',
                       'fallback_cb' => false,
                   ) );
               } else {
-                  echo '<a href="#" class="hover:text-starizo-orange transition-colors block">Partner with Us</a>
-                        <a href="#" class="hover:text-starizo-orange transition-colors block">Plant</a>
-                        <a href="#" class="hover:text-starizo-orange transition-colors block">Careers</a>
-                        <a href="#" class="hover:text-starizo-orange transition-colors block">Insights</a>
-                        <a href="#" class="hover:text-starizo-orange transition-colors block">Contact</a>';
+                  echo '<a href="' . esc_url(site_url('/partner-with-us')) . '" class="hover:text-starizo-orange transition-colors">Partner with Us</a>
+                        <a href="' . esc_url(site_url('/plant')) . '" class="hover:text-starizo-orange transition-colors">Plant</a>
+                        <a href="' . esc_url(site_url('/careers')) . '" class="hover:text-starizo-orange transition-colors">Careers</a>
+                        <a href="' . esc_url(site_url('/insights')) . '" class="hover:text-starizo-orange transition-colors">Insights</a>
+                        <a href="' . esc_url(site_url('/contact')) . '" class="hover:text-starizo-orange transition-colors">Contact</a>';
               }
               ?>
-            </div>
-
-            <!-- Contact Details -->
-            <div class="flex flex-col col-span-2 mt-2">
-              <h4 class="font-montserrat font-bold text-[12px] leading-[20px] tracking-[0em] text-black mb-3">Contact Details</h4>
-              <div class="w-[312px] h-[29px] flex items-center gap-[12px] whitespace-nowrap">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/mail-icon.svg'); ?>" alt="Email" class="w-[29px] h-[29px] shrink-0">
-                <p class="font-montserrat text-[12px] leading-[20px] tracking-[0em]">
-                  <span class="font-bold text-black">Email: </span>
-                  <a href="mailto:<?php echo esc_attr($footer_email); ?>" class="font-normal text-black/80 hover:underline"><?php echo esc_html($footer_email); ?></a>
-                </p>
-              </div>
             </div>
           </div>
 
           <!-- Column 2 (Right) -->
-          <div class="flex flex-col">
-            <h4 class="font-montserrat font-bold text-[12px] leading-[20px] tracking-[0em] text-black mb-3">About</h4>
+          <div class="flex flex-col gap-3 min-w-0">
+            <h4 class="font-montserrat font-bold text-[14px] leading-[20px] tracking-[0em] text-black">About</h4>
             <?php
             if ( has_nav_menu('footer_about') ) {
                 wp_nav_menu( array(
                     'theme_location' => 'footer_about',
                     'container' => false,
-                    'menu_class' => 'flex flex-col gap-2 font-montserrat font-normal text-[12px] leading-[20px] tracking-[0em] text-black/80',
+                    'menu_class' => 'flex flex-col gap-2 font-montserrat font-medium text-[13px] leading-[20px] tracking-[0em] text-black/90',
                     'fallback_cb' => false,
                 ) );
             } else {
-                echo '<ul class="flex flex-col gap-2 font-montserrat font-normal text-[12px] leading-[20px] tracking-[0em] text-black/80">
-                        <li><a href="#" class="hover:text-starizo-orange transition-colors block">Our Story</a></li>
-                        <li><a href="#" class="hover:text-starizo-orange transition-colors block">Research Lab</a></li>
-                        <li><a href="#" class="hover:text-starizo-orange transition-colors block">Technology &amp; Quality</a></li>
+                echo '<ul class="flex flex-col gap-2 font-montserrat font-medium text-[13px] leading-[20px] tracking-[0em] text-black/90">
+                        <li><a href="' . esc_url(site_url('/about#story')) . '" class="hover:text-starizo-orange transition-colors">Our Story</a></li>
+                        <li><a href="' . esc_url(site_url('/research-lab')) . '" class="hover:text-starizo-orange transition-colors">Research Lab</a></li>
+                        <li><a href="' . esc_url(site_url('/about#technology')) . '" class="hover:text-starizo-orange transition-colors whitespace-nowrap">Technology &amp; Quality</a></li>
                       </ul>';
             }
             ?>
@@ -214,15 +202,29 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
 
         </div>
 
+        <!-- Contact Details (Full Width Below 2-Column Grid) -->
+        <div class="flex flex-col gap-2 mt-4">
+          <h4 class="font-montserrat font-bold text-[14px] leading-[20px] tracking-[0em] text-black">Contact Details</h4>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-white shadow-xs flex items-center justify-center shrink-0 border border-emerald-100">
+              <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/mail-icon.svg'); ?>" alt="Email" class="w-[22px] h-[22px] object-contain">
+            </div>
+            <p class="font-montserrat text-[13px] leading-[20px] tracking-[0em] whitespace-nowrap">
+              <span class="font-bold text-black">Email: </span>
+              <a href="mailto:<?php echo esc_attr($footer_email); ?>" class="font-normal text-black hover:underline"><?php echo esc_html($footer_email); ?></a>
+            </p>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Copyright Bottom Bar -->
-      <div class="w-full bg-[#5D3700] text-white py-3 px-6 font-montserrat font-normal text-[10px] leading-[20px] tracking-[0em]">
+      <!-- Copyright Bottom Bar (Target 1: Single Row) -->
+      <div class="w-full bg-[#5D3700] text-white py-3.5 px-4 font-montserrat font-normal text-[10px] sm:text-[11px] leading-[20px] tracking-[0em]">
         <div class="w-full max-w-[341px] mx-auto flex flex-row items-center justify-between gap-2 whitespace-nowrap">
           <span><?php echo esc_html($footer_copyright); ?></span>
-          <div class="flex items-center gap-1 shrink-0">
+          <div class="flex items-center gap-1.5 shrink-0">
             <a href="<?php echo esc_url($legal_policy_link); ?>" class="hover:underline transition-colors">Legal policy</a>
-            <span class="opacity-50">|</span>
+            <span class="opacity-70">|</span>
             <a href="<?php echo esc_url($privacy_policy_link); ?>" class="hover:underline transition-colors">Privacy policy</a>
           </div>
         </div>
