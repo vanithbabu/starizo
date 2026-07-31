@@ -89,7 +89,6 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                   ) );
               } else {
                   echo '<ul class="space-y-2">
-                          <li><a href="' . esc_url(site_url('/plant')) . '" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Plant</a></li>
                           <li><a href="' . esc_url(site_url('/careers')) . '" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Careers</a></li>
                           <li><a href="' . esc_url(site_url('/insights')) . '" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Insights</a></li>
                           <li><a href="' . esc_url(site_url('/contact')) . '" class="text-[12px] font-bold text-black leading-[20px] hover:text-starizo-orange transition-colors block">Contact</a></li>
@@ -170,7 +169,6 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                   ) );
               } else {
                   echo '<a href="' . esc_url(site_url('/partner-with-us')) . '" class="hover:text-starizo-orange transition-colors">Partner with Us</a>
-                        <a href="' . esc_url(site_url('/plant')) . '" class="hover:text-starizo-orange transition-colors">Plant</a>
                         <a href="' . esc_url(site_url('/careers')) . '" class="hover:text-starizo-orange transition-colors">Careers</a>
                         <a href="' . esc_url(site_url('/insights')) . '" class="hover:text-starizo-orange transition-colors">Insights</a>
                         <a href="' . esc_url(site_url('/contact')) . '" class="hover:text-starizo-orange transition-colors">Contact</a>';
