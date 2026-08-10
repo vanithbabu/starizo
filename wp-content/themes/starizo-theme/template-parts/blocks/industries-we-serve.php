@@ -37,7 +37,7 @@ $industries = [
 
 <!-- Desktop Layout View -->
 <div class="hidden xl:block w-full">
-    <section class="w-full bg-[#FDFBF3] py-24 border-b border-gray-100">
+    <section class="w-full bg-[#FDFBF3] py-10 border-b border-gray-100">
       <div class="max-w-[1280px] mx-auto px-10">
 
         <!-- Header -->

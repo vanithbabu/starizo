@@ -25,7 +25,7 @@ $has_products = $products_query->have_posts();
 
 <!-- Desktop Layout View -->
 <div class="hidden xl:block w-full">
-    <section class="w-full bg-[#FDFBF3] py-24">
+    <section class="w-full bg-[#FDFBF3] py-10">
       <div class="max-w-[1280px] mx-auto px-10">
 
         <!-- Outer Border Container matching Figma -->

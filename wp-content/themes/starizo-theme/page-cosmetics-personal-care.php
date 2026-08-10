@@ -136,7 +136,7 @@ get_header();
             <div class="pt-2">
               <a href="<?php echo esc_url( site_url( '/contact' ) ); ?>"
                 class="bg-white hover:bg-amber-50 text-[#FF8D00] font-montserrat font-bold text-[16px] px-6 py-2.5 rounded-[8.45px] inline-flex items-center gap-2 shadow-sm transition duration-200 select-none">
-                Talk to Technical Team
+                Contact Us
                 <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
             </div>
@@ -299,7 +299,7 @@ get_header();
             <h3 class="font-montserrat font-bold text-[16px] text-white leading-tight">Not Sure which Ingredient fits?</h3>
             <p class="font-montserrat font-normal text-[12px] leading-[17px] text-white/95">Tell us your application, processing conditions, and performance goals. We’ll recommend the right ingredient system.</p>
             <a href="<?php echo esc_url( site_url( '/contact' ) ); ?>" class="bg-white text-[#FF8D00] font-montserrat font-bold text-[13px] px-4 py-2 rounded-[8px] w-fit mt-1 inline-flex items-center gap-1 shadow-xs hover:bg-amber-50 transition">
-              Talk to Technical Team
+                     Contact Us
               <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
           </div>

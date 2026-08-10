@@ -68,9 +68,9 @@ $privacy_policy_link = get_field('footer_privacy_policy_link', 'option') ?: '#';
                   ) );
               } else {
                   echo '<ul class="space-y-2">
-                          <li><a href="' . esc_url(site_url('/about#story')) . '" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Our Story</a></li>
+                          <li><a href="' . esc_url(site_url('/about-us#story')) . '" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Our Story</a></li>
                           <li><a href="' . esc_url(site_url('/research-lab')) . '" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Research Lab</a></li>
-                          <li><a href="' . esc_url(site_url('/about#technology')) . '" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Technology &amp; Quality</a></li>
+                          <li><a href="' . esc_url(site_url('/about-us#technology')) . '" class="text-[12px] text-black leading-[20px] hover:text-starizo-orange transition-colors block">Technology &amp; Quality</a></li>
                         </ul>';
               }
               ?>

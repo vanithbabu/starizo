@@ -27,7 +27,7 @@ get_header();
           <!-- Top Text Group -->
           <div class="flex flex-col items-start gap-[14px] w-full">
             <span class="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.11em] uppercase text-black">
-              FOOD & BAVERAGE
+              FOOD & Beverage
             </span>
 
             <h1 class="font-montserrat font-black text-[38px] lg:text-[42px] leading-[48px] lg:leading-[54px] tracking-tight w-full max-w-[393px]"
@@ -102,21 +102,21 @@ get_header();
               'link'  => site_url('/product/rice-starch')
             ],
             [
-              'title' => 'IMO Syrups',
+              'title' => 'IMO Syrup',
               'desc'  => 'High-purity liquid prebiotic sweetener for beverages and bars.',
               'cat'   => 'Food • Beverage',
               'img'   => 'food-syrup.svg',
               'link'  => site_url('/product/rice-starch')
             ],
             [
-              'title' => 'Rice Glucose Syrups',
+              'title' => 'Rice Glucose Syrup',
               'desc'  => 'Natural plant syrup offering controlled sweetness and viscosity.',
               'cat'   => 'Cross Industry',
               'img'   => 'food-syrup.svg',
               'link'  => site_url('/product/rice-starch')
             ],
             [
-              'title' => 'High Maltose Rice Syrups',
+              'title' => 'High Maltose Rice Syrup',
               'desc'  => 'Non-GMO syrup designed for confectionery and beverage stability.',
               'cat'   => 'Cross Industry',
               'img'   => 'food-syrup.svg',
@@ -164,7 +164,7 @@ get_header();
             <div class="pt-2">
               <a href="<?php echo esc_url( site_url( '/contact' ) ); ?>"
                 class="bg-white hover:bg-amber-50 text-[#FF8D00] font-montserrat font-bold text-[16px] px-6 py-2.5 rounded-[8.45px] inline-flex items-center gap-2 shadow-sm transition duration-200 select-none">
-                Talk to Technical Team
+                Contact Us
                 <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
             </div>
@@ -257,7 +257,7 @@ get_header();
         
         <!-- Category Tag -->
         <span class="font-montserrat font-bold text-[12px] leading-[22px] tracking-[0.11em] uppercase text-black text-center whitespace-nowrap w-auto mt-2 mb-[40px]">
-          FOOD & BAVERAGE
+          FOOD & Beverage
         </span>
 
         <!-- Text Group (Centered) -->
@@ -333,7 +333,7 @@ get_header();
             <h3 class="font-montserrat font-bold text-[16px] text-white leading-tight">Not Sure which Ingredient fits?</h3>
             <p class="font-montserrat font-normal text-[12px] leading-[17px] text-white/95">Tell us your application, processing conditions, and performance goals. We’ll recommend the right ingredient system.</p>
             <a href="<?php echo esc_url( site_url( '/contact' ) ); ?>" class="bg-white text-[#FF8D00] font-montserrat font-bold text-[13px] px-4 py-2 rounded-[8px] w-fit mt-1 inline-flex items-center gap-1 shadow-xs hover:bg-amber-50 transition">
-              Talk to Technical Team
+              Contact Us
               <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </a>
           </div>

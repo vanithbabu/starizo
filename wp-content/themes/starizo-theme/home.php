@@ -9,6 +9,22 @@ get_header(); ?>
 <div class="w-full font-montserrat bg-[#FDFBF3] text-black min-h-screen antialiased overflow-x-hidden">
   
   <?php 
+  $page_for_posts = get_option( 'page_for_posts' );
+  $fields = function_exists('get_fields') ? get_fields($page_for_posts) : false;
+
+  $hero_title = !empty($fields['hero_title']) ? $fields['hero_title'] : 'Ideas. Ingredients. Innovation.';
+  $hero_description = !empty($fields['hero_description']) ? $fields['hero_description'] : 'From technical deep-dives to industry perspectives, discover practical insights designed for formulators, manufacturers, R&D teams, and decision-makers.';
+
+  $hero_image_desktop = !empty($fields['hero_image_desktop']['url']) ? $fields['hero_image_desktop']['url'] : get_template_directory_uri() . '/public/assets/blog-hero.png';
+  $hero_image_desktop_alt = !empty($fields['hero_image_desktop']['alt']) ? $fields['hero_image_desktop']['alt'] : 'Starizo Blog Hero';
+
+  $hero_image_mobile = !empty($fields['hero_image_mobile']['url']) ? $fields['hero_image_mobile']['url'] : get_template_directory_uri() . '/public/assets/blog-hero-sm.png';
+  $hero_image_mobile_alt = !empty($fields['hero_image_mobile']['alt']) ? $fields['hero_image_mobile']['alt'] : 'Featured Paddy Field';
+
+  $newsletter_tagline = !empty($fields['newsletter_tagline']) ? $fields['newsletter_tagline'] : 'NEWSLETTER';
+  $newsletter_headline = !empty($fields['newsletter_headline']) ? $fields['newsletter_headline'] : 'Get Insights That Matter';
+  $newsletter_subtitle = !empty($fields['newsletter_subtitle']) ? $fields['newsletter_subtitle'] : 'Monthly perspectives on ingredients, manufacturing, and formulation innovation.';
+
   // Fetch the latest post for the Hero
   $featured_query = new WP_Query( array(
       'posts_per_page' => 1,
@@ -29,17 +45,17 @@ get_header(); ?>
       </span>
       <div class="flex flex-col gap-[14px]">
         <h1 class="font-montserrat font-black text-[42px] leading-[54px] text-[#00A256]">
-          Ideas. Ingredients. Innovation.
+          <?php echo esc_html($hero_title); ?>
         </h1>
         <p class="font-montserrat font-medium text-[18px] leading-[30px] text-black">
-          From technical deep-dives to industry perspectives, discover practical insights designed for formulators, manufacturers, R&D teams, and decision-makers.
+          <?php echo esc_html($hero_description); ?>
         </p>
       </div>
     </div>
 
     <!-- Right Hero Image -->
     <div class="absolute left-[483px] right-0 top-0 h-[800px] overflow-hidden rounded-bl-[222px] z-0 shadow-lg">
-      <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/blog-hero.png'); ?>" alt="Starizo Blog Hero" class="w-full h-full object-cover">
+      <img src="<?php echo esc_url($hero_image_desktop); ?>" alt="<?php echo esc_attr($hero_image_desktop_alt); ?>" class="w-full h-full object-cover">
     </div>
 
     <!-- Featured Article Card -->
@@ -90,7 +106,7 @@ get_header(); ?>
       
       <!-- Background Paddy Photo -->
       <div class="absolute top-0 right-0 w-[299px] max-w-[85%] h-[355px] rounded-bl-[67.64px] overflow-hidden shadow-sm z-0">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/blog-hero-sm.png' ); ?>" alt="Featured Paddy Field" class="w-full h-full object-cover">
+        <img src="<?php echo esc_url($hero_image_mobile); ?>" alt="<?php echo esc_attr($hero_image_mobile_alt); ?>" class="w-full h-full object-cover">
       </div>
 
       <!-- 100% Viewport-Centered White Featured Article Card -->
@@ -135,10 +151,10 @@ get_header(); ?>
         INSIGHTS
       </span>
       <h1 class="font-montserrat font-extrabold text-[28px] leading-[36px] text-[#00A256]">
-        Ideas. Ingredients. Innovation.
+        <?php echo esc_html($hero_title); ?>
       </h1>
       <p class="font-montserrat font-medium text-[14px] leading-[22px] text-black/80">
-        From technical deep-dives to industry perspectives, discover practical insights designed for formulators, manufacturers, R&D teams, and decision-makers.
+        <?php echo esc_html($hero_description); ?>
       </p>
     </div>
 
@@ -388,17 +404,17 @@ get_header(); ?>
         
         <!-- Category Tag -->
         <span class="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.11em] uppercase text-white/90">
-          NEWSLETTER
+          <?php echo esc_html($newsletter_tagline); ?>
         </span>
 
         <!-- Main Headline -->
         <h2 class="font-montserrat font-extrabold text-[32px] sm:text-[40px] md:text-[44px] leading-[42px] sm:leading-[52px] text-white">
-          Get Insights That Matter
+          <?php echo esc_html($newsletter_headline); ?>
         </h2>
 
         <!-- Subtitle -->
         <p class="font-montserrat font-medium text-[16px] sm:text-[18px] leading-[26px] sm:leading-[28px] text-white/95">
-          Monthly perspectives on ingredients, manufacturing, and formulation innovation.
+          <?php echo esc_html($newsletter_subtitle); ?>
         </p>
 
         <!-- Input + Submit Button Box -->

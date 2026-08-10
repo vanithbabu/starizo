@@ -38,6 +38,14 @@ $is_insights = is_page( 'insights' ) || is_home() || is_singular( 'post' ) || is
         <!-- Menu Navigation (Exact 1:1 with index.html) -->
         <nav class="flex items-center gap-10 font-montserrat font-normal text-[18px] leading-[21px] tracking-normal text-[#5D3700]">
           
+			      <!-- About Dropdown (Exact 1:1 with index.html) -->
+          <div class="relative group py-2">
+            <a href="<?php echo esc_url( site_url('/about-us') ); ?>" class="flex items-center gap-1 font-montserrat font-normal text-[18px] leading-[21px] tracking-normal text-[#5D3700] group-hover:font-semibold group-hover:text-[#5D3700] transition duration-200 focus:outline-none">
+              About Us
+            </a>
+
+     
+          </div>
           <!-- Products Dropdown (Exact 1:1 with index.html) -->
           <div class="relative group py-2">
             <button type="button" class="flex items-center gap-1 font-montserrat font-normal text-[18px] leading-[21px] tracking-normal text-[#5D3700] group-hover:font-semibold group-hover:text-[#5D3700] transition duration-200 focus:outline-none">
@@ -74,40 +82,7 @@ $is_insights = is_page( 'insights' ) || is_home() || is_singular( 'post' ) || is
             </div>
           </div>
 
-          <!-- About Dropdown (Exact 1:1 with index.html) -->
-          <div class="relative group py-2">
-            <a href="<?php echo esc_url( site_url('/about') ); ?>" class="flex items-center gap-1 font-montserrat font-normal text-[18px] leading-[21px] tracking-normal text-[#5D3700] group-hover:font-semibold group-hover:text-[#5D3700] transition duration-200 focus:outline-none">
-              About
-            </a>
-
-            <!-- About Mega Dropdown Container (Starts below bottom edge of header navbar) -->
-            <div class="absolute top-[calc(100%+22px)] -left-[24px] w-auto h-[112px] min-w-[530px] bg-white rounded-br-[44px] rounded-bl-[44px] rounded-tr-none rounded-tl-none shadow-2xl border border-gray-100/90 px-9 flex items-center justify-center opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-1 group-hover:translate-y-0 z-50">
-              
-              <!-- Inner Items Container (Gap 32px) -->
-              <div class="flex items-center justify-between gap-[32px] whitespace-nowrap">
-                
-                <!-- Our Story Option -->
-                <a href="<?php echo esc_url( site_url('/about#story') ); ?>" class="flex items-center gap-[10px] group/item text-[#5D3700] hover:text-[#FF8D00] transition-colors">
-                  <span class="w-[3px] h-[22px] bg-[#FF8D00] rounded-full inline-block shrink-0"></span>
-                  <span class="font-montserrat font-medium text-[16px] leading-[29px] tracking-normal text-[#5D3700] group-hover/item:text-[#FF8D00] transition-colors whitespace-nowrap">Our Story</span>
-                </a>
-
-                <!-- Application Option -->
-                <a href="<?php echo esc_url( site_url('/about#application') ); ?>" class="flex items-center gap-[10px] group/item text-[#5D3700] hover:text-[#FF8D00] transition-colors">
-                  <span class="w-[3px] h-[22px] bg-[#FF8D00] rounded-full inline-block shrink-0"></span>
-                  <span class="font-montserrat font-medium text-[16px] leading-[29px] tracking-normal text-[#5D3700] group-hover/item:text-[#FF8D00] transition-colors whitespace-nowrap">Application</span>
-                </a>
-
-                <!-- Technology & Quality Option -->
-                <a href="<?php echo esc_url( site_url('/about#technology') ); ?>" class="flex items-center gap-[10px] group/item text-[#5D3700] hover:text-[#FF8D00] transition-colors">
-                  <span class="w-[3px] h-[22px] bg-[#FF8D00] rounded-full inline-block shrink-0"></span>
-                  <span class="font-montserrat font-medium text-[16px] leading-[29px] tracking-normal text-[#5D3700] group-hover/item:text-[#FF8D00] transition-colors whitespace-nowrap">Technology &amp; Quality</span>
-                </a>
-
-              </div>
-
-            </div>
-          </div>
+    
 
           <a href="<?php echo esc_url( site_url('/partner-with-us') ); ?>" class="font-montserrat font-normal text-[18px] leading-[21px] tracking-normal text-[#5D3700] hover:text-[#FF8D00] transition">
             Partner with Us
