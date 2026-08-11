@@ -28,6 +28,13 @@ acf_add_local_field_group(array(
 			'rows' => 3,
 		),
 		array(
+			'key' => 'field_prod_brochure_file',
+			'label' => 'Brochure File',
+			'name' => 'brochure_file',
+			'type' => 'file',
+			'return_format' => 'url',
+		),
+		array(
 			'key' => 'field_prod_hero_badges',
 			'label' => 'Hero Badges',
 			'name' => 'hero_badges',
@@ -86,6 +93,14 @@ acf_add_local_field_group(array(
 			'name' => 'benefits_title',
 			'type' => 'text',
 			'default_value' => 'Why Manufacturers Choose',
+		),
+		array(
+			'key' => 'field_prod_benefits_desc',
+			'label' => 'Section Description',
+			'name' => 'benefits_description',
+			'type' => 'textarea',
+			'rows' => 3,
+			'default_value' => 'Built for formulations where ingredient performance matters.',
 		),
 		array(
 			'key' => 'field_prod_benefits_list',
@@ -205,10 +220,24 @@ acf_add_local_field_group(array(
 					'return_format' => 'url',
 				),
 				array(
+					'key' => 'field_prod_app_icon',
+					'label' => 'Icon',
+					'name' => 'icon',
+					'type' => 'image',
+					'return_format' => 'url',
+				),
+				array(
 					'key' => 'field_prod_app_name',
 					'label' => 'Name',
 					'name' => 'name',
 					'type' => 'text',
+				),
+				array(
+					'key' => 'field_prod_app_item_desc',
+					'label' => 'Description',
+					'name' => 'description',
+					'type' => 'textarea',
+					'rows' => 3,
 				),
 				array(
 					'key' => 'field_prod_app_link',

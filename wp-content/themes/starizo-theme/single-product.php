@@ -45,13 +45,13 @@
 
               <!-- 2. Main Title (Figma: width 534px, height 54px, 42px Montserrat Black, line-height 54px, color #00A256) -->
               <h1 class="font-montserrat font-black text-[#00A256]"
-                style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 42px; line-height: 54px; letter-spacing: 0%; color: #00A256; width: 534px; height: 54px;">
+                style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 42px; line-height: 54px; letter-spacing: 0%; color: #00A256; max-width: 534px; width: 100%;">
                 <?php the_title(); ?>
               </h1>
 
               <!-- 3. Subtitle Description (Figma: width 534px, height 90px, 18px Montserrat Medium, line-height 30px, color rgba(0,0,0,0.8)) -->
               <p class="font-montserrat font-medium text-black/80"
-                style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 18px; line-height: 30px; letter-spacing: 0%; color: rgba(0, 0, 0, 0.8); width: 534px; height: 90px;">
+                style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 18px; line-height: 30px; letter-spacing: 0%; color: rgba(0, 0, 0, 0.8); max-width: 534px; width: 100%;">
                 <?php echo esc_html( get_field('hero_subtitle') ); ?>
               </p>
 
@@ -77,7 +77,8 @@
               </a>
 
               <!-- Right Button Link: Download Brochure (Figma: width 211px, height 21px, 18px SemiBold #FF8D00 with arrow-down.svg icon) -->
-              <a href="#" download
+              <?php if ( $brochure_url = get_field('brochure_file') ) : ?>
+              <a href="<?php echo esc_url( $brochure_url ); ?>" download
                 class="flex flex-row items-center justify-start shrink-0 whitespace-nowrap hover:opacity-85 transition select-none group"
                 style="width: 211px; height: 21px; gap: 12px;">
                 <span class="font-montserrat font-semibold text-[#FF8D00] whitespace-nowrap"
@@ -87,6 +88,7 @@
                 <!-- Exact SVG icon from public/assets/arrow-down.svg -->
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/arrow-down.svg' ); ?>" alt="Download" class="w-[13px] h-[17px] shrink-0 transform group-hover:translate-y-0.5 transition-transform duration-200">
               </a>
+              <?php endif; ?>
 
             </div>
 
@@ -105,7 +107,7 @@
             $hero_pouch_img = get_field('product_hero_image');
             $hero_pouch_url = ( is_array($hero_pouch_img) && !empty($hero_pouch_img['url']) ) ? $hero_pouch_img['url'] : ( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ?: get_template_directory_uri() . '/public/assets/rice-bag-hero.png' );
             ?>
-            <div class="relative z-10 filter drop-shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="relative z-10 filter drop-shadow-xl transform hover:scale-[1.02] transition-transform duration-300 mt-[120px]">
               <img src="<?php echo esc_url( $hero_pouch_url ); ?>" alt="STARIZO <?php the_title_attribute(); ?> Pouch"
                 class="object-contain mx-auto"
                 style="width: 365px; height: 484px;">
@@ -115,80 +117,24 @@
 
         </div>
 
-        <!-- Bottom Highlights Bar (Figma Spec 1:1: max-width 708px, height 33px, gap 19px, moved up without border) -->
-        <div class="flex flex-row items-center justify-start shrink-0 mt-4"
-          style="max-width: 708px; height: 33px; gap: 19px;">
-          
-          <!-- Badge 1: Non-GMO (Exact 15px x 15px icon inside 32.76px green circle) -->
-          <div class="flex flex-row items-center shrink-0" style="gap: 12.82px; height: 32.76px;">
-            <div class="rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm"
-              style="width: 32.76px; height: 32.76px;">
-              <svg style="width: 15px; height: 15px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <polyline points="20 6 9 17 4 12" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+        <!-- Bottom Highlights Bar -->
+        <div class="flex flex-row items-center justify-start shrink-0 mt-4 flex-wrap" style="max-width: 708px; gap: 19px;">
+          <?php if ( have_rows('hero_badges') ) : ?>
+            <?php while ( have_rows('hero_badges') ) : the_row(); 
+              $label = get_sub_field('label');
+            ?>
+            <div class="flex flex-row items-center shrink-0" style="gap: 12.82px; height: 32.76px;">
+              <div class="rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm" style="width: 32.76px; height: 32.76px;">
+                <svg style="width: 15px; height: 15px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <polyline points="20 6 9 17 4 12" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="font-montserrat font-normal text-black" style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 12.82px; line-height: 14.95px; color: #000000;">
+                <?php echo esc_html( $label ); ?>
+              </span>
             </div>
-            <span class="font-montserrat font-normal text-black"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 12.82px; line-height: 14.95px; letter-spacing: 0%; color: #000000;">
-              Non-GMO
-            </span>
-          </div>
-
-          <!-- Badge 2: Gluten Free -->
-          <div class="flex flex-row items-center shrink-0" style="gap: 12.82px; height: 32.76px;">
-            <div class="rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm"
-              style="width: 32.76px; height: 32.76px;">
-              <svg style="width: 15px; height: 15px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <polyline points="20 6 9 17 4 12" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <span class="font-montserrat font-normal text-black"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 12.82px; line-height: 14.95px; letter-spacing: 0%; color: #000000;">
-              Gluten Free
-            </span>
-          </div>
-
-          <!-- Badge 3: Clean Label -->
-          <div class="flex flex-row items-center shrink-0" style="gap: 12.82px; height: 32.76px;">
-            <div class="rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm"
-              style="width: 32.76px; height: 32.76px;">
-              <svg style="width: 15px; height: 15px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <polyline points="20 6 9 17 4 12" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <span class="font-montserrat font-normal text-black"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 12.82px; line-height: 14.95px; letter-spacing: 0%; color: #000000;">
-              Clean Label
-            </span>
-          </div>
-
-          <!-- Badge 4: Hypoallergenic -->
-          <div class="flex flex-row items-center shrink-0" style="gap: 12.82px; height: 32.76px;">
-            <div class="rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm"
-              style="width: 32.76px; height: 32.76px;">
-              <svg style="width: 15px; height: 15px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <polyline points="20 6 9 17 4 12" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <span class="font-montserrat font-normal text-black"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 12.82px; line-height: 14.95px; letter-spacing: 0%; color: #000000;">
-              Hypoallergenic
-            </span>
-          </div>
-
-          <!-- Badge 5: Export Ready -->
-          <div class="flex flex-row items-center shrink-0" style="gap: 12.82px; height: 32.76px;">
-            <div class="rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm"
-              style="width: 32.76px; height: 32.76px;">
-              <svg style="width: 15px; height: 15px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <polyline points="20 6 9 17 4 12" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <span class="font-montserrat font-normal text-black"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 12.82px; line-height: 14.95px; letter-spacing: 0%; color: #000000;">
-              Export Ready
-            </span>
-          </div>
-
+            <?php endwhile; ?>
+          <?php endif; ?>
         </div>
 
       </div>
@@ -208,105 +154,63 @@
           <!-- Badge Text (Figma: 22px Montserrat Regular, letter-spacing 11%, line-height 54px, uppercase #FFFFFF) -->
           <h2 class="font-montserrat font-normal text-white uppercase whitespace-nowrap"
             style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 22px; line-height: 54px; letter-spacing: 0.11em; text-transform: uppercase; color: #FFFFFF;">
-            WHY MANUFACTURERS CHOOSE <?php the_title(); ?>
+            <?php echo esc_html( get_field('benefits_title') ?: 'WHY MANUFACTURERS CHOOSE ' . get_the_title() ); ?>
           </h2>
         </div>
 
         <!-- Headline Title (Figma: 22px Montserrat Bold, line-height 30px, color #FFFFFF) -->
         <p class="font-montserrat font-bold text-white text-center"
           style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 22px; line-height: 30px; letter-spacing: 0%; color: #FFFFFF;">
-          Built for formulations where ingredient performance matters.
+          <?php echo esc_html( get_field('benefits_description') ?: 'Built for formulations where ingredient performance matters.' ); ?>
         </p>
 
       </div>
 
-      <!-- 4-Card Horizontal Container (Figma Spec 1:1: 4 cards side-by-side in single horizontal row) -->
+      <!-- 4-Card Horizontal Container -->
       <div class="w-full max-w-[1180px] mx-auto flex flex-row flex-nowrap items-stretch justify-center gap-4 xl:gap-[25px]">
-        
-        <!-- Card 1: Ultra Fine Granules (Figma: 266.12px x 354px) -->
-        <div class="bg-white text-black overflow-hidden shadow-xl flex flex-col shrink-0 transition-transform duration-300 hover:-translate-y-1.5"
-          style="width: 266.12px; height: 354px; border-top-left-radius: 44px; border-bottom-right-radius: 44px;">
-          <!-- Top Image (Figma: width 252px, height 201px, top 8px, left 7px, border-top-left 44px) -->
-          <div class="overflow-hidden shrink-0"
-            style="width: 252px; height: 201px; margin-top: 8px; margin-left: 7px; margin-right: 7px; border-top-left-radius: 44px;">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-rice.png' ); ?>" alt="Ultra Fine Granules" class="w-full h-full object-cover" style="border-top-left-radius: 44px;">
+        <?php if ( have_rows('benefits_list') ) : $count = 0; ?>
+          <?php while ( have_rows('benefits_list') ) : the_row(); 
+            $title = get_sub_field('title');
+            $desc = get_sub_field('description');
+            $count++;
+            
+            if ( $count == 1 ) {
+                $radius = 'border-top-left-radius: 44px; border-bottom-right-radius: 44px;';
+                $img_radius = 'border-top-left-radius: 44px;';
+                $default_img = get_template_directory_uri() . '/public/assets/product-rice.png';
+            } elseif ( $count == 2 ) {
+                $radius = 'border-top-right-radius: 44px; border-bottom-left-radius: 44px;';
+                $img_radius = 'border-top-right-radius: 44px;';
+                $default_img = get_template_directory_uri() . '/public/assets/product-expect.png';
+            } elseif ( $count == 3 ) {
+                $radius = 'border-top-left-radius: 44px; border-bottom-right-radius: 44px;';
+                $img_radius = 'border-top-left-radius: 44px;';
+                $default_img = get_template_directory_uri() . '/public/assets/product-clean.png';
+            } else {
+                $radius = 'border-top-right-radius: 44px; border-bottom-left-radius: 44px;';
+                $img_radius = 'border-top-right-radius: 44px;';
+                $default_img = get_template_directory_uri() . '/public/assets/product-excellet.png';
+            }
+            
+            $icon = get_sub_field('icon');
+            $img_url = ( is_array($icon) && !empty($icon['url']) ) ? $icon['url'] : $default_img;
+          ?>
+          <div class="bg-white text-black overflow-hidden shadow-xl flex flex-col shrink-0 transition-transform duration-300 hover:-translate-y-1.5 h-full"
+            style="width: 266.12px; min-height: 354px; height: auto; <?php echo $radius; ?>">
+            <div class="overflow-hidden shrink-0" style="width: 252px; height: 201px; margin-top: 8px; margin-left: 7px; margin-right: 7px; <?php echo $img_radius; ?>">
+              <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" class="w-full h-full object-cover" style="<?php echo $img_radius; ?>">
+            </div>
+            <div class="px-4 py-3 flex flex-col justify-start flex-1" style="gap: 4px;">
+              <h3 class="font-montserrat font-semibold text-[#5D3700]" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 18px; line-height: 28px; color: #5D3700;">
+                <?php echo esc_html( $title ); ?>
+              </h3>
+              <p class="font-montserrat font-normal text-black/70" style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; line-height: 22px; color: rgba(0, 0, 0, 0.7);">
+                <?php echo esc_html( $desc ); ?>
+              </p>
+            </div>
           </div>
-          <!-- Card Content Padding -->
-          <div class="px-4 py-3 flex flex-col justify-start flex-1" style="gap: 4px;">
-            <h3 class="font-montserrat font-semibold text-[#5D3700]"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 18px; line-height: 28px; letter-spacing: 0%; color: #5D3700;">
-              Ultra Fine Granules
-            </h3>
-            <p class="font-montserrat font-normal text-black/70"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; line-height: 22px; letter-spacing: 0%; color: rgba(0, 0, 0, 0.7);">
-              Creates smoother mouthfeel and improved texture performance.
-            </p>
-          </div>
-        </div>
-
-        <!-- Card 2: Stable Under Processing (Figma Spec 1:1: border-top-right 44px, border-bottom-left 44px) -->
-        <div class="bg-white text-black overflow-hidden shadow-xl flex flex-col shrink-0 transition-transform duration-300 hover:-translate-y-1.5"
-          style="width: 266.12px; height: 354px; border-top-right-radius: 44px; border-bottom-left-radius: 44px;">
-          <!-- Top Image (Figma: width 252px, height 201px, top 8px, left 7px, border-top-right 44px) -->
-          <div class="overflow-hidden shrink-0"
-            style="width: 252px; height: 201px; margin-top: 8px; margin-left: 7px; margin-right: 7px; border-top-right-radius: 44px;">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-expect.png' ); ?>" alt="Stable Under Processing" class="w-full h-full object-cover" style="border-top-right-radius: 44px;">
-          </div>
-          <!-- Card Content Padding -->
-          <div class="px-4 py-3 flex flex-col justify-start flex-1" style="gap: 4px;">
-            <h3 class="font-montserrat font-semibold text-[#5D3700]"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 18px; line-height: 28px; letter-spacing: 0%; color: #5D3700;">
-              Stable Under Processing
-            </h3>
-            <p class="font-montserrat font-normal text-black/70"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; line-height: 22px; letter-spacing: 0%; color: rgba(0, 0, 0, 0.7);">
-              Maintains consistency under heat and varying pH conditions.
-            </p>
-          </div>
-        </div>
-
-        <!-- Card 3: Clean Label Compatibility (Figma Spec 1:1: border-top-left 44px, border-bottom-right 44px) -->
-        <div class="bg-white text-black overflow-hidden shadow-xl flex flex-col shrink-0 transition-transform duration-300 hover:-translate-y-1.5"
-          style="width: 266.12px; height: 354px; border-top-left-radius: 44px; border-bottom-right-radius: 44px;">
-          <!-- Top Image (Figma: width 252px, height 201px, top 8px, left 7px, border-top-left 44px) -->
-          <div class="overflow-hidden shrink-0"
-            style="width: 252px; height: 201px; margin-top: 8px; margin-left: 7px; margin-right: 7px; border-top-left-radius: 44px;">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-clean.png' ); ?>" alt="Clean Label Compatibility" class="w-full h-full object-cover" style="border-top-left-radius: 44px;">
-          </div>
-          <!-- Card Content Padding -->
-          <div class="px-4 py-3 flex flex-col justify-start flex-1" style="gap: 4px;">
-            <h3 class="font-montserrat font-semibold text-[#5D3700]"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 18px; line-height: 28px; letter-spacing: 0%; color: #5D3700;">
-              Clean Label Compatibility
-            </h3>
-            <p class="font-montserrat font-normal text-black/70"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; line-height: 22px; letter-spacing: 0%; color: rgba(0, 0, 0, 0.7);">
-              Supports simpler ingredient declarations.
-            </p>
-          </div>
-        </div>
-
-        <!-- Card 4: Excellent Digestibility (Figma Spec 1:1: border-top-right 44px, border-bottom-left 44px) -->
-        <div class="bg-white text-black overflow-hidden shadow-xl flex flex-col shrink-0 transition-transform duration-300 hover:-translate-y-1.5"
-          style="width: 266.12px; height: 354px; border-top-right-radius: 44px; border-bottom-left-radius: 44px;">
-          <!-- Top Image (Figma: width 252px, height 201px, top 8px, left 7px, border-top-right 44px) -->
-          <div class="overflow-hidden shrink-0"
-            style="width: 252px; height: 201px; margin-top: 8px; margin-left: 7px; margin-right: 7px; border-top-right-radius: 44px;">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-excellet.png' ); ?>" alt="Excellent Digestibility" class="w-full h-full object-cover" style="border-top-right-radius: 44px;">
-          </div>
-          <!-- Card Content Padding -->
-          <div class="px-4 py-3 flex flex-col justify-start flex-1" style="gap: 4px;">
-            <h3 class="font-montserrat font-semibold text-[#5D3700]"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 18px; line-height: 28px; letter-spacing: 0%; color: #5D3700;">
-              Excellent Digestibility
-            </h3>
-            <p class="font-montserrat font-normal text-black/70"
-              style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 15px; line-height: 22px; letter-spacing: 0%; color: rgba(0, 0, 0, 0.7);">
-              Suitable for sensitive formulations.
-            </p>
-          </div>
-        </div>
-
+          <?php endwhile; ?>
+        <?php endif; ?>
       </div>
 
     </section>
@@ -347,131 +251,93 @@
 
         </div>
 
-        <!-- Row 1: Top 3 Cards Row (Strict 280px cards, 32px gap) -->
-        <div class="mx-auto flex flex-row flex-nowrap items-center justify-center gap-[32px] mb-[32px] w-full">
-          
-          <!-- Card 1: Bakery -->
-          <div class="bg-[#FDFBEE] rounded-[28px] p-[12px] flex flex-col justify-start shrink-0 relative transition-transform duration-300 hover:-translate-y-1.5 shadow-sm"
-            style="width: 280px; height: 345px;">
-            <!-- Image Frame (Leaf Curved Corners: TL 36px, BR 36px) -->
+        <?php if ( have_rows('applications_list') ) : 
+            $apps = array();
+            while ( have_rows('applications_list') ) {
+                the_row();
+                $apps[] = array(
+                    'name' => get_sub_field('name'),
+                    'description' => get_sub_field('description'),
+                    'image' => get_sub_field('image'),
+                    'icon' => get_sub_field('icon')
+                );
+            }
+            $emojis = ['🍞', '🥛', '🥣', '🍬', '👶'];
+            $default_imgs = [
+                get_template_directory_uri() . '/public/assets/product-bakery.png',
+                get_template_directory_uri() . '/public/assets/product-milk.png',
+                get_template_directory_uri() . '/public/assets/product-meals.png',
+                get_template_directory_uri() . '/public/assets/product-confectionery.png',
+                get_template_directory_uri() . '/public/assets/product-nutrition.png'
+            ];
+        ?>
+        <!-- Row 1: Top 3 Cards Row -->
+        <div class="mx-auto flex flex-row flex-nowrap items-stretch justify-center gap-[32px] mb-[32px] w-full">
+          <?php for($i=0; $i<min(3, count($apps)); $i++): 
+              $app = $apps[$i];
+              $img_url = ( is_array($app['image']) && !empty($app['image']['url']) ) ? $app['image']['url'] : $default_imgs[$i % 5];
+          ?>
+          <div class="bg-[#FDFBEE] rounded-[28px] p-[12px] flex flex-col justify-start shrink-0 relative transition-transform duration-300 hover:-translate-y-1.5 shadow-sm h-full" style="width: 280px; min-height: 345px; height: auto;">
             <div class="relative w-full overflow-visible shrink-0" style="height: 195px;">
               <div class="w-full h-full overflow-hidden" style="border-top-left-radius: 36px; border-bottom-right-radius: 36px;">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-bakery.png' ); ?>" alt="Bakery" class="w-full h-full object-cover">
-              </div>
-              <!-- Overlapping Circle Icon Badge -->
-              <div class="w-[52px] h-[52px] bg-white rounded-full shadow-md flex items-center justify-center absolute -bottom-[18px] left-[16px] z-20 border border-gray-100">
-                <span class="text-[26px] leading-none">🍞</span>
-              </div>
-            </div>
-            <!-- Text Content -->
-            <div class="pt-6 px-3 flex flex-col justify-start flex-1" style="gap: 3px;">
-              <h3 class="font-montserrat font-bold text-[#6A3E00] text-[17px] leading-[24px]">
-                Bakery
-              </h3>
-              <p class="font-montserrat font-normal text-black/70 text-[14px] leading-[20px]">
-                Improve softness and structure.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 2: Dairy -->
-          <div class="bg-[#FDFBEE] rounded-[28px] p-[12px] flex flex-col justify-start shrink-0 relative transition-transform duration-300 hover:-translate-y-1.5 shadow-sm"
-            style="width: 280px; height: 345px;">
-            <div class="relative w-full overflow-visible shrink-0" style="height: 195px;">
-              <div class="w-full h-full overflow-hidden" style="border-top-left-radius: 36px; border-bottom-right-radius: 36px;">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-milk.png' ); ?>" alt="Dairy" class="w-full h-full object-cover">
+                <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr($app['name']); ?>" class="w-full h-full object-cover">
               </div>
               <div class="w-[52px] h-[52px] bg-white rounded-full shadow-md flex items-center justify-center absolute -bottom-[18px] left-[16px] z-20 border border-gray-100">
-                <span class="text-[26px] leading-none">🥛</span>
-              </div>
-            </div>
-            <div class="pt-6 px-3 flex flex-col justify-start flex-1" style="gap: 3px;">
-              <h3 class="font-montserrat font-bold text-[#6A3E00] text-[17px] leading-[24px]">
-                Dairy
-              </h3>
-              <p class="font-montserrat font-normal text-black/70 text-[14px] leading-[20px]">
-                Create creamier textures.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 3: Ready Meals -->
-          <div class="bg-[#FDFBEE] rounded-[28px] p-[12px] flex flex-col justify-start shrink-0 relative transition-transform duration-300 hover:-translate-y-1.5 shadow-sm"
-            style="width: 280px; height: 345px;">
-            <div class="relative w-full overflow-visible shrink-0" style="height: 195px;">
-              <div class="w-full h-full overflow-hidden" style="border-top-left-radius: 36px; border-bottom-right-radius: 36px;">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-meals.png' ); ?>" alt="Ready Meals" class="w-full h-full object-cover">
-              </div>
-              <div class="w-[52px] h-[52px] bg-white rounded-full shadow-md flex items-center justify-center absolute -bottom-[18px] left-[16px] z-20 border border-gray-100">
-                <span class="text-[26px] leading-none">🥣</span>
+                <?php if(!empty($app['icon'])): ?>
+                <img src="<?php echo esc_url($app['icon']); ?>" alt="" class="w-[26px] h-[26px] object-contain">
+                <?php else: ?>
+                <span class="text-[26px] leading-none"><?php echo $emojis[$i % 5]; ?></span>
+                <?php endif; ?>
               </div>
             </div>
             <div class="pt-6 px-3 flex flex-col justify-start flex-1" style="gap: 3px;">
               <h3 class="font-montserrat font-bold text-[#6A3E00] text-[17px] leading-[24px]">
-                Ready Meals
+                <?php echo esc_html($app['name']); ?>
               </h3>
               <p class="font-montserrat font-normal text-black/70 text-[14px] leading-[20px]">
-                Improve softness and structure.
+                <?php echo esc_html($app['description']); ?>
               </p>
             </div>
           </div>
-
+          <?php endfor; ?>
         </div>
 
-        <!-- Row 2: Bottom 2 Cards Centered Row (Strict 280px cards, 32px gap) -->
-        <div class="mx-auto flex flex-row flex-nowrap items-center justify-center gap-[32px] relative w-full">
+        <?php if(count($apps) > 3): ?>
+        <!-- Row 2: Bottom Cards Centered Row -->
+        <div class="mx-auto flex flex-row flex-nowrap items-stretch justify-center gap-[32px] relative w-full">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/leaf-product.svg' ); ?>" alt="" class="absolute left-2 bottom-2 w-[120px] h-auto opacity-100 pointer-events-none select-none">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/leaf-product.svg' ); ?>" alt="" class="absolute right-2 bottom-2 w-[120px] h-auto opacity-100 pointer-events-none select-none transform scale-x-[-1]">
 
-          <!-- Left Sprout Leaf Watermark -->
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/leaf-product.svg' ); ?>" alt=""
-            class="absolute left-2 bottom-2 w-[120px] h-auto opacity-100 pointer-events-none select-none">
-
-          <!-- Right Sprout Leaf Watermark -->
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/leaf-product.svg' ); ?>" alt=""
-            class="absolute right-2 bottom-2 w-[120px] h-auto opacity-100 pointer-events-none select-none transform scale-x-[-1]">
-
-          <!-- Card 4: Confectionery -->
-          <div class="bg-[#FDFBEE] rounded-[28px] p-[12px] flex flex-col justify-start shrink-0 relative transition-transform duration-300 hover:-translate-y-1.5 shadow-sm"
-            style="width: 280px; height: 345px;">
+          <?php for($i=3; $i<count($apps); $i++): 
+              $app = $apps[$i];
+              $img_url = ( is_array($app['image']) && !empty($app['image']['url']) ) ? $app['image']['url'] : $default_imgs[$i % 5];
+          ?>
+          <div class="bg-[#FDFBEE] rounded-[28px] p-[12px] flex flex-col justify-start shrink-0 relative transition-transform duration-300 hover:-translate-y-1.5 shadow-sm h-full" style="width: 280px; min-height: 345px; height: auto;">
             <div class="relative w-full overflow-visible shrink-0" style="height: 195px;">
               <div class="w-full h-full overflow-hidden" style="border-top-left-radius: 36px; border-bottom-right-radius: 36px;">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-confectionery.png' ); ?>" alt="Confectionery" class="w-full h-full object-cover">
+                <img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr($app['name']); ?>" class="w-full h-full object-cover">
               </div>
               <div class="w-[52px] h-[52px] bg-white rounded-full shadow-md flex items-center justify-center absolute -bottom-[18px] left-[16px] z-20 border border-gray-100">
-                <span class="text-[26px] leading-none">🍬</span>
+                <?php if(!empty($app['icon'])): ?>
+                <img src="<?php echo esc_url($app['icon']); ?>" alt="" class="w-[26px] h-[26px] object-contain">
+                <?php else: ?>
+                <span class="text-[26px] leading-none"><?php echo $emojis[$i % 5]; ?></span>
+                <?php endif; ?>
               </div>
             </div>
             <div class="pt-6 px-3 flex flex-col justify-start flex-1" style="gap: 3px;">
               <h3 class="font-montserrat font-bold text-[#6A3E00] text-[17px] leading-[24px]">
-                Confectionery
+                <?php echo esc_html($app['name']); ?>
               </h3>
               <p class="font-montserrat font-normal text-black/70 text-[14px] leading-[20px]">
-                Support coating and smooth finish.
+                <?php echo esc_html($app['description']); ?>
               </p>
             </div>
           </div>
-
-          <!-- Card 5: Infant Nutrition -->
-          <div class="bg-[#FDFBEE] rounded-[28px] p-[12px] flex flex-col justify-start shrink-0 relative transition-transform duration-300 hover:-translate-y-1.5 shadow-sm"
-            style="width: 280px; height: 345px;">
-            <div class="relative w-full overflow-visible shrink-0" style="height: 195px;">
-              <div class="w-full h-full overflow-hidden" style="border-top-left-radius: 36px; border-bottom-right-radius: 36px;">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-nutrition.png' ); ?>" alt="Infant Nutrition" class="w-full h-full object-cover">
-              </div>
-              <div class="w-[52px] h-[52px] bg-white rounded-full shadow-md flex items-center justify-center absolute -bottom-[18px] left-[16px] z-20 border border-gray-100">
-                <span class="text-[26px] leading-none">👶</span>
-              </div>
-            </div>
-            <div class="pt-6 px-3 flex flex-col justify-start flex-1" style="gap: 3px;">
-              <h3 class="font-montserrat font-bold text-[#6A3E00] text-[17px] leading-[24px]">
-                Infant Nutrition
-              </h3>
-              <p class="font-montserrat font-normal text-black/70 text-[14px] leading-[20px]">
-                High digestibility and gentle texture.
-              </p>
-            </div>
-          </div>
-
+          <?php endfor; ?>
         </div>
+        <?php endif; ?>
+        <?php endif; ?>
 
       </div>
 
@@ -487,7 +353,7 @@
           <div class="w-1.5 h-8 bg-starizo-orange rounded-full"></div>
           <h2
             class="font-montserrat font-normal text-[16px] text-starizo-brown uppercase leading-[54px] tracking-[0.11em]">
-            Frequently Asked Questions</h2>
+            <?php echo esc_html( get_field('faq_title') ?: 'Frequently Asked Questions' ); ?></h2>
         </div>
       </div>
 
@@ -499,69 +365,27 @@
 
           <!-- FAQ list -->
           <div class="space-y-4 flex-1">
-
-            <!-- FAQ 1 (Active/Expanded) -->
-            <div class="bg-white border border-gray-100 rounded-3xl py-4 px-6 md:py-[18px] md:px-8 shadow-sm">
-              <div class="flex justify-between items-center gap-4">
-                <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]">Do you
-                  support formulation guidance?</h4>
-                <div class="w-5 h-[2px] bg-starizo-brown rounded-full"></div>
-              </div>
-              <p class="mt-3 text-[16px] text-gray-600 leading-[1.6] max-w-xl">
-                Yes. We collaborate to align ingredient performance with application goals.
-              </p>
-            </div>
-
-            <!-- FAQ 2 -->
-            <div class="bg-white border border-gray-100 rounded-3xl py-4 px-6 md:py-[18px] md:px-8 shadow-sm">
-              <div class="flex justify-between items-center gap-4">
-                <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]">Can we
-                  request technical information?</h4>
-                <div class="w-5 h-5 flex items-center justify-center relative text-starizo-orange">
-                  <div class="w-5 h-[2.5px] bg-current rounded-full"></div>
-                  <div class="w-[2.5px] h-5 bg-current rounded-full absolute"></div>
+            <?php if ( have_rows('faq_list') ) : $faq_count = 0; ?>
+              <?php while ( have_rows('faq_list') ) : the_row(); 
+                $q = get_sub_field('question');
+                $a = get_sub_field('answer');
+                $faq_count++;
+              ?>
+              <div class="bg-white border border-gray-100 rounded-3xl py-4 px-6 md:py-[18px] md:px-8 shadow-sm">
+                <div class="flex justify-between items-center gap-4 cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.vertical-line').classList.toggle('rotate-90');">
+                  <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]"><?php echo esc_html($q); ?></h4>
+                  <div class="w-5 h-5 flex items-center justify-center relative text-starizo-orange">
+                    <div class="w-5 h-[2.5px] bg-current rounded-full absolute"></div>
+                    <div class="vertical-line w-[2.5px] h-5 bg-current rounded-full absolute transition-transform duration-200 <?php echo $faq_count == 1 ? 'rotate-90' : ''; ?>"></div>
+                  </div>
                 </div>
+                <p class="mt-3 text-[16px] text-gray-600 leading-[1.6] max-w-xl <?php echo $faq_count == 1 ? '' : 'hidden'; ?>">
+                  <?php echo esc_html($a); ?>
+                </p>
               </div>
-            </div>
-
-            <!-- FAQ 3 -->
-            <div class="bg-white border border-gray-100 rounded-3xl py-4 px-6 md:py-[18px] md:px-8 shadow-sm">
-              <div class="flex justify-between items-center gap-4">
-                <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]">Do you
-                  support international supply?</h4>
-                <div class="w-5 h-5 flex items-center justify-center relative text-starizo-orange">
-                  <div class="w-5 h-[2.5px] bg-current rounded-full"></div>
-                  <div class="w-[2.5px] h-5 bg-current rounded-full absolute"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- FAQ 4 -->
-            <div class="bg-white border border-gray-100 rounded-3xl py-4 px-6 md:py-[18px] md:px-8 shadow-sm">
-              <div class="flex justify-between items-center gap-4">
-                <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]">Can
-                  STARIZO support product development?</h4>
-                <div class="w-5 h-5 flex items-center justify-center relative text-starizo-orange">
-                  <div class="w-5 h-[2.5px] bg-current rounded-full"></div>
-                  <div class="w-[2.5px] h-5 bg-current rounded-full absolute"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- FAQ 5 -->
-            <div class="bg-white border border-gray-100 rounded-3xl py-4 px-6 md:py-[18px] md:px-8 shadow-sm">
-              <div class="flex justify-between items-center gap-4">
-                <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]">Is there
-                  a minimum order requirement?</h4>
-                <div class="w-5 h-5 flex items-center justify-center relative text-starizo-orange">
-                  <div class="w-5 h-[2.5px] bg-current rounded-full"></div>
-                  <div class="w-[2.5px] h-5 bg-current rounded-full absolute"></div>
-                </div>
-              </div>
-            </div>
-
+              <?php endwhile; ?>
+            <?php endif; ?>
           </div>
-
         </div>
 
         <!-- Brand Info Card Right (Matches Left container in width and stretches to match height) -->
@@ -570,8 +394,13 @@
           <div class="flex flex-col space-y-6">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/logo.svg' ); ?>" alt="Starizo" class="h-8 w-auto self-start">
             <h4 class="text-[22px] font-bold text-starizo-brown leading-tight">
-              More Than Ingredients.<br>Built For Growth.
+              <?php echo wp_kses_post( get_field('value_prop_title') ?: 'More Than Ingredients.<br>Built For Growth.' ); ?>
             </h4>
+            <?php if( $val_desc = get_field('value_prop_description') ) : ?>
+            <div class="text-[16px] text-gray-700 leading-[1.8] space-y-4">
+              <?php echo wpautop( wp_kses_post( $val_desc ) ); ?>
+            </div>
+            <?php else : ?>
             <p class="text-[16px] text-gray-700 leading-[1.8]">
               STARIZO combines sourcing intelligence, advanced processing, technical collaboration, and manufacturing
               scale to help businesses create products that perform in the real world.
@@ -579,6 +408,7 @@
             <p class="text-[16px] text-gray-700 leading-[1.8]">
               From idea to industrial production—we support every stage of the journey.
             </p>
+            <?php endif; ?>
           </div>
           <a href="#"
             class="w-full border-2 border-starizo-orange hover:bg-starizo-orange text-starizo-orange hover:text-white font-semibold text-[18px] py-3 rounded-[22px] flex items-center justify-center gap-2 group transition-all duration-200 mt-8">
@@ -639,13 +469,15 @@
           </a>
 
           <!-- Secondary Action Button: Download Brochure -->
-          <a href="#" download
+          <?php if ( $brochure_url = get_field('brochure_file') ) : ?>
+          <a href="<?php echo esc_url( $brochure_url ); ?>" download
             class="text-[#FF8D00] hover:text-[#e07c00] font-montserrat font-semibold text-[13px] h-[36px] flex items-center justify-center gap-1.5 transition duration-200 shrink-0">
             <span>Download Brochure</span>
             <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </a>
+          <?php endif; ?>
         </div>
 
       </div>
@@ -659,64 +491,34 @@
         </div>
       </div>
 
-      <!-- Mobile Highlights Grid Container (Figma Spec 1:1: width 286.15px, height 136.27px, gap 19px, centered) -->
-      <div class="mx-auto flex flex-col justify-between items-center my-6"
-        style="width: 286.15px; min-height: 136.27px; gap: 19px;">
-        
-        <!-- Row 1: Non-GMO & Gluten Free -->
-        <div class="w-full flex flex-row items-center justify-between">
+      <!-- Mobile Highlights Grid Container -->
+      <div class="mx-auto flex flex-col justify-between items-center my-6" style="width: 286.15px; min-height: 136.27px; gap: 19px;">
+        <?php if(have_rows('hero_badges')): 
+          $badges = [];
+          while(have_rows('hero_badges')) { the_row(); $badges[] = get_sub_field('label'); }
+          for($i=0; $i<count($badges); $i+=2): 
+        ?>
+        <div class="w-full flex flex-row items-center <?php echo isset($badges[$i+1]) ? 'justify-between' : 'justify-start'; ?>">
           <div class="flex items-center gap-[12px] shrink-0">
             <div class="w-[32.76px] h-[32.76px] rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm">
               <svg class="w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
             </div>
-            <span class="font-montserrat font-normal text-[12.82px] leading-[15px] text-black">Non-GMO</span>
+            <span class="font-montserrat font-normal text-[12.82px] leading-[15px] text-black"><?php echo esc_html($badges[$i]); ?></span>
           </div>
-
+          <?php if(isset($badges[$i+1])): ?>
           <div class="flex items-center gap-[12px] shrink-0">
             <div class="w-[32.76px] h-[32.76px] rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm">
               <svg class="w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
             </div>
-            <span class="font-montserrat font-normal text-[12.82px] leading-[15px] text-black">Gluten Free</span>
+            <span class="font-montserrat font-normal text-[12.82px] leading-[15px] text-black"><?php echo esc_html($badges[$i+1]); ?></span>
           </div>
+          <?php endif; ?>
         </div>
-
-        <!-- Row 2: Clean Label & Hypoallergenic -->
-        <div class="w-full flex flex-row items-center justify-between">
-          <div class="flex items-center gap-[12px] shrink-0">
-            <div class="w-[32.76px] h-[32.76px] rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm">
-              <svg class="w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-            <span class="font-montserrat font-normal text-[12.82px] leading-[15px] text-black">Clean Label</span>
-          </div>
-
-          <div class="flex items-center gap-[12px] shrink-0">
-            <div class="w-[32.76px] h-[32.76px] rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm">
-              <svg class="w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-            <span class="font-montserrat font-normal text-[12.82px] leading-[15px] text-black">Hypoallergenic</span>
-          </div>
-        </div>
-
-        <!-- Row 3: Export Ready -->
-        <div class="w-full flex flex-row items-center justify-start">
-          <div class="flex items-center gap-[12px] shrink-0">
-            <div class="w-[32.76px] h-[32.76px] rounded-full bg-[#00A256] flex items-center justify-center shrink-0 shadow-sm">
-              <svg class="w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </div>
-            <span class="font-montserrat font-normal text-[12.82px] leading-[15px] text-black">Export Ready</span>
-          </div>
-        </div>
-
+        <?php endfor; endif; ?>
       </div>
 
     </section>
@@ -729,89 +531,59 @@
         <div class="w-[5px] h-[36px] bg-[#FF8D00] rounded-full shrink-0"></div>
         <h2 class="font-montserrat text-white uppercase text-center"
           style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; line-height: 34px; letter-spacing: 0.11em; text-align: center; text-transform: uppercase; color: #FFFFFF;">
-          WHY MANUFACTURERS CHOOSE <?php the_title(); ?>
+          <?php echo esc_html( get_field('benefits_title') ?: 'WHY MANUFACTURERS CHOOSE ' . get_the_title() ); ?>
         </h2>
       </div>
 
-      <!-- 2 Columns x 2 Rows Cards Grid (Decreased padding matching screenshot 1:1) -->
+      <?php if( $mobile_desc = get_field('benefits_description') ) : ?>
+      <p class="font-montserrat font-medium text-white text-center mb-6 px-2"
+        style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 22px;">
+        <?php echo esc_html( $mobile_desc ); ?>
+      </p>
+      <?php endif; ?>
+
+      <!-- 2 Columns x 2 Rows Cards Grid -->
       <div class="w-full max-w-[360px] grid grid-cols-2 gap-3 sm:gap-4">
-
-        <!-- Card 1: Ultra Fine Granules (Leaf corners: Top-Left & Bottom-Right 36px) -->
-        <div class="bg-white text-black p-1.5 pb-3 flex flex-col justify-start shadow-lg transition-transform duration-300 hover:-translate-y-1"
-          style="border-top-left-radius: 36px; border-bottom-right-radius: 36px; min-height: 235px;">
+        <?php if ( have_rows('benefits_list') ) : $count = 0; ?>
+          <?php while ( have_rows('benefits_list') ) : the_row(); 
+            $title = get_sub_field('title');
+            $desc = get_sub_field('description');
+            $count++;
+            
+            if ( $count % 2 == 1 ) {
+                $radius = 'border-top-left-radius: 36px; border-bottom-right-radius: 36px;';
+                $img_radius = 'border-top-left-radius: 28px; border-bottom-right-radius: 28px;';
+            } else {
+                $radius = 'border-top-right-radius: 36px; border-bottom-left-radius: 36px;';
+                $img_radius = 'border-top-right-radius: 28px; border-bottom-left-radius: 28px;';
+            }
+            
+            $default_imgs = [
+                get_template_directory_uri() . '/public/assets/product-rice.png',
+                get_template_directory_uri() . '/public/assets/product-expect.png',
+                get_template_directory_uri() . '/public/assets/product-clean.png',
+                get_template_directory_uri() . '/public/assets/product-excellet.png'
+            ];
+            
+            $icon = get_sub_field('icon');
+            $img_url = ( is_array($icon) && !empty($icon['url']) ) ? $icon['url'] : $default_imgs[($count-1) % 4];
+          ?>
+        <div class="bg-white text-black p-1.5 pb-3 flex flex-col justify-start shadow-lg transition-transform duration-300 hover:-translate-y-1" style="<?php echo $radius; ?> min-height: 235px;">
           <!-- Card Image -->
-          <div class="w-full overflow-hidden shrink-0 mb-2"
-            style="height: 120px; border-top-left-radius: 28px; border-bottom-right-radius: 28px;">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-rice.png' ); ?>" alt="Ultra Fine Granules" class="w-full h-full object-cover">
+          <div class="w-full overflow-hidden shrink-0 mb-2" style="height: 120px; <?php echo $img_radius; ?>">
+            <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($title); ?>" class="w-full h-full object-cover">
           </div>
           <!-- Card Content -->
           <div class="px-1.5 flex flex-col justify-start gap-1">
             <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] sm:text-[14px] leading-snug">
-              Ultra Fine Granules
+              <?php echo esc_html($title); ?>
             </h3>
             <p class="font-montserrat font-normal text-black/75 text-[11px] sm:text-[12px] leading-relaxed">
-              Creates smoother mouthfeel and improved texture performance.
+              <?php echo esc_html($desc); ?>
             </p>
           </div>
         </div>
-
-        <!-- Card 2: Stable Under Processing (Leaf corners: Top-Right & Bottom-Left 36px) -->
-        <div class="bg-white text-black p-1.5 pb-3 flex flex-col justify-start shadow-lg transition-transform duration-300 hover:-translate-y-1"
-          style="border-top-right-radius: 36px; border-bottom-left-radius: 36px; min-height: 235px;">
-          <!-- Card Image -->
-          <div class="w-full overflow-hidden shrink-0 mb-2"
-            style="height: 120px; border-top-right-radius: 28px; border-bottom-left-radius: 28px;">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-expect.png' ); ?>" alt="Stable Under Processing" class="w-full h-full object-cover">
-          </div>
-          <!-- Card Content -->
-          <div class="px-1.5 flex flex-col justify-start gap-1">
-            <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] sm:text-[14px] leading-snug">
-              Stable Under Processing
-            </h3>
-            <p class="font-montserrat font-normal text-black/75 text-[11px] sm:text-[12px] leading-relaxed">
-              Maintains consistency under heat and varying pH conditions.
-            </p>
-          </div>
-        </div>
-
-        <!-- Card 3: Clean Label Compatibility (Leaf corners: Top-Left & Bottom-Right 36px) -->
-        <div class="bg-white text-black p-1.5 pb-3 flex flex-col justify-start shadow-lg transition-transform duration-300 hover:-translate-y-1"
-          style="border-top-left-radius: 36px; border-bottom-right-radius: 36px; min-height: 235px;">
-          <!-- Card Image -->
-          <div class="w-full overflow-hidden shrink-0 mb-2"
-            style="height: 120px; border-top-left-radius: 28px; border-bottom-right-radius: 28px;">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-clean.png' ); ?>" alt="Clean Label Compatibility" class="w-full h-full object-cover">
-          </div>
-          <!-- Card Content -->
-          <div class="px-1.5 flex flex-col justify-start gap-1">
-            <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] sm:text-[14px] leading-snug">
-              Clean Label Compatibility
-            </h3>
-            <p class="font-montserrat font-normal text-black/75 text-[11px] sm:text-[12px] leading-relaxed">
-              Supports simpler ingredient declarations.
-            </p>
-          </div>
-        </div>
-
-        <!-- Card 4: Excellent Digestibility (Leaf corners: Top-Right & Bottom-Left 36px) -->
-        <div class="bg-white text-black p-1.5 pb-3 flex flex-col justify-start shadow-lg transition-transform duration-300 hover:-translate-y-1"
-          style="border-top-right-radius: 36px; border-bottom-left-radius: 36px; min-height: 235px;">
-          <!-- Card Image -->
-          <div class="w-full overflow-hidden shrink-0 mb-2"
-            style="height: 120px; border-top-right-radius: 28px; border-bottom-left-radius: 28px;">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-excellet.png' ); ?>" alt="Excellent Digestibility" class="w-full h-full object-cover">
-          </div>
-          <!-- Card Content -->
-          <div class="px-1.5 flex flex-col justify-start gap-1">
-            <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] sm:text-[14px] leading-snug">
-              Excellent Digestibility
-            </h3>
-            <p class="font-montserrat font-normal text-black/75 text-[11px] sm:text-[12px] leading-relaxed">
-              Suitable for sensitive formulations.
-            </p>
-          </div>
-        </div>
-
+        <?php endwhile; endif; ?>
       </div>
 
     </section>
@@ -849,93 +621,76 @@
           </h2>
         </div>
 
-        <!-- 4-Cards Grid: 2 Columns x 2 Rows (347px width, gap 14px) -->
+        <!-- 4-Cards Grid: 2 Columns x 2 Rows -->
         <div class="w-full grid grid-cols-2 gap-3.5" style="max-width: 347px;">
-          
-          <!-- Card 1: Bakery -->
+          <?php if ( have_rows('applications_list') ) : 
+              $apps = [];
+              while ( have_rows('applications_list') ) {
+                  the_row();
+                  $apps[] = [
+                      'name' => get_sub_field('name'),
+                      'description' => get_sub_field('description'),
+                      'image' => get_sub_field('image'),
+                      'icon' => get_sub_field('icon')
+                  ];
+              }
+              $emojis = ['🍞', '🥛', '🥣', '🍬', '👶'];
+              $default_imgs = [
+                  get_template_directory_uri() . '/public/assets/product-bakery.png',
+                  get_template_directory_uri() . '/public/assets/product-milk.png',
+                  get_template_directory_uri() . '/public/assets/product-meals.png',
+                  get_template_directory_uri() . '/public/assets/product-confectionery.png',
+                  get_template_directory_uri() . '/public/assets/product-nutrition.png'
+              ];
+              for($i=0; $i<min(4, count($apps)); $i++):
+                  $app = $apps[$i];
+                  $img_url = ( is_array($app['image']) && !empty($app['image']['url']) ) ? $app['image']['url'] : $default_imgs[$i % 5];
+          ?>
           <div class="bg-[#FDFBF3] rounded-[24px] p-2 flex flex-col text-left shadow-sm">
             <div class="relative w-full h-[105px] shrink-0">
               <div class="w-full h-full overflow-hidden" style="border-top-left-radius: 20px; border-bottom-right-radius: 20px;">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-bakery.png' ); ?>" alt="Bakery" class="w-full h-full object-cover">
+                <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($app['name']); ?>" class="w-full h-full object-cover">
               </div>
               <div class="w-[36px] h-[36px] bg-white rounded-full shadow-md flex items-center justify-center absolute -bottom-[12px] left-[8px] z-10">
-                <span class="text-[18px]">🍞</span>
+                <?php if(!empty($app['icon'])): ?>
+                <img src="<?php echo esc_url($app['icon']); ?>" alt="" class="w-[18px] h-[18px] object-contain">
+                <?php else: ?>
+                <span class="text-[18px]"><?php echo $emojis[$i % 5]; ?></span>
+                <?php endif; ?>
               </div>
             </div>
             <div class="pt-4 px-1.5 pb-1 flex flex-col gap-0.5">
-              <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] leading-tight">Bakery</h3>
-              <p class="font-montserrat font-normal text-black/75 text-[10px] leading-snug">Improve softness and structure.</p>
+              <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] leading-tight"><?php echo esc_html($app['name']); ?></h3>
+              <p class="font-montserrat font-normal text-black/75 text-[10px] leading-snug"><?php echo esc_html($app['description']); ?></p>
             </div>
           </div>
-
-          <!-- Card 2: Dairy -->
-          <div class="bg-[#FDFBF3] rounded-[24px] p-2 flex flex-col text-left shadow-sm">
-            <div class="relative w-full h-[105px] shrink-0">
-              <div class="w-full h-full overflow-hidden" style="border-top-left-radius: 20px; border-bottom-right-radius: 20px;">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-milk.png' ); ?>" alt="Dairy" class="w-full h-full object-cover">
-              </div>
-              <div class="w-[36px] h-[36px] bg-white rounded-full shadow-md flex items-center justify-center absolute -bottom-[12px] left-[8px] z-10">
-                <span class="text-[18px]">🥛</span>
-              </div>
-            </div>
-            <div class="pt-4 px-1.5 pb-1 flex flex-col gap-0.5">
-              <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] leading-tight">Dairy</h3>
-              <p class="font-montserrat font-normal text-black/75 text-[10px] leading-snug">Create creamier textures.</p>
-            </div>
-          </div>
-
-          <!-- Card 3: Ready Meals -->
-          <div class="bg-[#FDFBF3] rounded-[24px] p-2 flex flex-col text-left shadow-sm">
-            <div class="relative w-full h-[105px] shrink-0">
-              <div class="w-full h-full overflow-hidden" style="border-top-left-radius: 20px; border-bottom-right-radius: 20px;">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-meals.png' ); ?>" alt="Ready Meals" class="w-full h-full object-cover">
-              </div>
-              <div class="w-[36px] h-[36px] bg-white rounded-full shadow-md flex items-center justify-center absolute -bottom-[12px] left-[8px] z-10">
-                <span class="text-[18px]">🥣</span>
-              </div>
-            </div>
-            <div class="pt-4 px-1.5 pb-1 flex flex-col gap-0.5">
-              <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] leading-tight">Ready Meals</h3>
-              <p class="font-montserrat font-normal text-black/75 text-[10px] leading-snug">Improve softness and structure.</p>
-            </div>
-          </div>
-
-          <!-- Card 4: Confectionery -->
-          <div class="bg-[#FDFBF3] rounded-[24px] p-2 flex flex-col text-left shadow-sm">
-            <div class="relative w-full h-[105px] shrink-0">
-              <div class="w-full h-full overflow-hidden" style="border-top-left-radius: 20px; border-bottom-right-radius: 20px;">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-confectionery.png' ); ?>" alt="Confectionery" class="w-full h-full object-cover">
-              </div>
-              <div class="w-[36px] h-[36px] bg-white rounded-full shadow-md flex items-center justify-center absolute -bottom-[12px] left-[8px] z-10">
-                <span class="text-[18px]">🍬</span>
-              </div>
-            </div>
-            <div class="pt-4 px-1.5 pb-1 flex flex-col gap-0.5">
-              <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] leading-tight">Confectionery</h3>
-              <p class="font-montserrat font-normal text-black/75 text-[10px] leading-snug">Support coating and smooth finish.</p>
-            </div>
-          </div>
-
+          <?php endfor; ?>
         </div>
 
-        <!-- Card 5: Infant Nutrition (Centered beneath top grid, width 160.13px, height 184.57px) -->
-        <div class="w-[160px] bg-[#FDFBF3] rounded-[24px] p-2 flex flex-col text-left shadow-sm mx-auto shrink-0"
-          style="min-height: 184px;">
+        <?php if(count($apps) > 4): 
+            $app = $apps[4];
+            $img_url = ( is_array($app['image']) && !empty($app['image']['url']) ) ? $app['image']['url'] : $default_imgs[4];
+        ?>
+        <!-- Card 5: Infant Nutrition -->
+        <div class="w-[160px] bg-[#FDFBF3] rounded-[24px] p-2 flex flex-col text-left shadow-sm mx-auto shrink-0 mt-4" style="min-height: 184px;">
           <div class="relative w-full h-[105px] shrink-0">
             <div class="w-full h-full overflow-hidden" style="border-top-left-radius: 20px; border-bottom-right-radius: 20px;">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/product-nutrition.png' ); ?>" alt="Infant Nutrition" class="w-full h-full object-cover">
+              <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($app['name']); ?>" class="w-full h-full object-cover">
             </div>
             <div class="w-[36px] h-[36px] bg-white rounded-full shadow-md flex items-center justify-center absolute -bottom-[12px] left-[8px] z-10">
-              <span class="text-[18px]">👶</span>
+              <?php if(!empty($app['icon'])): ?>
+              <img src="<?php echo esc_url($app['icon']); ?>" alt="" class="w-[18px] h-[18px] object-contain">
+              <?php else: ?>
+              <span class="text-[18px]"><?php echo $emojis[4]; ?></span>
+              <?php endif; ?>
             </div>
           </div>
           <div class="pt-4 px-1.5 pb-1 flex flex-col gap-0.5">
-            <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] leading-tight">Infant Nutrition</h3>
-            <p class="font-montserrat font-normal text-black/75 text-[10px] leading-snug">High digestibility and gentle texture.</p>
+            <h3 class="font-montserrat font-bold text-[#5D3700] text-[13px] leading-tight"><?php echo esc_html($app['name']); ?></h3>
+            <p class="font-montserrat font-normal text-black/75 text-[10px] leading-snug"><?php echo esc_html($app['description']); ?></p>
           </div>
         </div>
-
-      </div>
+        <?php endif; endif; ?>
     </section>
 
     <!-- Mobile FAQ & Brand Card Section -->
@@ -946,104 +701,33 @@
         <div class="flex items-center gap-3 mb-4">
           <div class="w-[6px] h-[33px] bg-[#FF8500] rounded-full shrink-0"></div>
           <h2 class="font-montserrat font-normal text-[16px] text-[#5D3700] uppercase leading-[54px] tracking-[0.11em] whitespace-nowrap">
-            Frequently Asked Questions</h2>
+            <?php echo esc_html( get_field('faq_title') ?: 'Frequently Asked Questions' ); ?></h2>
         </div>
       </div>
 
       <!-- Accordion Stack -->
       <div class="w-full max-w-[340px] mx-auto flex flex-col gap-4 px-1 mb-10" id="mobile-faq-accordion">
-
-        <!-- Accordion 1 -->
-        <div
-          class="mobile-faq-item bg-white border border-gray-100/50 rounded-3xl py-[18px] px-6 shadow-sm flex flex-col transition-all duration-300"
-          data-faq-active="true">
+        <?php if(have_rows('faq_list')): $faq_count = 0; ?>
+          <?php while(have_rows('faq_list')): the_row(); 
+            $q = get_sub_field('question');
+            $a = get_sub_field('answer');
+            $faq_count++;
+            $active = $faq_count == 1 ? 'true' : 'false';
+          ?>
+        <div class="mobile-faq-item bg-white border border-gray-100/50 rounded-3xl py-[18px] px-6 shadow-sm flex flex-col transition-all duration-300" data-faq-active="<?php echo $active; ?>">
           <button class="w-full flex justify-between items-center text-left focus:outline-none">
-            <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]">Do you support
-              formulation guidance?</h4>
-            <div class="faq-icon-minus w-5 h-[2px] bg-[#5D3700] rounded-full shrink-0"></div>
-            <div
-              class="faq-icon-plus hidden w-5 h-5 flex items-center justify-center relative text-starizo-orange shrink-0">
+            <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]"><?php echo esc_html($q); ?></h4>
+            <div class="faq-icon-minus <?php echo $faq_count == 1 ? '' : 'hidden'; ?> w-5 h-[2px] bg-[#5D3700] rounded-full shrink-0"></div>
+            <div class="faq-icon-plus <?php echo $faq_count == 1 ? 'hidden' : ''; ?> w-5 h-5 flex items-center justify-center relative text-[#FF8D00] shrink-0">
               <div class="w-5 h-[2.5px] bg-current rounded-full"></div>
               <div class="w-[2.5px] h-5 bg-current rounded-full absolute"></div>
             </div>
           </button>
-          <p class="faq-answer mt-3 text-[13px] font-medium text-black/70 leading-[20px] max-w-xl">
-            Yes. We collaborate to align ingredient performance with application goals.
+          <p class="faq-answer <?php echo $faq_count == 1 ? '' : 'hidden'; ?> mt-3 text-[13px] font-medium text-black/70 leading-[20px] max-w-xl">
+            <?php echo esc_html($a); ?>
           </p>
         </div>
-
-        <!-- Accordion 2 -->
-        <div
-          class="mobile-faq-item bg-white border border-gray-100/50 rounded-3xl py-[18px] px-6 shadow-sm flex flex-col transition-all duration-300"
-          data-faq-active="false">
-          <button class="w-full flex justify-between items-center text-left focus:outline-none">
-            <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]">Can we request
-              technical information?</h4>
-            <div class="faq-icon-minus hidden w-5 h-[2px] bg-[#5D3700] rounded-full shrink-0"></div>
-            <div class="faq-icon-plus w-5 h-5 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-              <div class="w-5 h-[2.5px] bg-current rounded-full"></div>
-              <div class="w-[2.5px] h-5 bg-current rounded-full absolute"></div>
-            </div>
-          </button>
-          <p class="faq-answer hidden mt-3 text-[13px] font-medium text-black/70 leading-[20px] max-w-xl">
-            Yes, technical specifications, safety data sheets, and certificates of analysis are available upon request.
-          </p>
-        </div>
-
-        <!-- Accordion 3 -->
-        <div
-          class="mobile-faq-item bg-white border border-gray-100/50 rounded-3xl py-[18px] px-6 shadow-sm flex flex-col transition-all duration-300"
-          data-faq-active="false">
-          <button class="w-full flex justify-between items-center text-left focus:outline-none">
-            <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]">Do you support
-              international supply?</h4>
-            <div class="faq-icon-minus hidden w-5 h-[2px] bg-[#5D3700] rounded-full shrink-0"></div>
-            <div class="faq-icon-plus w-5 h-5 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-              <div class="w-5 h-[2.5px] bg-current rounded-full"></div>
-              <div class="w-[2.5px] h-5 bg-current rounded-full absolute"></div>
-            </div>
-          </button>
-          <p class="faq-answer hidden mt-3 text-[13px] font-medium text-black/70 leading-[20px] max-w-xl">
-            Yes, we deliver ingredients to major hubs globally through our international distribution network.
-          </p>
-        </div>
-
-        <!-- Accordion 4 -->
-        <div
-          class="mobile-faq-item bg-white border border-gray-100/50 rounded-3xl py-[18px] px-6 shadow-sm flex flex-col transition-all duration-300"
-          data-faq-active="false">
-          <button class="w-full flex justify-between items-center text-left focus:outline-none">
-            <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]">Can STARIZO support
-              product development?</h4>
-            <div class="faq-icon-minus hidden w-5 h-[2px] bg-[#5D3700] rounded-full shrink-0"></div>
-            <div class="faq-icon-plus w-5 h-5 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-              <div class="w-5 h-[2.5px] bg-current rounded-full"></div>
-              <div class="w-[2.5px] h-5 bg-current rounded-full absolute"></div>
-            </div>
-          </button>
-          <p class="faq-answer hidden mt-3 text-[13px] font-medium text-black/70 leading-[20px] max-w-xl">
-            Yes, our team collaborates from formulation to pilot batch validation.
-          </p>
-        </div>
-
-        <!-- Accordion 5 -->
-        <div
-          class="mobile-faq-item bg-white border border-gray-100/50 rounded-3xl py-[18px] px-6 shadow-sm flex flex-col transition-all duration-300"
-          data-faq-active="false">
-          <button class="w-full flex justify-between items-center text-left focus:outline-none">
-            <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] tracking-[0em]">Is there a minimum
-              order requirement?</h4>
-            <div class="faq-icon-minus hidden w-5 h-[2px] bg-[#5D3700] rounded-full shrink-0"></div>
-            <div class="faq-icon-plus w-5 h-5 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-              <div class="w-5 h-[2.5px] bg-current rounded-full"></div>
-              <div class="w-[2.5px] h-5 bg-current rounded-full absolute"></div>
-            </div>
-          </button>
-          <p class="faq-answer hidden mt-3 text-[13px] font-medium text-black/70 leading-[20px] max-w-xl">
-            Minimum order quantities vary by product category. Contact our sales team for details.
-          </p>
-        </div>
-
+        <?php endwhile; endif; ?>
       </div>
 
       <!-- Mobile Brand Card -->
@@ -1052,8 +736,13 @@
         <div class="flex flex-col space-y-6 w-full">
           <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/logo.svg' ); ?>" alt="Starizo" class="h-8 w-auto self-start">
           <h4 class="text-[22px] font-bold text-[#5D3700] leading-tight">
-            More Than Ingredients.<br>Built For Growth.
+            <?php echo wp_kses_post( get_field('value_prop_title') ?: 'More Than Ingredients.<br>Built For Growth.' ); ?>
           </h4>
+          <?php if( $val_desc = get_field('value_prop_description') ) : ?>
+          <div class="text-[14px] font-medium text-black/70 leading-[22px] space-y-4">
+            <?php echo wpautop( wp_kses_post( $val_desc ) ); ?>
+          </div>
+          <?php else : ?>
           <p class="text-[14px] font-medium text-black/70 leading-[22px]">
             STARIZO combines sourcing intelligence, advanced processing, technical collaboration, and manufacturing
             scale to help businesses create products that perform in the real world.
@@ -1061,6 +750,7 @@
           <p class="text-[14px] font-medium text-black/70 leading-[22px]">
             From idea to industrial production—we support every stage of the journey.
           </p>
+          <?php endif; ?>
         </div>
 
         <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-bold text-[16px] py-3.5 rounded-[22px] flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 mt-8 shadow-md hover:shadow-xl select-none">
