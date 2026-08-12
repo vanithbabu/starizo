@@ -80,11 +80,14 @@ $has_products = $products_query->have_posts();
                             'terms'    => 'food-beverage',
                         ),
                     ),
+                    'orderby'        => 'menu_order title',
+                    'order'          => 'ASC',
                 ) );
                 if ( $food_query->have_posts() ) :
                     while ( $food_query->have_posts() ) : $food_query->the_post();
                         $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/product-rice-starch.png';
-                        $excerpt   = get_the_excerpt() ?: 'Clean-label starch with superior texture, stability, and process performance.';
+                        $excerpt   = get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15);
+                        $cat       = get_field('product_category') ?: 'Food & Beverage';
                 ?>
                 <div class="swiper-slide !w-[380px]">
                   <div class="w-[380px] h-[210px] bg-[#FDFBF3] rounded-[16px] border border-[#EFE9DD] shadow-sm p-4 flex items-center gap-4 hover:shadow-md hover:border-[#FF8D00]/40 transition-all duration-200">
@@ -99,7 +102,7 @@ $has_products = $products_query->have_posts();
                           <?php echo esc_html( $excerpt ); ?>
                         </p>
                         <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-black/80 text-center mb-2">
-                          Food • Bakery
+                          <?php echo esc_html( $cat ); ?>
                         </div>
                       </div>
 
@@ -171,11 +174,14 @@ $has_products = $products_query->have_posts();
                             'terms'    => 'cosmetics-personal-care',
                         ),
                     ),
+                    'orderby'        => 'menu_order title',
+                    'order'          => 'ASC',
                 ) );
                 if ( $cosmetics_query->have_posts() ) :
                     while ( $cosmetics_query->have_posts() ) : $cosmetics_query->the_post();
                         $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/food-rice.png';
-                        $excerpt   = get_the_excerpt() ?: 'Natural biopolymer texturizer providing sensory elegance and silky finish.';
+                        $excerpt   = get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15);
+                        $cat       = get_field('product_category') ?: 'Cosmetics & Personal Care';
                 ?>
                 <div class="swiper-slide !w-[380px]">
                   <div class="w-[380px] h-[210px] bg-[#FDFBF3] rounded-[16px] border border-[#EFE9DD] shadow-sm p-4 flex items-center gap-4 hover:shadow-md hover:border-[#00A256]/40 transition-all duration-200">
@@ -190,7 +196,7 @@ $has_products = $products_query->have_posts();
                           <?php echo esc_html( $excerpt ); ?>
                         </p>
                         <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-black/80 text-center mb-2">
-                          Cosmetics • Skincare
+                          <?php echo esc_html( $cat ); ?>
                         </div>
                       </div>
 
@@ -469,11 +475,14 @@ document.addEventListener('DOMContentLoaded', () => {
                       'terms'    => 'food-beverage',
                   ),
               ),
+              'orderby'        => 'menu_order title',
+              'order'          => 'ASC',
           ) );
           if ( $mobile_food_query->have_posts() ) :
               while ( $mobile_food_query->have_posts() ) : $mobile_food_query->the_post();
                   $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/product-rice-starch.png';
-                  $excerpt   = get_the_excerpt() ?: 'Clean-label starch with superior texture, stability, and process performance.';
+                  $excerpt   = get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15);
+                  $cat       = get_field('product_category') ?: 'Food & Beverage';
           ?>
           <div class="w-full bg-[#FDFBF3] rounded-[20px] border border-[#EFE9DD] shadow-sm p-3.5 flex flex-row items-center gap-3.5 text-left">
             <div class="w-[125px] min-w-[125px] h-[175px] shrink-0 bg-white rounded-tl-[6px] rounded-br-[6px] border border-gray-100 shadow-sm overflow-hidden p-2 flex items-center justify-center">
@@ -487,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <?php echo esc_html( $excerpt ); ?>
                 </p>
                 <div class="inline-block bg-white border border-[#E8E2D5] px-2.5 py-1 rounded-full font-montserrat font-medium text-[11px] text-black/80 mb-3 shadow-xs">
-                  Food • Bakery
+                  <?php echo esc_html( $cat ); ?>
                 </div>
               </div>
 
@@ -554,11 +563,14 @@ document.addEventListener('DOMContentLoaded', () => {
                       'terms'    => 'cosmetics-personal-care',
                   ),
               ),
+              'orderby'        => 'menu_order title',
+              'order'          => 'ASC',
           ) );
           if ( $mobile_cosmetics_query->have_posts() ) :
               while ( $mobile_cosmetics_query->have_posts() ) : $mobile_cosmetics_query->the_post();
                   $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/food-rice.png';
-                  $excerpt   = get_the_excerpt() ?: 'Natural biopolymer texturizer providing sensory elegance and silky finish.';
+                  $excerpt   = get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15);
+                  $cat       = get_field('product_category') ?: 'Cosmetics & Personal Care';
           ?>
           <div class="w-full bg-[#FDFBF3] rounded-[20px] border border-[#EFE9DD] shadow-sm p-3.5 flex flex-row items-center gap-3.5 text-left">
             <div class="w-[125px] min-w-[125px] h-[175px] shrink-0 bg-white rounded-tl-[6px] rounded-br-[6px] border border-gray-100 shadow-sm overflow-hidden p-2 flex items-center justify-center">
@@ -572,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <?php echo esc_html( $excerpt ); ?>
                 </p>
                 <div class="inline-block bg-white border border-[#E8E2D5] px-2.5 py-1 rounded-full font-montserrat font-medium text-[11px] text-black/80 mb-3 shadow-xs">
-                  Cosmetics • Skincare
+                  <?php echo esc_html( $cat ); ?>
                 </div>
               </div>
 

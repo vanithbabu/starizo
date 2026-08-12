@@ -106,7 +106,7 @@ get_header();
             <div class="flex flex-col justify-between h-full py-1 gap-3">
               <div class="flex flex-col gap-2">
                 <h3 class="font-montserrat font-bold text-[22px] leading-[32.73px] text-[#5D3700]"><?php echo esc_html( $title ); ?></h3>
-                <p class="font-montserrat font-normal text-[15px] lg:text-[16px] leading-[24px] text-black/80">
+                <p class="font-montserrat font-normal text-[15px] lg:text-[16px] leading-[24px] text-black/80 line-clamp-3">
                   <?php echo esc_html( $desc ); ?>
                 </p>
               </div>
