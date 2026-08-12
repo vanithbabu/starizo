@@ -14,37 +14,37 @@ if ( empty( $partners ) ) {
         array(
             'title'       => 'Food Manufacturers',
             'description' => 'Scale clean-label production with reliable ingredient systems.',
-            'icon'        => array('url' => get_template_directory_uri() . '/public/assets/food-manufacture-icon.svg'),
+            'icon'        => array('url' => get_template_directory_uri() . '/assets/food-manufacture-icon.svg'),
             'highlight'   => true
         ),
         array(
             'title'       => 'R&D & Formulation Teams',
             'description' => 'Develop application-ready solutions with technical collaboration.',
-            'icon'        => array('url' => get_template_directory_uri() . '/public/assets/r-d-manufactures-icon.svg'),
+            'icon'        => array('url' => get_template_directory_uri() . '/assets/r-d-manufactures-icon-black.svg'),
             'highlight'   => false
         ),
         array(
             'title'       => 'Nutraceutical Brands',
             'description' => 'Source functional rice-derived ingredients with traceability.',
-            'icon'        => array('url' => get_template_directory_uri() . '/public/assets/nutrisial-icon.svg'),
+            'icon'        => array('url' => get_template_directory_uri() . '/assets/nutrisial-icon-black.svg'),
             'highlight'   => false
         ),
         array(
             'title'       => 'Global Ingredient Buyers',
             'description' => 'Secure scalable supply with quality assurance.',
-            'icon'        => array('url' => get_template_directory_uri() . '/public/assets/global-icon.svg'),
+            'icon'        => array('url' => get_template_directory_uri() . '/assets/global-icon-black.svg'),
             'highlight'   => false
         ),
         array(
             'title'       => 'Contract Manufacturers',
             'description' => 'Improve consistency and reduce sourcing complexity.',
-            'icon'        => array('url' => get_template_directory_uri() . '/public/assets/contract-icon.svg'),
+            'icon'        => array('url' => get_template_directory_uri() . '/assets/contract-icon-black.svg'),
             'highlight'   => false
         ),
         array(
             'title'       => 'Emerging Brands',
             'description' => 'Build differentiated products with expert guidance.',
-            'icon'        => array('url' => get_template_directory_uri() . '/public/assets/emerging-icon.svg'),
+            'icon'        => array('url' => get_template_directory_uri() . '/assets/emerging-icon-black.svg'),
             'highlight'   => false
         ),
     );
@@ -89,20 +89,20 @@ if ( empty( $partners ) ) {
 
         <?php 
         $default_icons = array(
-            'Food Manufacturers'       => get_template_directory_uri() . '/public/assets/food-manufacture-icon.svg',
-            'R&D & Formulation Teams'  => get_template_directory_uri() . '/public/assets/r-d-manufactures-icon.svg',
-            'Nutraceutical Brands'     => get_template_directory_uri() . '/public/assets/nutrisial-icon.svg',
-            'Global Ingredient Buyers' => get_template_directory_uri() . '/public/assets/global-icon.svg',
-            'Contract Manufacturers'   => get_template_directory_uri() . '/public/assets/contract-icon.svg',
-            'Emerging Brands'          => get_template_directory_uri() . '/public/assets/emerging-icon.svg',
+            'Food Manufacturers'       => get_template_directory_uri() . '/assets/food-manufacture-icon.svg',
+            'R&D & Formulation Teams'  => get_template_directory_uri() . '/assets/r-d-manufactures-icon-black.svg',
+            'Nutraceutical Brands'     => get_template_directory_uri() . '/assets/nutrisial-icon-black.svg',
+            'Global Ingredient Buyers' => get_template_directory_uri() . '/assets/global-icon-black.svg',
+            'Contract Manufacturers'   => get_template_directory_uri() . '/assets/contract-icon-black.svg',
+            'Emerging Brands'          => get_template_directory_uri() . '/assets/emerging-icon-black.svg',
         );
         $fallback_icons_by_index = array(
-            0 => get_template_directory_uri() . '/public/assets/food-manufacture-icon.svg',
-            1 => get_template_directory_uri() . '/public/assets/r-d-manufactures-icon.svg',
-            2 => get_template_directory_uri() . '/public/assets/nutrisial-icon.svg',
-            3 => get_template_directory_uri() . '/public/assets/global-icon.svg',
-            4 => get_template_directory_uri() . '/public/assets/contract-icon.svg',
-            5 => get_template_directory_uri() . '/public/assets/emerging-icon.svg',
+            0 => get_template_directory_uri() . '/assets/food-manufacture-icon.svg',
+            1 => get_template_directory_uri() . '/assets/r-d-manufactures-icon-black.svg',
+            2 => get_template_directory_uri() . '/assets/nutrisial-icon-black.svg',
+            3 => get_template_directory_uri() . '/assets/global-icon-black.svg',
+            4 => get_template_directory_uri() . '/assets/contract-icon-black.svg',
+            5 => get_template_directory_uri() . '/assets/emerging-icon-black.svg',
         );
 
         foreach ( $partners as $index => $partner ) : 
