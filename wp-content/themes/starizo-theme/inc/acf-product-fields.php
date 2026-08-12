@@ -21,6 +21,21 @@ acf_add_local_field_group(array(
 			'instructions' => 'e.g. Food & Beverage',
 		),
 		array(
+			'key' => 'field_prod_card_description',
+			'label' => 'Card Description',
+			'name' => 'card_description',
+			'type' => 'textarea',
+			'rows' => 3,
+			'instructions' => 'Short description shown on product cards (Home & Category pages)',
+		),
+		array(
+			'key' => 'field_prod_card_applications',
+			'label' => 'Card Applications',
+			'name' => 'card_applications',
+			'type' => 'text',
+			'instructions' => 'e.g. Food • Bakery • Snacks',
+		),
+		array(
 			'key' => 'field_prod_hero_subtitle',
 			'label' => 'Hero Subtitle',
 			'name' => 'hero_subtitle',

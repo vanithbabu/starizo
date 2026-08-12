@@ -32,7 +32,7 @@ $image_url = $image ? esc_url( $image['url'] ) : get_template_directory_uri() . 
         class="absolute top-0 left-0 w-[60%] h-full object-cover object-left opacity-30 pointer-events-none select-none z-1">
 
       <!-- Hero Content Grid -->
-      <div class="relative z-10 w-full max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center py-6 sm:py-10" style="margin-top: 150px;">
+      <div class="relative z-10 w-full max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center py-6 sm:py-10 mt-[100px]">
 
         <div class="lg:col-span-7 flex flex-col items-start text-left">
           <!-- Badge Header without Orange Accent Bar -->

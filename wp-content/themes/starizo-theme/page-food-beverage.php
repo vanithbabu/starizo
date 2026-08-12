@@ -90,10 +90,12 @@ get_header();
           if ( $product_query->have_posts() ) :
               while ( $product_query->have_posts() ) : $product_query->the_post();
                   $title = get_the_title();
-                  $desc  = get_field('hero_subtitle');
+                  $desc  = get_field('card_description');
+                  if (!$desc) $desc = get_field('hero_subtitle');
                   if (!$desc) $desc = wp_trim_words(get_the_excerpt(), 15);
                   $cat   = get_field('product_category');
                   if (!$cat) $cat = 'Food & Beverage';
+                  $apps  = get_field('card_applications');
                   $link  = get_permalink();
                   $thumb = get_the_post_thumbnail_url(get_the_ID(), 'large');
                   $img_src = $thumb ? esc_url($thumb) : esc_url(get_template_directory_uri() . '/public/assets/food-rice.png');
@@ -110,12 +112,24 @@ get_header();
                   <?php echo esc_html( $desc ); ?>
                 </p>
               </div>
-              <div class="flex flex-col gap-2 items-start">
-                <span class="bg-[#FBEAC4] text-[#5D3700] rounded-[11.61px] px-[10.56px] py-[3.17px] font-montserrat font-medium text-[13px] leading-[20px]">
-                  <?php echo esc_html( $cat ); ?>
-                </span>
+              <div class="flex flex-col gap-2 items-start mt-1">
+                <?php if ( $apps ) : 
+                    $app_list = explode('•', $apps);
+                ?>
+                  <div class="flex flex-wrap gap-1.5">
+                    <?php foreach($app_list as $app_item): $app_item = trim($app_item); if($app_item): ?>
+                      <span class="inline-block bg-[#FBEAC4] text-[#5D3700] rounded-[11.61px] px-[10.56px] py-[3.17px] font-montserrat font-medium text-[13px] leading-[20px]">
+                        <?php echo esc_html( $app_item ); ?>
+                      </span>
+                    <?php endif; endforeach; ?>
+                  </div>
+                <?php else : ?>
+                  <span class="inline-block bg-[#FBEAC4] text-[#5D3700] rounded-[11.61px] px-[10.56px] py-[3.17px] font-montserrat font-medium text-[13px] leading-[20px]">
+                    <?php echo esc_html( $cat ); ?>
+                  </span>
+                <?php endif; ?>
                 <a href="<?php echo esc_url( $link ); ?>" class="font-montserrat font-bold text-[17px] leading-[22px] text-[#FF8D00] flex items-center gap-1 hover:underline">
-                  View Details
+                  View Product
                   <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 </a>
               </div>

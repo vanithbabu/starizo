@@ -86,8 +86,9 @@ $has_products = $products_query->have_posts();
                 if ( $food_query->have_posts() ) :
                     while ( $food_query->have_posts() ) : $food_query->the_post();
                         $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/product-rice-starch.png';
-                        $excerpt   = get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15);
+                        $excerpt   = get_field('card_description') ?: (get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15));
                         $cat       = get_field('product_category') ?: 'Food & Beverage';
+                        $apps      = get_field('card_applications');
                 ?>
                 <div class="swiper-slide !w-[380px]">
                   <div class="w-[380px] h-[210px] bg-[#FDFBF3] rounded-[16px] border border-[#EFE9DD] shadow-sm p-4 flex items-center gap-4 hover:shadow-md hover:border-[#FF8D00]/40 transition-all duration-200">
@@ -101,9 +102,21 @@ $has_products = $products_query->have_posts();
                         <p class="font-montserrat font-normal text-[14px] leading-[20px] text-black/75 mb-3 line-clamp-2">
                           <?php echo esc_html( $excerpt ); ?>
                         </p>
-                        <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-black/80 text-center mb-2">
-                          <?php echo esc_html( $cat ); ?>
-                        </div>
+                        <?php if ($apps) :
+                            $app_list = explode('•', $apps);
+                        ?>
+                          <div class="flex flex-wrap gap-1.5 mb-2 overflow-hidden h-6">
+                            <?php foreach($app_list as $app_item): $app_item = trim($app_item); if($app_item): ?>
+                              <span class="inline-block bg-white border border-[#E8E2D5] px-2.5 py-0.5 rounded-full font-montserrat font-medium text-[11px] leading-[16px] text-[#5D3700] text-center shadow-sm max-w-full truncate">
+                                <?php echo esc_html( $app_item ); ?>
+                              </span>
+                            <?php endif; endforeach; ?>
+                          </div>
+                        <?php else : ?>
+                          <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-[#5D3700] text-center mb-2 shadow-sm">
+                            <?php echo esc_html( $cat ); ?>
+                          </div>
+                        <?php endif; ?>
                       </div>
 
                       <a href="<?php the_permalink(); ?>" class="group font-montserrat font-bold text-[16px] leading-[20px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1.5 transition duration-150 w-fit select-none">
@@ -180,8 +193,9 @@ $has_products = $products_query->have_posts();
                 if ( $cosmetics_query->have_posts() ) :
                     while ( $cosmetics_query->have_posts() ) : $cosmetics_query->the_post();
                         $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/food-rice.png';
-                        $excerpt   = get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15);
+                        $excerpt   = get_field('card_description') ?: (get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15));
                         $cat       = get_field('product_category') ?: 'Cosmetics & Personal Care';
+                        $apps      = get_field('card_applications');
                 ?>
                 <div class="swiper-slide !w-[380px]">
                   <div class="w-[380px] h-[210px] bg-[#FDFBF3] rounded-[16px] border border-[#EFE9DD] shadow-sm p-4 flex items-center gap-4 hover:shadow-md hover:border-[#00A256]/40 transition-all duration-200">
@@ -195,9 +209,21 @@ $has_products = $products_query->have_posts();
                         <p class="font-montserrat font-normal text-[14px] leading-[20px] text-black/75 mb-3 line-clamp-2">
                           <?php echo esc_html( $excerpt ); ?>
                         </p>
-                        <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-black/80 text-center mb-2">
-                          <?php echo esc_html( $cat ); ?>
-                        </div>
+                        <?php if ($apps) :
+                            $app_list = explode('•', $apps);
+                        ?>
+                          <div class="flex flex-wrap gap-1.5 mb-2 overflow-hidden h-6">
+                            <?php foreach($app_list as $app_item): $app_item = trim($app_item); if($app_item): ?>
+                              <span class="inline-block bg-white border border-[#E8E2D5] px-2.5 py-0.5 rounded-full font-montserrat font-medium text-[11px] leading-[16px] text-[#5D3700] text-center shadow-sm max-w-full truncate">
+                                <?php echo esc_html( $app_item ); ?>
+                              </span>
+                            <?php endif; endforeach; ?>
+                          </div>
+                        <?php else : ?>
+                          <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-[#5D3700] text-center mb-2 shadow-sm">
+                            <?php echo esc_html( $cat ); ?>
+                          </div>
+                        <?php endif; ?>
                       </div>
 
                       <a href="<?php the_permalink(); ?>" class="group font-montserrat font-bold text-[16px] leading-[20px] text-[#FF8D00] hover:text-[#e07c00] flex items-center gap-1.5 transition duration-150 w-fit select-none">
@@ -481,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if ( $mobile_food_query->have_posts() ) :
               while ( $mobile_food_query->have_posts() ) : $mobile_food_query->the_post();
                   $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/product-rice-starch.png';
-                  $excerpt   = get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15);
+                  $excerpt   = get_field('card_description') ?: (get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15));
                   $cat       = get_field('product_category') ?: 'Food & Beverage';
           ?>
           <div class="w-full bg-[#FDFBF3] rounded-[20px] border border-[#EFE9DD] shadow-sm p-3.5 flex flex-row items-center gap-3.5 text-left">
@@ -569,7 +595,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if ( $mobile_cosmetics_query->have_posts() ) :
               while ( $mobile_cosmetics_query->have_posts() ) : $mobile_cosmetics_query->the_post();
                   $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ?: get_template_directory_uri() . '/public/assets/food-rice.png';
-                  $excerpt   = get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15);
+                  $excerpt   = get_field('card_description') ?: (get_field('hero_subtitle') ?: wp_trim_words(get_the_excerpt(), 15));
                   $cat       = get_field('product_category') ?: 'Cosmetics & Personal Care';
           ?>
           <div class="w-full bg-[#FDFBF3] rounded-[20px] border border-[#EFE9DD] shadow-sm p-3.5 flex flex-row items-center gap-3.5 text-left">
