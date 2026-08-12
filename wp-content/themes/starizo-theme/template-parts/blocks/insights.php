@@ -68,7 +68,7 @@ $has_posts   = $posts_query->have_posts();
                 <h4 class="text-[18px] font-black text-black leading-snug tracking-tight mb-3">
                   <?php the_title(); ?>
                 </h4>
-                <p class="text-[13px] font-medium text-black/60 leading-[20px] mb-4">
+                <p class="text-[13px] font-medium text-black/60 leading-[20px] mb-4 line-clamp-3">
                   <?php echo esc_html( $excerpt ); ?>
                 </p>
               </div>
@@ -105,7 +105,7 @@ $has_posts   = $posts_query->have_posts();
                 <h4 class="text-[18px] font-black text-black leading-snug tracking-tight mb-3">
                   <?php echo esc_html($post_item['title']); ?>
                 </h4>
-                <p class="text-[13px] font-medium text-black/60 leading-[20px] mb-4">
+                <p class="text-[13px] font-medium text-black/60 leading-[20px] mb-4 line-clamp-3">
                   <?php echo esc_html($post_item['desc']); ?>
                 </p>
               </div>

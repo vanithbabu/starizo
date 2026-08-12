@@ -3,8 +3,8 @@
  * Certifications Block Template
  */
 
-$subheading = get_sub_field( 'subheading' ) ?: 'CERTIFICATIONS';
-$certificates = get_sub_field( 'certificates' );
+$subheading = get_sub_field( 'subheading' ) ?: get_field( 'subheading' ) ?: 'CERTIFICATIONS';
+$certificates = get_sub_field( 'certificates' ) ?: get_field( 'certificates' );
 
 // Fallback data if ACF is empty
 if ( empty( $certificates ) ) {
