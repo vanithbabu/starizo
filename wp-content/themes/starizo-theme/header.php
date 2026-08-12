@@ -31,7 +31,7 @@ $is_insights = is_page( 'insights' ) || is_home() || is_singular( 'post' ) || is
       <div id="navbar" class="w-full max-w-[1240px] mx-auto h-[85px] bg-white rounded-[26px] shadow-[0px_4px_44.6px_0px_rgba(0,0,0,0.05)] border border-gray-100 flex items-center justify-between px-6 md:px-10">
         
         <!-- Logo -->
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="transform -translate-y-1.5">
           <img src="<?php echo esc_url( $header_logo ); ?>" class="h-9" alt="<?php bloginfo( 'name' ); ?>">
         </a>
 
