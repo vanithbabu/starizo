@@ -239,7 +239,7 @@ get_header(); ?>
         <?php
         if ( have_posts() ) :
             while ( have_posts() ) : the_post();
-                if ( isset($featured_id) && get_the_ID() == $featured_id && !is_paged() ) continue;
+                // Show all posts in the grid, even the featured one
                 
                 $reading_time = starizo_reading_time( get_the_content() );
                 $category = get_the_category(); 
@@ -293,6 +293,10 @@ get_header(); ?>
         <p class="font-montserrat font-semibold text-[18px] text-[#828282]">No articles found under this topic.</p>
       </div>
 
+      <?php
+      global $wp_query;
+      if ( $wp_query->max_num_pages > 1 ) :
+      ?>
       <!-- 1:1 Load More Button -->
       <div class="flex justify-center mt-4 mb-2">
         <button id="load-more-btn" type="button" class="w-[160px] h-[46px] rounded-full border border-[#FF8D00] bg-white text-[#FF8D00] hover:bg-[#FF8D00] hover:text-white font-montserrat font-semibold text-[15px] flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm select-none">
@@ -300,6 +304,7 @@ get_header(); ?>
           <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </button>
       </div>
+      <?php endif; ?>
 
     </div>
   </section>

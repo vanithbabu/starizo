@@ -106,6 +106,36 @@ get_header();
         <div class="font-montserrat font-medium text-[18px] leading-[39px] text-[#333333]">
             <?php the_content(); ?>
         </div>
+
+        <?php if ( have_rows('faq_list') ) : ?>
+        <div class="mt-10">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="w-[4px] h-[24px] bg-[#FF8D00] rounded-full inline-block"></span>
+            <h2 class="font-montserrat font-semibold text-[24px] text-black">Frequently Asked Questions</h2>
+          </div>
+          <div class="space-y-4">
+            <?php $faq_count = 0; while ( have_rows('faq_list') ) : the_row(); 
+              $q = get_sub_field('question');
+              $a = get_sub_field('answer');
+              $faq_count++;
+            ?>
+            <div class="bg-white border border-[#E8E8EA] rounded-2xl py-4 px-6 shadow-sm">
+              <div class="flex justify-between items-center gap-4 cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.vertical-line').classList.toggle('rotate-90');">
+                <h4 class="font-montserrat font-semibold text-[16px] text-black leading-[24px] pr-4"><?php echo esc_html($q); ?></h4>
+                <div class="w-5 h-5 flex items-center justify-center relative text-[#FF8D00] shrink-0">
+                  <div class="w-5 h-[2.5px] bg-current rounded-full absolute"></div>
+                  <div class="vertical-line w-[2.5px] h-5 bg-current rounded-full absolute transition-transform duration-200 <?php echo $faq_count == 1 ? 'rotate-90' : ''; ?>"></div>
+                </div>
+              </div>
+              <p class="mt-3 font-montserrat text-[15px] font-medium text-[#333333] leading-[26px] <?php echo $faq_count == 1 ? '' : 'hidden'; ?>">
+                <?php echo esc_html($a); ?>
+              </p>
+            </div>
+            <?php endwhile; ?>
+          </div>
+        </div>
+        <?php endif; ?>
+
       </article>
 
     </div>
@@ -287,6 +317,36 @@ get_header();
         <div class="font-montserrat font-medium text-[15px] leading-[26px] text-[#333333]">
           <?php the_content(); ?>
         </div>
+
+        <?php if ( have_rows('faq_list') ) : ?>
+        <div class="mt-6 w-full">
+          <div class="flex items-center gap-2.5 mb-5">
+            <span class="w-[3px] h-[20px] bg-[#FF8D00] rounded-full inline-block"></span>
+            <h2 class="font-montserrat font-semibold text-[20px] text-black">FAQ</h2>
+          </div>
+          <div class="space-y-4">
+            <?php $faq_count = 0; while ( have_rows('faq_list') ) : the_row(); 
+              $q = get_sub_field('question');
+              $a = get_sub_field('answer');
+              $faq_count++;
+            ?>
+            <div class="bg-white border border-[#E8E8EA] rounded-2xl py-4 px-5 shadow-sm">
+              <div class="flex justify-between items-center gap-3 cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.vertical-line').classList.toggle('rotate-90');">
+                <h4 class="font-montserrat font-semibold text-[14px] text-black leading-[22px] pr-2"><?php echo esc_html($q); ?></h4>
+                <div class="w-4 h-4 flex items-center justify-center relative text-[#FF8D00] shrink-0">
+                  <div class="w-4 h-[2px] bg-current rounded-full absolute"></div>
+                  <div class="vertical-line w-[2px] h-4 bg-current rounded-full absolute transition-transform duration-200 <?php echo $faq_count == 1 ? 'rotate-90' : ''; ?>"></div>
+                </div>
+              </div>
+              <p class="mt-3 font-montserrat text-[14px] font-medium text-[#333333] leading-[24px] <?php echo $faq_count == 1 ? '' : 'hidden'; ?>">
+                <?php echo esc_html($a); ?>
+              </p>
+            </div>
+            <?php endwhile; ?>
+          </div>
+        </div>
+        <?php endif; ?>
+
       </article>
 
       <!-- Mobile Green CTA Card -->

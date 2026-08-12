@@ -29,7 +29,7 @@
         </div>
 
         <!-- Hero Content Grid: Left Text Column + Right Image Column -->
-        <div class="grid grid-cols-12 gap-8 lg:gap-12 items-center min-h-[460px]">
+        <div class="grid grid-cols-12 gap-8 lg:gap-12 items-center min-h-[300px]">
 
           <!-- Left Text Column (Figma: width 534px, min-height 281px, gap 42px) -->
           <div class="col-span-7 flex flex-col items-start text-left" style="max-width: 534px; min-height: 281px; gap: 42px;">

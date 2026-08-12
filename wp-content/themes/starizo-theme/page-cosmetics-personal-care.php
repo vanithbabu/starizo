@@ -72,55 +72,60 @@ get_header();
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 w-full">
 
           <?php
-          $cosmetics_solutions = [
-            [
-              'title' => 'Rice Biopolymer',
-              'desc'  => 'Natural texturizer and film-former providing sensory elegance and velvet finish.',
-              'cat'   => 'Skincare • Cosmetics',
-              'img'   => 'food-rice.png',
-              'link'  => site_url('/product/rice-starch')
-            ],
-            [
-              'title' => 'Hydrolyzed Rice Protein',
-              'desc'  => 'Nutrient-rich protein hydrolysate enhancing hair volume and skin hydration.',
-              'cat'   => 'Haircare • Personal Care',
-              'img'   => 'food-rice.png',
-              'link'  => site_url('/product/rice-starch')
-            ],
-            [
-              'title' => 'Rice Maltodextrin',
-              'desc'  => 'Plant-based carrier and stabilizing agent for active cosmetic ingredients.',
-              'cat'   => 'Personal Care • Formulations',
-              'img'   => 'food-rice.png',
-              'link'  => site_url('/product/rice-starch')
-            ]
+          $args = [
+              'post_type'      => 'product',
+              'posts_per_page' => -1,
+              'tax_query'      => [
+                  [
+                      'taxonomy' => 'product_cat',
+                      'field'    => 'slug',
+                      'terms'    => 'cosmetics-personal-care',
+                  ]
+              ],
+              'orderby'        => 'menu_order title',
+              'order'          => 'ASC',
           ];
+          $product_query = new WP_Query($args);
 
-          foreach ( $cosmetics_solutions as $sol ) : ?>
+          if ( $product_query->have_posts() ) :
+              while ( $product_query->have_posts() ) : $product_query->the_post();
+                  $title = get_the_title();
+                  $desc  = get_field('hero_subtitle');
+                  if (!$desc) $desc = wp_trim_words(get_the_excerpt(), 15);
+                  $cat   = get_field('product_category');
+                  if (!$cat) $cat = 'Cosmetics & Personal Care';
+                  $link  = get_permalink();
+                  $thumb = get_the_post_thumbnail_url(get_the_ID(), 'large');
+                  $img_src = $thumb ? esc_url($thumb) : esc_url(get_template_directory_uri() . '/public/assets/food-rice.png');
+          ?>
           <!-- Solution Card -->
           <div class="bg-white rounded-tl-[36px] rounded-br-[36px] rounded-tr-[4px] rounded-bl-[4px] p-5 shadow-md flex items-center gap-5 min-h-[236px]">
             <div class="w-[144px] h-[198px] relative shrink-0 rounded-tl-none rounded-br-none overflow-hidden" style="border-top-left-radius: 6.33px; border-bottom-right-radius: 6.33px;">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/' . $sol['img'] ); ?>" alt="<?php echo esc_attr( $sol['title'] ); ?>" class="w-full h-full object-cover">
+              <img src="<?php echo $img_src; ?>" alt="<?php echo esc_attr( $title ); ?>" class="w-full h-full object-cover">
             </div>
             <div class="flex flex-col justify-between h-full py-1 gap-3">
               <div class="flex flex-col gap-2">
-                <h3 class="font-montserrat font-bold text-[22px] leading-[32.73px] text-[#5D3700]"><?php echo esc_html( $sol['title'] ); ?></h3>
+                <h3 class="font-montserrat font-bold text-[22px] leading-[32.73px] text-[#5D3700]"><?php echo esc_html( $title ); ?></h3>
                 <p class="font-montserrat font-normal text-[15px] lg:text-[16px] leading-[24px] text-black/80">
-                  <?php echo esc_html( $sol['desc'] ); ?>
+                  <?php echo esc_html( $desc ); ?>
                 </p>
               </div>
               <div class="flex flex-col gap-2 items-start">
                 <span class="bg-[#FBEAC4] text-[#5D3700] rounded-[11.61px] px-[10.56px] py-[3.17px] font-montserrat font-medium text-[13px] leading-[20px]">
-                  <?php echo esc_html( $sol['cat'] ); ?>
+                  <?php echo esc_html( $cat ); ?>
                 </span>
-                <a href="<?php echo esc_url( $sol['link'] ); ?>" class="font-montserrat font-bold text-[17px] leading-[22px] text-[#FF8D00] flex items-center gap-1 hover:underline">
+                <a href="<?php echo esc_url( $link ); ?>" class="font-montserrat font-bold text-[17px] leading-[22px] text-[#FF8D00] flex items-center gap-1 hover:underline">
                   View Details
                   <svg class="w-4 h-4 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 </a>
               </div>
             </div>
           </div>
-          <?php endforeach; ?>
+          <?php 
+              endwhile;
+              wp_reset_postdata();
+          endif; 
+          ?>
 
           <!-- Card 04: Special CTA Card -->
           <div class="rounded-tl-[36px] rounded-br-[36px] rounded-tr-[4px] rounded-bl-[4px] p-6 text-white min-h-[236px] flex flex-col justify-between shadow-md"
@@ -159,25 +164,20 @@ get_header();
 
         <div class="grid grid-cols-12 gap-12 items-start">
           <div class="col-span-7 flex flex-col gap-4">
+            <?php if ( have_rows('faq_list') ) : $faq_count = 0; while ( have_rows('faq_list') ) : the_row(); $faq_count++; ?>
             <div class="bg-white border border-gray-100/80 rounded-[28px] py-5 px-7 shadow-sm">
-              <div class="flex justify-between items-center gap-4">
-                <h4 class="font-montserrat font-semibold text-[17px] text-black">What types of rice-derived ingredients do you produce?</h4>
+              <div class="flex justify-between items-center gap-4 cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.vertical-line').classList.toggle('rotate-90');">
+                <h4 class="font-montserrat font-semibold text-[17px] text-black pr-4"><?php echo esc_html(get_sub_field('question')); ?></h4>
                 <div class="w-5 h-5 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-                  <div class="w-5 h-[2px] bg-current rounded-full"></div>
-                  <div class="w-[2px] h-5 bg-current rounded-full absolute"></div>
+                  <div class="w-5 h-[2.5px] bg-current rounded-full absolute"></div>
+                  <div class="vertical-line w-[2.5px] h-5 bg-current rounded-full absolute transition-transform duration-200 <?php echo $faq_count == 1 ? 'rotate-90' : ''; ?>"></div>
                 </div>
               </div>
+              <p class="mt-3 text-[15px] text-gray-600 leading-[1.6] <?php echo $faq_count == 1 ? '' : 'hidden'; ?>">
+                <?php echo wp_kses_post(get_sub_field('answer')); ?>
+              </p>
             </div>
-
-            <div class="bg-white border border-gray-100/80 rounded-[28px] py-5 px-7 shadow-sm">
-              <div class="flex justify-between items-center gap-4">
-                <h4 class="font-montserrat font-semibold text-[17px] text-black">What certifications do your manufacturing facilities hold?</h4>
-                <div class="w-5 h-5 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-                  <div class="w-5 h-[2px] bg-current rounded-full"></div>
-                  <div class="w-[2px] h-5 bg-current rounded-full absolute"></div>
-                </div>
-              </div>
-            </div>
+            <?php endwhile; endif; ?>
           </div>
 
           <div class="col-span-5">
@@ -275,23 +275,40 @@ get_header();
 
         <div class="flex flex-col gap-4 w-full">
 
-          <?php foreach ( $cosmetics_solutions as $sol ) : ?>
+          <?php
+          // Re-use the WP_Query for mobile
+          $product_query = new WP_Query($args);
+          if ( $product_query->have_posts() ) :
+              while ( $product_query->have_posts() ) : $product_query->the_post();
+                  $title = get_the_title();
+                  $desc  = get_field('hero_subtitle');
+                  if (!$desc) $desc = wp_trim_words(get_the_excerpt(), 15);
+                  $cat   = get_field('product_category');
+                  if (!$cat) $cat = 'Cosmetics & Personal Care';
+                  $link  = get_permalink();
+                  $thumb = get_the_post_thumbnail_url(get_the_ID(), 'large');
+                  $img_src = $thumb ? esc_url($thumb) : esc_url(get_template_directory_uri() . '/public/assets/food-rice.png');
+          ?>
           <!-- Solution Card -->
           <div class="bg-white rounded-[20px] p-3.5 shadow-md flex flex-row items-center gap-3.5 w-full">
             <div class="w-[125px] h-[165px] shrink-0 rounded-[12px] overflow-hidden flex items-center justify-center bg-gray-50">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/public/assets/' . $sol['img'] ); ?>" alt="<?php echo esc_attr( $sol['title'] ); ?>" class="w-full h-full object-cover">
+              <img src="<?php echo $img_src; ?>" alt="<?php echo esc_attr( $title ); ?>" class="w-full h-full object-cover">
             </div>
             <div class="flex flex-col justify-between flex-1 min-w-0">
-              <h3 class="font-montserrat font-bold text-[15px] text-[#5D3700] leading-tight mb-1 truncate"><?php echo esc_html( $sol['title'] ); ?></h3>
-              <p class="font-montserrat text-[11px] leading-[15px] text-black/75 mb-2 line-clamp-3"><?php echo esc_html( $sol['desc'] ); ?></p>
-              <span class="bg-[#FBEAC4] text-[#5D3700] rounded-[6px] px-2 py-0.5 font-montserrat font-medium text-[10px] w-fit mb-2"><?php echo esc_html( $sol['cat'] ); ?></span>
-              <a href="<?php echo esc_url( $sol['link'] ); ?>" class="font-montserrat font-bold text-[12px] text-[#FF8D00] inline-flex items-center gap-0.5 hover:underline">
+              <h3 class="font-montserrat font-bold text-[15px] text-[#5D3700] leading-tight mb-1 truncate"><?php echo esc_html( $title ); ?></h3>
+              <p class="font-montserrat text-[11px] leading-[15px] text-black/75 mb-2 line-clamp-3"><?php echo esc_html( $desc ); ?></p>
+              <span class="bg-[#FBEAC4] text-[#5D3700] rounded-[6px] px-2 py-0.5 font-montserrat font-medium text-[10px] w-fit mb-2"><?php echo esc_html( $cat ); ?></span>
+              <a href="<?php echo esc_url( $link ); ?>" class="font-montserrat font-bold text-[12px] text-[#FF8D00] inline-flex items-center gap-0.5 hover:underline">
                 View Details
                 <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </a>
             </div>
           </div>
-          <?php endforeach; ?>
+          <?php 
+              endwhile;
+              wp_reset_postdata();
+          endif; 
+          ?>
 
           <!-- Card 04: Special CTA Card -->
           <div class="rounded-[20px] p-4 text-white flex flex-col gap-3 shadow-md w-full"
@@ -323,57 +340,20 @@ get_header();
 
       <!-- Mobile Accordions -->
       <div class="w-full max-w-[340px] mx-auto flex flex-col gap-4 mb-8">
-        
+        <?php if ( have_rows('faq_list') ) : $faq_count = 0; while ( have_rows('faq_list') ) : the_row(); $faq_count++; ?>
         <div class="bg-white border border-gray-100/60 rounded-3xl py-4 px-5 shadow-sm">
-          <div class="flex justify-between items-center gap-3">
-            <h4 class="font-montserrat font-semibold text-[15px] text-black">What types of rice-derived ingredients do you produce?</h4>
+          <div class="flex justify-between items-center gap-3 cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.vertical-line').classList.toggle('rotate-90');">
+            <h4 class="font-montserrat font-semibold text-[15px] text-black pr-4"><?php echo esc_html(get_sub_field('question')); ?></h4>
             <div class="w-4 h-4 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-              <div class="w-4 h-[2px] bg-current rounded-full"></div>
-              <div class="w-[2px] h-4 bg-current rounded-full absolute"></div>
+              <div class="w-4 h-[2px] bg-current rounded-full absolute"></div>
+              <div class="vertical-line w-[2px] h-4 bg-current rounded-full absolute transition-transform duration-200 <?php echo $faq_count == 1 ? 'rotate-90' : ''; ?>"></div>
             </div>
           </div>
+          <p class="mt-2 text-[13px] font-medium text-black/70 leading-[19px] <?php echo $faq_count == 1 ? '' : 'hidden'; ?>">
+            <?php echo wp_kses_post(get_sub_field('answer')); ?>
+          </p>
         </div>
-
-        <div class="bg-white border border-gray-100/60 rounded-3xl py-4 px-5 shadow-sm">
-          <div class="flex justify-between items-center gap-3">
-            <h4 class="font-montserrat font-semibold text-[15px] text-black">What certifications do your manufacturing facilities hold?</h4>
-            <div class="w-4 h-4 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-              <div class="w-4 h-[2px] bg-current rounded-full"></div>
-              <div class="w-[2px] h-4 bg-current rounded-full absolute"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-100/60 rounded-3xl py-4 px-5 shadow-sm">
-          <div class="flex justify-between items-center gap-3">
-            <h4 class="font-montserrat font-semibold text-[15px] text-black">Do you support international supply?</h4>
-            <div class="w-4 h-4 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-              <div class="w-4 h-[2px] bg-current rounded-full"></div>
-              <div class="w-[2px] h-4 bg-current rounded-full absolute"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-100/60 rounded-3xl py-4 px-5 shadow-sm">
-          <div class="flex justify-between items-center gap-3">
-            <h4 class="font-montserrat font-semibold text-[15px] text-black">Can STARIZO support product development?</h4>
-            <div class="w-4 h-4 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-              <div class="w-4 h-[2px] bg-current rounded-full"></div>
-              <div class="w-[2px] h-4 bg-current rounded-full absolute"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-100/60 rounded-3xl py-4 px-5 shadow-sm">
-          <div class="flex justify-between items-center gap-3">
-            <h4 class="font-montserrat font-semibold text-[15px] text-black">Is there a minimum order requirement?</h4>
-            <div class="w-4 h-4 flex items-center justify-center relative text-[#FF8D00] shrink-0">
-              <div class="w-4 h-[2px] bg-current rounded-full"></div>
-              <div class="w-[2px] h-4 bg-current rounded-full absolute"></div>
-            </div>
-          </div>
-        </div>
-
+        <?php endwhile; endif; ?>
       </div>
 
       <!-- Mobile Brand Info Card -->

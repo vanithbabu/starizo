@@ -130,39 +130,20 @@ if ( empty( $partners ) ) {
               : 'rounded-tl-[24px] lg:rounded-tl-[33px] rounded-tr-none rounded-bl-none rounded-br-[24px] lg:rounded-br-[33px]';
         ?>
 
-        <?php if ( $is_highlight ) : ?>
-        <!-- Highlighted Orange Card -->
-        <div class="rounded-tl-none rounded-tr-[24px] lg:rounded-tr-[33px] rounded-bl-[24px] lg:rounded-bl-[33px] rounded-br-none p-[1.5px] shadow-md lg:shadow-lg relative overflow-hidden transition-transform duration-300 hover:-translate-y-1 w-full max-w-[320px] lg:max-w-[329px] mx-auto md:mx-0 lg:h-[187px]" style="background: linear-gradient(111.28deg, #5D3700 -1.65%, #FFFFFF 94.3%);">
-          <div class="w-full h-full rounded-tl-none rounded-tr-[22.5px] lg:rounded-tr-[31.5px] rounded-bl-[22.5px] lg:rounded-bl-[31.5px] rounded-br-none p-5 lg:p-6 flex flex-col justify-between" style="background: linear-gradient(111.28deg, #FF9900 -1.65%, #FF8D00 94.3%);">
-            <div class="flex items-center gap-3 lg:gap-4">
-              <div class="w-[45px] lg:w-[55px] h-[45px] lg:h-[55px] bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm lg:shadow-md">
-                <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" class="w-6 lg:w-7 h-6 lg:h-7 object-contain">
-              </div>
-              <h3 class="font-montserrat font-bold text-black text-[16px] lg:text-[18px] leading-tight">
-                <?php echo esc_html( $title ); ?>
-              </h3>
-            </div>
-            <p class="font-montserrat font-medium text-black/90 text-[13px] lg:text-[14px] leading-[20px] lg:leading-[22px] mt-3 lg:mt-2">
-              <?php echo wp_kses_post( $desc ); ?>
-            </p>
-          </div>
-        </div>
-        <?php else : ?>
         <!-- Standard Card -->
-        <div class="<?php echo $card_corners; ?> p-5 lg:p-6 flex flex-col justify-between shadow-sm border border-amber-100/60 bg-[#FDFBF3] transition-transform duration-300 hover:-translate-y-1 w-full max-w-[320px] lg:max-w-[329px] mx-auto md:mx-0 lg:h-[187px]">
+        <div class="<?php echo $card_corners; ?> group p-5 lg:p-6 flex flex-col justify-between shadow-sm border border-amber-100/60 bg-[#FDFBF3] transition-all duration-300 hover:-translate-y-1 hover:bg-gradient-to-br hover:from-[#FF9900] hover:to-[#FF8D00] hover:border-transparent hover:shadow-lg w-full max-w-[320px] lg:max-w-[329px] mx-auto md:mx-0 lg:h-[187px]">
           <div class="flex items-center gap-3 lg:gap-4">
-            <div class="w-[45px] lg:w-[55px] h-[45px] lg:h-[55px] bg-[#00A256] rounded-full flex items-center justify-center shrink-0 shadow-sm lg:shadow-md">
-              <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" class="w-6 lg:w-7 h-6 lg:h-7 object-contain" style="filter: brightness(0) invert(1);">
+            <div class="w-[45px] lg:w-[55px] h-[45px] lg:h-[55px] bg-[#00A256] group-hover:bg-white transition-colors duration-300 rounded-full flex items-center justify-center shrink-0 shadow-sm lg:shadow-md">
+              <img src="<?php echo esc_url( $icon_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" class="w-6 lg:w-7 h-6 lg:h-7 object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300">
             </div>
-            <h3 class="font-montserrat font-bold text-[#5D3700] text-[16px] lg:text-[18px] leading-tight">
+            <h3 class="font-montserrat font-bold text-[#5D3700] group-hover:text-black transition-colors duration-300 text-[16px] lg:text-[18px] leading-tight">
               <?php echo esc_html( $title ); ?>
             </h3>
           </div>
-          <p class="font-montserrat font-medium text-black/75 text-[13px] lg:text-[14px] leading-[20px] lg:leading-[22px] mt-3 lg:mt-2">
+          <p class="font-montserrat font-medium text-black/75 group-hover:text-black/90 transition-colors duration-300 text-[13px] lg:text-[14px] leading-[20px] lg:leading-[22px] mt-3 lg:mt-2">
             <?php echo wp_kses_post( $desc ); ?>
           </p>
         </div>
-        <?php endif; ?>
 
         <?php endforeach; ?>
 
