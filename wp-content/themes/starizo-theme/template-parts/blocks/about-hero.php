@@ -18,7 +18,7 @@ $image_url = $image ? esc_url( $image['url'] ) : get_template_directory_uri() . 
 <div class="hidden xl:block w-full">
     <!-- ==================== HERO SECTION (FIGMA SPEC 1:1) ==================== -->
   <main class="w-full pt-0 pb-0">
-    <div class="w-full min-h-[840px] lg:min-h-[880px] bg-[#00A256] overflow-hidden relative shadow-2xl px-6 sm:px-10 md:px-14 lg:px-16 pt-4 sm:pt-6 md:pt-8 pb-16 text-white flex flex-col justify-end">
+    <div class="w-full min-h-[640px] lg:min-h-[680px] bg-[#00A256] overflow-hidden relative shadow-2xl px-6 sm:px-10 md:px-14 lg:px-16 pt-4 sm:pt-6 md:pt-8 pb-16 text-white flex flex-col justify-start">
 
       <!-- Layer 1: Green Rice Field Background Texture -->
       <img src="<?php echo esc_url(get_template_directory_uri() . '/public/assets/hero-rice-field-bg.png'); ?>" alt=""
@@ -32,7 +32,7 @@ $image_url = $image ? esc_url( $image['url'] ) : get_template_directory_uri() . 
         class="absolute top-0 left-0 w-[60%] h-full object-cover object-left opacity-30 pointer-events-none select-none z-1">
 
       <!-- Hero Content Grid -->
-      <div class="relative z-10 w-full max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center py-6 sm:py-10 mt-[100px]">
+      <div class="relative z-10 w-full max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center py-6 sm:py-10 mt-[60px]">
 
         <div class="lg:col-span-7 flex flex-col items-start text-left">
           <!-- Badge Header without Orange Accent Bar -->

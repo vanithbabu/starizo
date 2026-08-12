@@ -41,6 +41,10 @@ if ( empty( $certificates ) ) {
             'title' => 'GMP',
             'image' => array('url' => get_template_directory_uri() . '/public/assets/GMP.png'),
         ),
+        array(
+            'title' => 'COSMOS NATURAL',
+            'image' => array('url' => ''), 
+        ),
     );
 }
 ?>

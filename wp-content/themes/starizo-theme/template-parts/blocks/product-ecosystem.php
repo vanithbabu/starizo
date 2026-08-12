@@ -102,16 +102,10 @@ $has_products = $products_query->have_posts();
                         <p class="font-montserrat font-normal text-[14px] leading-[20px] text-black/75 mb-3 line-clamp-2">
                           <?php echo esc_html( $excerpt ); ?>
                         </p>
-                        <?php if ($apps) :
-                            $app_list = explode('•', $apps);
-                        ?>
-                          <div class="flex flex-wrap gap-1.5 mb-2 overflow-hidden h-6">
-                            <?php foreach($app_list as $app_item): $app_item = trim($app_item); if($app_item): ?>
-                              <span class="inline-block bg-white border border-[#E8E2D5] px-2.5 py-0.5 rounded-full font-montserrat font-medium text-[11px] leading-[16px] text-[#5D3700] text-center shadow-sm max-w-full truncate">
-                                <?php echo esc_html( $app_item ); ?>
-                              </span>
-                            <?php endif; endforeach; ?>
-                          </div>
+                        <?php if ($apps) : ?>
+                          <span class="inline-block bg-white border border-[#E8E2D5] px-2.5 py-0.5 rounded-full font-montserrat font-medium text-[12px] leading-[18px] text-[#5D3700] text-center shadow-sm mb-2 max-w-full truncate align-top">
+                            <?php echo esc_html( $apps ); ?>
+                          </span>
                         <?php else : ?>
                           <div class="inline-block bg-white border border-[#E8E2D5] px-3 py-1 rounded-full font-montserrat font-medium text-[13px] leading-[20px] text-[#5D3700] text-center mb-2 shadow-sm">
                             <?php echo esc_html( $cat ); ?>

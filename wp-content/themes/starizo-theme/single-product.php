@@ -411,7 +411,7 @@
             <?php endif; ?>
           </div>
           <a href="#"
-            class="w-full border-2 border-starizo-orange hover:bg-starizo-orange text-starizo-orange hover:text-white font-semibold text-[18px] py-3 rounded-[22px] flex items-center justify-center gap-2 group transition-all duration-200 mt-8">
+            class="w-fit border-2 border-starizo-orange hover:bg-starizo-orange text-starizo-orange hover:text-white font-semibold text-[18px] py-3 px-8 rounded-[22px] flex items-center justify-center gap-2 group transition-all duration-200 mt-8 self-start">
             Speak To Team
             <svg class="w-4 h-4 fill-current transform group-hover:translate-x-0.5 transition-transform duration-200"
               viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
@@ -753,7 +753,7 @@
           <?php endif; ?>
         </div>
 
-        <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-bold text-[16px] py-3.5 rounded-[22px] flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 mt-8 shadow-md hover:shadow-xl select-none">
+        <a href="<?php echo esc_url( site_url('/contact') ); ?>" class="w-fit self-start group bg-[#FF8D00] hover:bg-gradient-to-r hover:from-[#FF8D00] hover:to-[#FFB457] text-white font-bold text-[16px] py-3.5 px-8 rounded-[22px] flex items-center justify-center gap-2 hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 mt-8 shadow-md hover:shadow-xl select-none">
           <span>Speak To Team</span>
           <svg class="w-4 h-4 fill-none stroke-current stroke-[2.5] transform group-hover:translate-x-1 transition-transform duration-300" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </a>
@@ -824,6 +824,4 @@
     });
   </script>
 
-</body>
-
-</html>
+<?php get_footer(); ?>

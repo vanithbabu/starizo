@@ -105,24 +105,18 @@ get_header();
             <div class="w-[144px] h-[198px] relative shrink-0 rounded-tl-none rounded-br-none overflow-hidden" style="border-top-left-radius: 6.33px; border-bottom-right-radius: 6.33px;">
               <img src="<?php echo $img_src; ?>" alt="<?php echo esc_attr( $title ); ?>" class="w-full h-full object-cover">
             </div>
-            <div class="flex flex-col justify-between h-full py-1 gap-3">
-              <div class="flex flex-col gap-2">
-                <h3 class="font-montserrat font-bold text-[22px] leading-[32.73px] text-[#5D3700]"><?php echo esc_html( $title ); ?></h3>
-                <p class="font-montserrat font-normal text-[15px] lg:text-[16px] leading-[24px] text-black/80 line-clamp-3">
+            <div class="flex flex-col justify-between h-full py-1 gap-3 flex-1 min-w-0">
+              <div class="flex flex-col gap-2 min-w-0">
+                <h3 class="font-montserrat font-bold text-[22px] leading-[32.73px] text-[#5D3700] truncate"><?php echo esc_html( $title ); ?></h3>
+                <p class="font-montserrat font-normal text-[15px] lg:text-[16px] leading-[24px] text-black/80 line-clamp-3 break-words whitespace-normal">
                   <?php echo esc_html( $desc ); ?>
                 </p>
               </div>
-              <div class="flex flex-col gap-2 items-start mt-1">
-                <?php if ( $apps ) : 
-                    $app_list = explode('•', $apps);
-                ?>
-                  <div class="flex flex-wrap gap-1.5">
-                    <?php foreach($app_list as $app_item): $app_item = trim($app_item); if($app_item): ?>
-                      <span class="inline-block bg-[#FBEAC4] text-[#5D3700] rounded-[11.61px] px-[10.56px] py-[3.17px] font-montserrat font-medium text-[13px] leading-[20px]">
-                        <?php echo esc_html( $app_item ); ?>
-                      </span>
-                    <?php endif; endforeach; ?>
-                  </div>
+              <div class="flex flex-col gap-2 items-start mt-1 w-full min-w-0">
+                <?php if ( $apps ) : ?>
+                  <span class="inline-block bg-[#FBEAC4] text-[#5D3700] rounded-[11.61px] px-[10.56px] py-[3.17px] font-montserrat font-medium text-[13px] leading-[20px] max-w-full truncate">
+                    <?php echo esc_html( $apps ); ?>
+                  </span>
                 <?php else : ?>
                   <span class="inline-block bg-[#FBEAC4] text-[#5D3700] rounded-[11.61px] px-[10.56px] py-[3.17px] font-montserrat font-medium text-[13px] leading-[20px]">
                     <?php echo esc_html( $cat ); ?>

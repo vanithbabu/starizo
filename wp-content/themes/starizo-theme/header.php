@@ -12,15 +12,15 @@ $is_careers  = is_page( 'careers' );
 $is_insights = is_page( 'insights' ) || is_home() || is_singular( 'post' ) || is_category();
 ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="overflow-x-hidden w-full">
 <head>
   <meta charset="<?php bloginfo( 'charset' ); ?>">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   
   <?php wp_head(); ?>
 </head>
 
-<body <?php body_class('font-montserrat bg-[#FDFBF3] text-black min-h-screen antialiased overflow-x-hidden'); ?>>
+<body <?php body_class('font-montserrat bg-[#FDFBF3] text-black min-h-screen antialiased overflow-x-hidden w-full relative'); ?>>
 <?php wp_body_open(); ?>
 
   <!-- ========================================== -->
