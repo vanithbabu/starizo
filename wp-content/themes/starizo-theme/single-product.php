@@ -15,14 +15,23 @@
       <!-- Main Hero Content Container (Exact Left & Right side spacing matching all other pages) -->
       <div class="relative z-10 w-full max-w-[1280px] mx-auto px-6 sm:px-10 md:px-14 lg:px-16">
 
-        <!-- Breadcrumb Bar (Figma Spec 1:1: width 247px, height 15px, font 12px, line-height 100%, text color #808080) -->
-        <div class="flex flex-row items-center gap-1.5 shrink-0 mb-8"
-          style="width: 247px; height: 15px; font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 100%; letter-spacing: 0%; color: #808080;">
-          <a href="./index.html" class="font-normal text-[#808080] hover:text-starizo-orange transition-colors whitespace-nowrap"
+        <!-- Breadcrumb Bar (Dynamic) -->
+        <?php
+        $terms = get_the_terms( get_the_ID(), 'product_cat' );
+        $category_name = 'Uncategorized';
+        $category_link = '#';
+        if ( $terms && ! is_wp_error( $terms ) ) {
+            $category_name = $terms[0]->name;
+            $category_link = get_term_link( $terms[0] );
+        }
+        ?>
+        <div class="flex flex-row items-center gap-1.5 shrink-0 mb-8 w-auto overflow-visible"
+          style="height: 15px; font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 100%; letter-spacing: 0%; color: #808080;">
+          <a href="<?php echo esc_url( home_url( '/products/' ) ); ?>" class="font-normal text-[#808080] hover:text-[#FF8D00] transition-colors whitespace-nowrap"
             style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 12px; line-height: 100%; color: #808080;">Products</a>
           <span class="font-normal text-[#808080]" style="font-size: 12px; line-height: 100%; color: #808080;">/</span>
-          <a href="./index.html#food" class="font-normal text-[#808080] hover:text-starizo-orange transition-colors whitespace-nowrap"
-            style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 12px; line-height: 100%; color: #808080;">Food & Beverage</a>
+          <a href="<?php echo esc_url( $category_link ); ?>" class="font-normal text-[#808080] hover:text-[#FF8D00] transition-colors whitespace-nowrap"
+            style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 12px; line-height: 100%; color: #808080;"><?php echo esc_html( $category_name ); ?></a>
           <span class="font-normal text-[#808080]" style="font-size: 12px; line-height: 100%; color: #808080;">/</span>
           <span class="font-medium text-[#808080] whitespace-nowrap"
             style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 12px; line-height: 100%; color: #808080;"><?php the_title(); ?></span>

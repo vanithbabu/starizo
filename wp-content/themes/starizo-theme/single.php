@@ -24,7 +24,7 @@ get_header();
     <div class="w-full max-w-[1120px] mx-auto px-6 lg:px-0 mb-4 mt-6">
       <nav aria-label="Breadcrumb" class="flex items-center gap-1.5 text-[12px] leading-none">
         <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>" class="font-montserrat font-medium text-[#7F7F7F] hover:text-[#FF8D00] transition-colors">Insights</a>
-        <span class="font-montserrat font-normal text-[#7F7F7F]">/ Insights Details</span>
+        <span class="font-montserrat font-normal text-[#7F7F7F]">/ <?php the_title(); ?></span>
       </nav>
     </div>
 
@@ -284,7 +284,7 @@ get_header();
       <!-- Mobile Breadcrumb -->
       <nav aria-label="Breadcrumb" class="flex items-center gap-1.5 text-[12px] leading-none">
         <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>" class="font-montserrat font-medium text-[#7F7F7F]">Insights</a>
-        <span class="font-montserrat font-normal text-[#7F7F7F]">/ Insights Details</span>
+        <span class="font-montserrat font-normal text-[#7F7F7F]">/ <?php the_title(); ?></span>
       </nav>
 
       <!-- Mobile Hero Card Container (1:1 Figma Spec) -->
