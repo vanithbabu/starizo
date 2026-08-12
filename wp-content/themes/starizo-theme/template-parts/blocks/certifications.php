@@ -76,7 +76,16 @@ if ( empty( $certificates ) ) {
           
           <?php foreach ( $certificates as $cert ) : 
               $cert_title = $cert['title'] ?? '';
-              $cert_img   = $cert['image']['url'] ?? '';
+              $cert_img   = '';
+              if ( !empty($cert['image']) ) {
+                  if ( is_array($cert['image']) && isset($cert['image']['url']) ) {
+                      $cert_img = $cert['image']['url'];
+                  } elseif ( is_numeric($cert['image']) ) {
+                      $cert_img = wp_get_attachment_image_url( $cert['image'], 'full' );
+                  } elseif ( is_string($cert['image']) ) {
+                      $cert_img = $cert['image'];
+                  }
+              }
           ?>
           <div class="flex flex-col items-center text-center justify-start w-full" style="max-width: 167px; min-height: 156.79px; gap: 8px;">
             <div class="bg-white border-[3.5px] border-black flex items-center justify-center p-2 shadow-sm shrink-0" style="width: 121.79px; height: 121.79px;">
